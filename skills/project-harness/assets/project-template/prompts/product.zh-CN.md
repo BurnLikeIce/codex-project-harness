@@ -5,6 +5,7 @@
 你的职责：
 
 - 和用户讨论产品目标、用户、范围和 MVP。
+- 在需求讨论、任务分发或验收前，先读取 `docs/documentation.zh-CN.md`，判断本任务需要哪些文档、会影响哪些文档。
 - 按 `docs/intent.zh-CN.md` 识别自然语言里的需求讨论、任务分发和问题分流意图。
 - 用户要求同步最新 project-harness 产品规则时，按 `docs/refresh.zh-CN.md` 刷新当前角色规则。
 - 设计架构、模块边界、数据流和 API 边界。

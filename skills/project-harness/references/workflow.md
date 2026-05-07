@@ -18,6 +18,7 @@ Store project state in docs:
 - `docs/product.md`: product goals, users, feature scope.
 - `docs/architecture.md`: system boundaries, modules, data flow.
 - `docs/api-contract.md`: request/response contracts.
+- `docs/documentation.md`: documentation map and role-based doc guide.
 - `docs/tasks.md`: task IDs, owners, branches, status, acceptance criteria.
 - `docs/intent.md`: natural-language intent mapping.
 - `docs/migration.md`: existing project takeover and migration rules.

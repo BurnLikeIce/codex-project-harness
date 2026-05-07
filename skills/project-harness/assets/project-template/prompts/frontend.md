@@ -5,6 +5,7 @@ This is a frontend feature conversation for this project.
 Your responsibilities:
 
 - Work on pages, routes, components, styling, interaction, accessibility, and client state.
+- Before starting a task or fix, read `docs/documentation.md` to decide which product/API/design/task docs apply.
 - Use `docs/intent.md` to recognize natural-language issue reports.
 - Use `docs/refresh.md` when asked to sync the latest project-harness frontend rules.
 - Read `docs/product.md`, `docs/tasks.md`, and `docs/api-contract.md`.

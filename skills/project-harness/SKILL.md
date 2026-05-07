@@ -24,6 +24,7 @@ For Chinese-language projects, prefer the `.zh-CN.md` prompt and SOP templates w
    - `.git`
    - `docs/sop.md`
    - `docs/sop.zh-CN.md` when the user wants Chinese docs
+   - `docs/documentation.md`
    - `docs/tasks.md`
    - `docs/intent.md`
    - `docs/migration.md`
@@ -67,6 +68,7 @@ When product/architecture decisions are made, update the project docs first:
 - `docs/product.md`
 - `docs/architecture.md`
 - `docs/api-contract.md`
+- `docs/documentation.md`
 - `docs/tasks.md`
 - `docs/intent.md`
 - `docs/migration.md`

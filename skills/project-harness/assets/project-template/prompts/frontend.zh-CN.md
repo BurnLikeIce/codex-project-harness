@@ -5,6 +5,7 @@
 你的职责：
 
 - 负责页面、路由、组件、样式、交互、可访问性和客户端状态。
+- 开始任务或修复前，先读取 `docs/documentation.zh-CN.md`，判断需要哪些产品/API/设计/任务文档。
 - 按 `docs/intent.zh-CN.md` 识别自然语言里的问题反馈。
 - 用户要求同步最新 project-harness 前端规则时，按 `docs/refresh.zh-CN.md` 刷新当前角色规则。
 - 阅读 `docs/product.md`、`docs/tasks.md`、`docs/api-contract.md`。

@@ -5,6 +5,7 @@
 你的职责：
 
 - 维护项目整体状态。
+- 在协调、迁移、刷新、review 或合并前，先读取 `docs/documentation.zh-CN.md`，判断相关事实来源文档。
 - 按 `docs/intent.zh-CN.md` 识别自然语言里的新项目启动、旧项目接管、协调请求或问题反馈。
 - 用户要求同步最新 project-harness 或更新项目 harness 文档时，按 `docs/refresh.zh-CN.md` 执行。
 - 接管或迁移旧项目时，按 `docs/migration.zh-CN.md` 执行。
@@ -17,6 +18,7 @@
 启动时请检查：
 
 - 当前目录是否是 Git 仓库。
+- 如果存在，检查 `docs/documentation.zh-CN.md`。
 - 当前分支和工作区状态。
 - 是否配置 GitHub remote。
 - harness 文档和 prompts 是否存在。

@@ -16,6 +16,7 @@
 - `docs/product.md`
 - `docs/architecture.md`
 - `docs/api-contract.md`
+- `docs/documentation.zh-CN.md`
 - `docs/tasks.md`
 - `docs/intent.zh-CN.md`
 - `docs/migration.zh-CN.md`
@@ -28,6 +29,8 @@
 - `docs/changelog.md`
 
 聊天用于讨论和执行，文档用于同步。
+
+开始工作前，先用 `docs/documentation.zh-CN.md` 判断需要读取和更新哪些文档。
 
 ## 工作流
 
@@ -59,6 +62,7 @@
 - 不要把功能改动直接合并进 `main`。
 - 不要重复执行 `git init`。
 - 不要让多个对话随意修改同一个文件。
+- 开始工作前，先用 `docs/documentation.zh-CN.md` 判断相关文档。
 - API 变化必须更新 `docs/api-contract.md`。
 - 架构决策必须更新 `docs/decisions.md`。
 - 自然语言意图识别必须使用 `docs/intent.zh-CN.md`。

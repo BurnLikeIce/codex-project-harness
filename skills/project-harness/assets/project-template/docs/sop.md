@@ -16,6 +16,7 @@ Project knowledge must be stored in docs:
 - `docs/product.md`
 - `docs/architecture.md`
 - `docs/api-contract.md`
+- `docs/documentation.md`
 - `docs/tasks.md`
 - `docs/intent.md`
 - `docs/migration.md`
@@ -28,6 +29,8 @@ Project knowledge must be stored in docs:
 - `docs/changelog.md`
 
 Chat is for discussion and execution. Docs are for synchronization.
+
+Use `docs/documentation.md` before starting work to decide which docs to read and update.
 
 ## Workflow
 
@@ -59,6 +62,7 @@ Chat is for discussion and execution. Docs are for synchronization.
 - Do not directly merge feature work into `main`.
 - Do not duplicate `git init`.
 - Do not let multiple conversations casually edit the same file.
+- Before starting work, use `docs/documentation.md` to identify relevant docs.
 - API changes must update `docs/api-contract.md`.
 - Architecture decisions must update `docs/decisions.md`.
 - Natural-language intent recognition must use `docs/intent.md`.

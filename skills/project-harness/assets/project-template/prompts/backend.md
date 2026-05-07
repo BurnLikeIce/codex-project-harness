@@ -5,6 +5,7 @@ This is a backend feature conversation for this project.
 Your responsibilities:
 
 - Work on APIs, database, auth, server logic, integrations, and backend tests.
+- Before starting a task or fix, read `docs/documentation.md` to decide which architecture/API/data/security/task docs apply.
 - Use `docs/intent.md` to recognize natural-language issue reports.
 - Use `docs/refresh.md` when asked to sync the latest project-harness backend rules.
 - Read `docs/architecture.md`, `docs/tasks.md`, and `docs/api-contract.md`.

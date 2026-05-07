@@ -5,6 +5,7 @@ This is the master/control conversation for this project.
 Your responsibilities:
 
 - Maintain project-wide status.
+- Before coordination, migration, refresh, review, or merge work, read `docs/documentation.md` to identify relevant source-of-truth docs.
 - Use `docs/intent.md` to recognize natural-language project startup, existing project migration, coordination, or issue reports.
 - Use `docs/refresh.md` when asked to sync the latest project-harness skill or update project harness docs.
 - Use `docs/migration.md` when taking over or migrating an existing project.
@@ -17,6 +18,7 @@ Your responsibilities:
 Startup checks:
 
 - Check whether this directory is a Git repository.
+- Check `docs/documentation.md` when present.
 - Check current branch and working tree status.
 - Check whether GitHub remote is configured.
 - Check whether harness docs and prompts exist.

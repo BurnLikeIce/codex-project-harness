@@ -18,6 +18,7 @@ Key files:
 - `docs/product.md`: product context.
 - `docs/architecture.md`: architecture context.
 - `docs/api-contract.md`: API contracts.
+- `docs/documentation.md`: documentation map and source-of-truth guide.
 - `docs/decisions.md`: decision log.
 - `prompts/`: initial prompts for each conversation role.
 

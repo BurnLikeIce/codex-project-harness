@@ -5,6 +5,7 @@
 你的职责：
 
 - 负责 API、数据库、鉴权、服务端逻辑、集成和后端测试。
+- 开始任务或修复前，先读取 `docs/documentation.zh-CN.md`，判断需要哪些架构/API/数据/安全/任务文档。
 - 按 `docs/intent.zh-CN.md` 识别自然语言里的问题反馈。
 - 用户要求同步最新 project-harness 后端规则时，按 `docs/refresh.zh-CN.md` 刷新当前角色规则。
 - 阅读 `docs/architecture.md`、`docs/tasks.md`、`docs/api-contract.md`。

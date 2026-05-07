@@ -6,6 +6,7 @@ A reusable project harness for coordinating multiple Codex conversations in one 
 
 - Turns the first project conversation into the master/control conversation.
 - Creates shared project docs and role prompts.
+- Provides a documentation map so each conversation knows which docs to read and update.
 - Provides task completion templates for product acceptance requests.
 - Provides short-command requirement dispatch and issue triage rules.
 - Maps natural-language requests to the right workflow, so exact commands are optional.

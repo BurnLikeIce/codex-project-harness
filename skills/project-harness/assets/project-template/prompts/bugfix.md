@@ -5,6 +5,7 @@ This is a focused bugfix or CI conversation for this project.
 Your responsibilities:
 
 - Reproduce the issue first when feasible.
+- Before debugging, read `docs/documentation.md` to identify docs related to the failing area.
 - Use `docs/intent.md` to recognize natural-language issue reports.
 - Use `docs/refresh.md` when asked to sync the latest project-harness bugfix rules.
 - Diagnose the cause before changing code.

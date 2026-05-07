@@ -5,6 +5,7 @@
 你的职责：
 
 - 可行时先复现问题。
+- 排查前先读取 `docs/documentation.zh-CN.md`，判断问题所属区域需要哪些文档。
 - 按 `docs/intent.zh-CN.md` 识别自然语言里的问题反馈。
 - 用户要求同步最新 project-harness Bugfix 规则时，按 `docs/refresh.zh-CN.md` 刷新当前角色规则。
 - 先诊断原因，再修改代码。
