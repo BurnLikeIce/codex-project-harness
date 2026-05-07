@@ -1,6 +1,6 @@
-# Acceptance
+# Acceptance and Rework Template
 
-Use this document when the product/architecture conversation reviews work from frontend, backend, bugfix, or experiment conversations.
+Use this document when the product/architecture conversation reviews results from frontend, backend, bugfix, or experiment conversations. The usual workflow is: the user pastes another conversation's result summary, screenshots, PR summary, test output, or notes into the product conversation, then the product conversation returns an acceptance decision and copy-ready next-step instructions.
 
 ## Acceptance Rule
 
@@ -10,35 +10,21 @@ Every review must end with one of these decisions:
 - `Rejected`
 - `Conditionally Accepted`
 
-If the result is not fully accepted, the product/architecture conversation must produce actionable next steps. Do not stop at "not good enough" or "does not pass".
+If the result is not fully accepted, explicitly state what failed and provide instructions the user can copy directly into the responsible conversation. Do not stop at "not good enough" or "does not pass".
 
-## Review Template
+## Output Format
 
 ```md
-## YYYY-MM-DD Task Acceptance
+## Task Acceptance: FE-001 / BE-001 / BUG-001
 
-Task:
-Reviewer:
 Decision: Accepted / Rejected / Conditionally Accepted
 
-Reviewed Evidence:
-- PR or branch:
-- Screenshots or demo:
-- Test/build result:
-- Relevant docs:
+Failed Points:
+- State exactly what does not match the requirement, acceptance criteria, or product expectation.
+- List each issue separately.
 
-Acceptance Criteria Checked:
-- [ ] Criterion 1
-- [ ] Criterion 2
-
-Findings:
-- 
-
-Required Rework:
-- Owner: Frontend / Backend / Master / Product / Bugfix / Experiment
-- Task ID: FE-001 / BE-001 / BUG-001
-- Instructions:
-  - 
+Responsible Conversation:
+- Frontend / Backend / Master / Product / Bugfix / Experiment
 
 Docs To Update:
 - [ ] `docs/tasks.md`
@@ -47,36 +33,77 @@ Docs To Update:
 - [ ] `docs/architecture.md`
 - [ ] `docs/decisions.md`
 
-Next Handoff:
-Frontend: read prompts/frontend.md and continue FE-001 from docs/tasks.md.
-Backend: read prompts/backend.md and continue BE-001 from docs/tasks.md.
-Master: keep the PR unmerged until rework is complete.
+Copy-Ready Instruction For The Responsible Conversation:
+
+```text
+Please continue FE-001.
+
+Product acceptance failed because:
+- ...
+- ...
+
+Please complete this rework:
+- ...
+- ...
+
+Requirements:
+- Continue on the current branch/worktree.
+- Update the relevant docs if API or product behavior changes.
+- Run the relevant verification, then return the result to the master/product conversation for re-acceptance.
 ```
 
-## Handoff Examples
+Master Conversation Next Step:
+- Do not merge the related PR until rework is complete.
+- Mark the task as `In Progress` or `Rework`.
+```
+
+## Accepted Example
+
+```text
+FE-001 is accepted.
+
+Why:
+- The page behavior matches the acceptance criteria in docs/tasks.md.
+- Empty, loading, and error states are covered.
+- Screenshots match the product expectation.
+
+Master conversation next step:
+- Proceed to PR review and pre-merge verification.
+- Mark FE-001 as Done after merge.
+```
+
+## Rejected Example
 
 ```text
 FE-001 is rejected.
 
-Reason:
-- Mobile layout does not meet the acceptance criteria.
+Failed points:
+- Mobile layout overflows horizontally at 390px width.
+- Empty state is missing when the user has no data.
+- Dashboard card fields do not match docs/product.md.
+
+Responsible conversation:
+- Frontend
+
+Docs to update:
+- [ ] docs/tasks.md
+
+Copy-ready instruction for the frontend conversation:
+
+Please continue FE-001.
+
+Product acceptance failed because:
+- Mobile layout overflows horizontally at 390px width.
 - Empty state is missing.
+- Dashboard card fields do not match docs/product.md.
 
-Frontend rework:
-- Continue FE-001 on the current branch.
-- Read the Rework Notes in docs/tasks.md.
-- Fix mobile layout and empty state.
-- Run lint/build and return to master for review.
-```
+Please complete this rework:
+- Fix the mobile layout so there is no horizontal scrolling at 390px width.
+- Add the empty state.
+- Adjust dashboard card fields to match docs/product.md.
+- Run lint/build and return the result to the master and product conversations for re-acceptance.
 
-```text
-BE-001 is conditionally accepted.
-
-Condition:
-- Add a test for the missing error response case before merge.
-
-Backend next step:
-- Continue BE-001 on the current branch.
-- Add test coverage for the documented error response.
-- Update docs/api-contract.md if the response shape changes.
+Master conversation next step:
+- Do not merge the FE-001 PR until rework is complete.
+- Mark FE-001 as Rework.
 ```

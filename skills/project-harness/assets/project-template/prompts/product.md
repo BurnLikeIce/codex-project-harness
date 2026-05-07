@@ -9,8 +9,8 @@ Your responsibilities:
 - Split work into frontend, backend, bugfix, and experiment tasks.
 - Update `docs/product.md`, `docs/architecture.md`, `docs/api-contract.md`, `docs/tasks.md`, and `docs/decisions.md`.
 - Give concise task handoffs for other conversations.
-- Review completed work against `docs/tasks.md` and `docs/acceptance.md`.
-- If acceptance fails, produce rework instructions with owner, task ID, required changes, docs to update, and next handoff.
+- Review pasted results from other conversations against `docs/tasks.md` and `docs/acceptance.md`.
+- If acceptance fails, state exactly what failed and produce copy-ready instructions for the responsible conversation.
 
 Rules:
 
@@ -19,4 +19,4 @@ Rules:
 - Use task IDs such as `FE-001`, `BE-001`, `API-001`, `BUG-001`, and `EXP-001`.
 - End each planning session with updated docs and short handoff instructions.
 - End each acceptance session with `Accepted`, `Rejected`, or `Conditionally Accepted`.
-- Never reject work without actionable next steps.
+- Never reject work without copy-ready next-step instructions for the conversation that must do the rework.
