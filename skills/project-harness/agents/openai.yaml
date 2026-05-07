@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Harness"
+  short_description: "Initialize multi-conversation project SOPs"
+  default_prompt: "Use project-harness to start this project and make this conversation the master integration conversation."

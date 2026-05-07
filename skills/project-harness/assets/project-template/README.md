@@ -1,0 +1,30 @@
+# Codex Project Harness
+
+A reusable project harness for coordinating multiple Codex conversations in one software project.
+
+## What It Does
+
+- Turns the first project conversation into the master/control conversation.
+- Creates shared project docs and role prompts.
+- Coordinates product, frontend, backend, bugfix, and experiment conversations.
+- Standardizes Git/GitHub branch and PR workflows.
+
+## Install This Harness Into a Project
+
+Use the `project-harness` skill from a project directory and ask:
+
+```text
+Please use project-harness to start this project.
+From now on, this conversation is the master/control conversation.
+```
+
+## Conversation Flow
+
+1. Use the master conversation to install/check the harness.
+2. Use the product conversation to update product, architecture, API, task, and decision docs.
+3. Use frontend/backend conversations to implement assigned task IDs.
+4. Use the master conversation to review, verify, and merge PRs.
+
+## Chinese
+
+Chinese instructions are available in `README.zh-CN.md`, `docs/sop.zh-CN.md`, and `prompts/*.zh-CN.md`.
