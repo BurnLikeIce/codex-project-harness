@@ -1,6 +1,6 @@
 ---
 name: project-harness
-description: Initialize and operate a reusable multi-conversation Codex project harness. Use when the user wants to start a new software project, migrate an existing project, turn the first conversation into the master/control conversation, create a repeatable project SOP, set up shared docs/prompts/GitHub templates, coordinate product/frontend/backend/bugfix/experiment conversations, or standardize Git/GitHub branch and PR workflows. Also use for Chinese requests such as 启动新项目, 迁移已有项目, 项目主控对话, 多对话协作, 项目开发SOP, 前后端对话协同, 产品对话同步, GitHub PR合并流程.
+description: Initialize and operate a reusable multi-conversation Codex project harness. Use when the user wants to start a new software project, migrate or take over an existing project, turn the first/current conversation into the master/control conversation, create a repeatable project SOP, set up shared docs/prompts/GitHub templates, coordinate product/frontend/backend/bugfix/experiment conversations, recognize natural-language workflow intent, or standardize Git/GitHub branch and PR workflows. Also use for Chinese requests such as 启动新项目, 旧项目接管, 迁移已有项目, 本对话作为主控, 项目主控对话, 多对话协作, 项目开发SOP, 前后端对话协同, 产品对话同步, GitHub PR合并流程.
 ---
 
 # Project Harness
@@ -26,6 +26,7 @@ For Chinese-language projects, prefer the `.zh-CN.md` prompt and SOP templates w
    - `docs/sop.zh-CN.md` when the user wants Chinese docs
    - `docs/tasks.md`
    - `docs/intent.md`
+   - `docs/migration.md`
    - `docs/dispatch.md`
    - `docs/triage.md`
    - `docs/completion.md`
@@ -68,6 +69,7 @@ When product/architecture decisions are made, update the project docs first:
 - `docs/api-contract.md`
 - `docs/tasks.md`
 - `docs/intent.md`
+- `docs/migration.md`
 - `docs/dispatch.md`
 - `docs/triage.md`
 - `docs/completion.md`

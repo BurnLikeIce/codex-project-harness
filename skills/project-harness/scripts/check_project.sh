@@ -45,6 +45,7 @@ required=(
   "docs/api-contract.md"
   "docs/tasks.md"
   "docs/intent.md"
+  "docs/migration.md"
   "docs/dispatch.md"
   "docs/triage.md"
   "docs/completion.md"

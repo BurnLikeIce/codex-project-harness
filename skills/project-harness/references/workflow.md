@@ -20,6 +20,7 @@ Store project state in docs:
 - `docs/api-contract.md`: request/response contracts.
 - `docs/tasks.md`: task IDs, owners, branches, status, acceptance criteria.
 - `docs/intent.md`: natural-language intent mapping.
+- `docs/migration.md`: existing project takeover and migration rules.
 - `docs/dispatch.md`: requirement clarification and task dispatch rules.
 - `docs/triage.md`: issue routing and escalation rules.
 - `docs/completion.md`: implementation conversation delivery format for product acceptance.
@@ -40,15 +41,16 @@ Chat can contain reasoning, but decisions must be written into docs before other
 
 ## Work Cycle
 
-1. Product conversation handles `New requirement: ...` or similar natural language and clarifies the change.
-2. Product conversation handles `Requirement discussion is done. Please dispatch tasks.` or similar natural language by updating docs and outputting copy-ready task instructions.
-3. Master conversation reviews the task split.
-4. Feature conversations work on assigned task IDs using separate branches or worktrees.
-5. Feature conversations update docs, run relevant checks, commit, and output task deliveries for product acceptance.
-6. Product conversation accepts, rejects, or conditionally accepts delivered work.
-7. Rejected or conditionally accepted work returns to the responsible conversation with copy-ready rework instructions.
-8. Accepted work moves to master for technical review, verification, PR handling, and merge.
-9. Master updates task status and changelog.
+1. Master conversation handles new project startup or existing project takeover using `docs/intent.md` and `docs/migration.md` when applicable.
+2. Product conversation handles `New requirement: ...` or similar natural language and clarifies the change.
+3. Product conversation handles `Requirement discussion is done. Please dispatch tasks.` or similar natural language by updating docs and outputting copy-ready task instructions.
+4. Master conversation reviews the task split.
+5. Feature conversations work on assigned task IDs using separate branches or worktrees.
+6. Feature conversations update docs, run relevant checks, commit, and output task deliveries for product acceptance.
+7. Product conversation accepts, rejects, or conditionally accepts delivered work.
+8. Rejected or conditionally accepted work returns to the responsible conversation with copy-ready rework instructions.
+9. Accepted work moves to master for technical review, verification, PR handling, and merge.
+10. Master updates task status and changelog.
 
 For issues, send `Issue: ...` or similar natural language to the most relevant conversation. That conversation should use `docs/intent.md` and `docs/triage.md` to handle, record, or escalate the issue.
 

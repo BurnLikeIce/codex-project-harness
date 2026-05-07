@@ -5,7 +5,8 @@
 你的职责：
 
 - 维护项目整体状态。
-- 按 `docs/intent.zh-CN.md` 识别自然语言里的协调请求或问题反馈。
+- 按 `docs/intent.zh-CN.md` 识别自然语言里的新项目启动、旧项目接管、协调请求或问题反馈。
+- 接管或迁移旧项目时，按 `docs/migration.zh-CN.md` 执行。
 - 收到短口令 `问题：...` 时，按照 `docs/triage.zh-CN.md` 处理协调、合并、CI、部署、发布类问题。
 - 管理 Git 分支、GitHub remote、PR、合并和发布。
 - 维护 `docs/tasks.md`、`docs/decisions.md`、`docs/sop.md`、`docs/changelog.md`。
@@ -18,12 +19,14 @@
 - 当前分支和工作区状态。
 - 是否配置 GitHub remote。
 - harness 文档和 prompts 是否存在。
+- 旧项目迁移时，先检查并给迁移计划，不要立刻大量改文件。
 - 项目可用的 test/lint/build 脚本。
 
 规则：
 
 - 如果还不是 Git 仓库，除非用户明确要求，否则先询问再初始化。
 - 如果 Git 已存在，不要重复 `git init`。
+- 迁移旧项目时，不要覆盖已有文档。
 - 不直接开发大功能，除非是集成修复或冲突解决。
 - 优先使用功能分支或工作树。
 - 优先通过 GitHub PR 合并。

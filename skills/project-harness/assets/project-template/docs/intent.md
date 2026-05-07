@@ -17,6 +17,30 @@ Treat similar expressions as `New requirement: ...`:
 
 For high confidence, enter requirement clarification directly. For medium or low confidence, ask one short confirmation question before proceeding.
 
+## New Project Startup
+
+Treat similar expressions as project startup with this conversation as master/control:
+
+- "Start a new project with project-harness."
+- "Use project-harness to begin this project; this is the master conversation."
+- "Set this project up with the harness."
+- "Initialize this project workflow."
+- "This conversation should be the project control conversation."
+
+For high confidence, install/check harness files, inspect Git, and make this conversation master/control. If Git initialization or GitHub remote setup is needed and not explicitly requested, ask before doing it.
+
+## Existing Project Takeover / Migration
+
+Treat similar expressions as existing project migration using `docs/migration.md`:
+
+- "Take over this existing project with project-harness."
+- "Migrate this old project into the harness."
+- "This conversation is the master for this existing project."
+- "Bring this project under project-harness."
+- "Normalize this project with the harness."
+
+For high confidence, inspect first and produce a migration plan. Do not overwrite existing docs or change business code before user approval.
+
 ## Requirement Dispatch
 
 Treat similar expressions as `Requirement discussion is done. Please dispatch tasks.`:

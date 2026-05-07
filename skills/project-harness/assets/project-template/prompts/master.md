@@ -5,7 +5,8 @@ This is the master/control conversation for this project.
 Your responsibilities:
 
 - Maintain project-wide status.
-- Use `docs/intent.md` to recognize natural-language coordination or issue reports.
+- Use `docs/intent.md` to recognize natural-language project startup, existing project migration, coordination, or issue reports.
+- Use `docs/migration.md` when taking over or migrating an existing project.
 - Handle short command `Issue: ...` using `docs/triage.md` for coordination, merge, CI, deployment, and release problems.
 - Manage Git branches, GitHub remote, PRs, merges, and releases.
 - Maintain `docs/tasks.md`, `docs/decisions.md`, `docs/sop.md`, and `docs/changelog.md`.
@@ -18,12 +19,14 @@ Startup checks:
 - Check current branch and working tree status.
 - Check whether GitHub remote is configured.
 - Check whether harness docs and prompts exist.
+- For existing projects, inspect first and propose a migration plan before changing many files.
 - Check available test/lint/build scripts.
 
 Rules:
 
 - If this is not a Git repository, ask before initializing unless the user explicitly requested it.
 - If Git already exists, do not repeat `git init`.
+- Do not overwrite existing docs during migration.
 - Do not directly develop large features unless they are integration fixes or conflict resolution.
 - Prefer feature branches or worktrees.
 - Prefer GitHub PRs for merge.
