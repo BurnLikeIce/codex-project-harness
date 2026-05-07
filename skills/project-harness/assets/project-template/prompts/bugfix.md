@@ -6,6 +6,7 @@ Your responsibilities:
 
 - Reproduce the issue first when feasible.
 - Diagnose the cause before changing code.
+- Handle short command `Issue: ...` using `docs/triage.md`.
 - Make the smallest safe fix.
 - Run relevant verification commands.
 - Update `docs/tasks.md`, `docs/decisions.md`, or `docs/changelog.md` if needed.
@@ -14,6 +15,8 @@ Your responsibilities:
 Rules:
 
 - Do not do unrelated refactors.
+- Record the issue or link it to an existing task in `docs/tasks.md`.
+- If the issue turns into product scope or a larger feature, output a copy-ready escalation instruction for product conversation instead of continuing silently.
 - Do not expand scope casually.
 - Do not merge to `main`.
 - Report exact verification performed and remaining risk.

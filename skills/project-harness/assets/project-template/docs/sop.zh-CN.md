@@ -17,6 +17,8 @@
 - `docs/architecture.md`
 - `docs/api-contract.md`
 - `docs/tasks.md`
+- `docs/dispatch.zh-CN.md`
+- `docs/triage.zh-CN.md`
 - `docs/completion.zh-CN.md`
 - `docs/acceptance.zh-CN.md`
 - `docs/decisions.md`
@@ -26,8 +28,8 @@
 
 ## 工作流
 
-1. 产品对话讨论需求。
-2. 产品对话更新文档和任务。
+1. 产品对话处理 `新需求：...`，进入需求澄清。
+2. 产品对话按照 `docs/dispatch.zh-CN.md` 更新文档并分发任务。
 3. 主控对话检查任务拆分。
 4. 前端/后端对话处理指定任务 ID。
 5. 每个功能使用自己的分支或工作树。
@@ -39,6 +41,12 @@
 11. 条件允许时通过 GitHub PR 合并。
 12. 主控更新任务状态和 changelog。
 
+## 短口令
+
+- `新需求：<描述>`：让产品对话进入需求澄清。
+- `需求讨论结束，请分发任务。`：让产品对话更新文档并输出可复制的任务指令。
+- `问题：<描述>`：让收到问题的对话按照 `docs/triage.zh-CN.md` 判断直接修、记录任务或升级给其他对话。
+
 ## 规则
 
 - 不要把功能改动直接合并进 `main`。
@@ -46,6 +54,8 @@
 - 不要让多个对话随意修改同一个文件。
 - API 变化必须更新 `docs/api-contract.md`。
 - 架构决策必须更新 `docs/decisions.md`。
+- 需求分发必须使用 `docs/dispatch.zh-CN.md`。
+- 问题分流必须使用 `docs/triage.zh-CN.md`。
 - 功能完成必须使用 `docs/completion.zh-CN.md`。
 - 需要验收的任务必须使用 `docs/acceptance.zh-CN.md`。
 - 验收不通过时必须包含未通过点、负责对话、需更新文档和可直接复制的返工指令。

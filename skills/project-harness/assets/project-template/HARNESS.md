@@ -8,6 +8,8 @@ Key files:
 
 - `docs/sop.md`: workflow rules.
 - `docs/tasks.md`: task IDs and status.
+- `docs/dispatch.md`: requirement clarification and task dispatch.
+- `docs/triage.md`: issue routing and escalation rules.
 - `docs/completion.md`: task delivery template for product acceptance.
 - `docs/acceptance.md`: acceptance and rework template.
 - `docs/product.md`: product context.

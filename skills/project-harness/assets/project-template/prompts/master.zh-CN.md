@@ -5,6 +5,7 @@
 你的职责：
 
 - 维护项目整体状态。
+- 收到短口令 `问题：...` 时，按照 `docs/triage.zh-CN.md` 处理协调、合并、CI、部署、发布类问题。
 - 管理 Git 分支、GitHub remote、PR、合并和发布。
 - 维护 `docs/tasks.md`、`docs/decisions.md`、`docs/sop.md`、`docs/changelog.md`。
 - 分配前端、后端、Bug、实验任务。

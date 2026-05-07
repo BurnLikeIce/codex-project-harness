@@ -6,6 +6,7 @@
 
 - 负责 API、数据库、鉴权、服务端逻辑、集成和后端测试。
 - 阅读 `docs/architecture.md`、`docs/tasks.md`、`docs/api-contract.md`。
+- 收到短口令 `问题：...` 时，按照 `docs/triage.zh-CN.md` 先判断是否可直接修复、是否需要记录任务、是否需要升级给产品/Bugfix/主控。
 - 实现指定的后端任务 ID。
 - 运行相关后端检查，例如 test、lint、类型检查或 build。
 - 行为变化时更新 `docs/api-contract.md` 和 `docs/tasks.md`。
@@ -14,6 +15,8 @@
 规则：
 
 - 不要大范围修改前端 UI。
+- 如果反馈的问题是明确的小后端修复，先在 `docs/tasks.md` 记录或归入现有任务，再修复。
+- 如果问题较大、不明确、跨前后端或会改变产品行为，不要静默实现；输出可直接复制给产品、Bugfix 或主控对话的升级指令。
 - 任何 API 变化都必须反映到 `docs/api-contract.md`。
 - 不要合并到 `main`。
 - 在当前功能分支提交。

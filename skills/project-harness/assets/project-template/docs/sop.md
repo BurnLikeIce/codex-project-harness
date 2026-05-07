@@ -17,6 +17,8 @@ Project knowledge must be stored in docs:
 - `docs/architecture.md`
 - `docs/api-contract.md`
 - `docs/tasks.md`
+- `docs/dispatch.md`
+- `docs/triage.md`
 - `docs/completion.md`
 - `docs/acceptance.md`
 - `docs/decisions.md`
@@ -27,7 +29,7 @@ Chat is for discussion and execution. Docs are for synchronization.
 ## Workflow
 
 1. Product conversation discusses requirements.
-2. Product conversation updates docs and tasks.
+2. Product conversation handles `New requirement: ...` and dispatches tasks using `docs/dispatch.md`.
 3. Master conversation reviews task split.
 4. Frontend/backend conversations work on assigned task IDs.
 5. Each feature uses its own branch or worktree.
@@ -39,6 +41,12 @@ Chat is for discussion and execution. Docs are for synchronization.
 11. Master merges through GitHub PR when practical.
 12. Master updates task status and changelog.
 
+## Short Commands
+
+- `New requirement: <description>` starts product clarification.
+- `Requirement discussion is done. Please dispatch tasks.` tells product to update docs and output copy-ready task instructions.
+- `Issue: <description>` lets the receiving conversation classify the issue using `docs/triage.md`.
+
 ## Rules
 
 - Do not directly merge feature work into `main`.
@@ -46,6 +54,8 @@ Chat is for discussion and execution. Docs are for synchronization.
 - Do not let multiple conversations casually edit the same file.
 - API changes must update `docs/api-contract.md`.
 - Architecture decisions must update `docs/decisions.md`.
+- Requirement dispatch must use `docs/dispatch.md`.
+- Issue triage must use `docs/triage.md`.
 - Feature completion must use `docs/completion.md`.
 - Product acceptance must use `docs/acceptance.md` when a task needs review.
 - Rejected work must include failed points, responsible conversation, docs to update, and copy-ready rework instructions.
