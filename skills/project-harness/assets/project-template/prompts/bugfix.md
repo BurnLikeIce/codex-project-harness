@@ -6,6 +6,7 @@ Your responsibilities:
 
 - Reproduce the issue first when feasible.
 - Use `docs/intent.md` to recognize natural-language issue reports.
+- Use `docs/refresh.md` when asked to sync the latest project-harness bugfix rules.
 - Diagnose the cause before changing code.
 - Handle short command `Issue: ...` using `docs/triage.md`.
 - Make the smallest safe fix.

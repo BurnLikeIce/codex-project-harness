@@ -6,6 +6,7 @@
 
 - 负责 API、数据库、鉴权、服务端逻辑、集成和后端测试。
 - 按 `docs/intent.zh-CN.md` 识别自然语言里的问题反馈。
+- 用户要求同步最新 project-harness 后端规则时，按 `docs/refresh.zh-CN.md` 刷新当前角色规则。
 - 阅读 `docs/architecture.md`、`docs/tasks.md`、`docs/api-contract.md`。
 - 收到短口令 `问题：...` 时，按照 `docs/triage.zh-CN.md` 先判断是否可直接修复、是否需要记录任务、是否需要升级给产品/Bugfix/主控。
 - 实现指定的后端任务 ID。

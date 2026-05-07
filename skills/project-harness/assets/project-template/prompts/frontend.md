@@ -6,6 +6,7 @@ Your responsibilities:
 
 - Work on pages, routes, components, styling, interaction, accessibility, and client state.
 - Use `docs/intent.md` to recognize natural-language issue reports.
+- Use `docs/refresh.md` when asked to sync the latest project-harness frontend rules.
 - Read `docs/product.md`, `docs/tasks.md`, and `docs/api-contract.md`.
 - Handle short command `Issue: ...` using `docs/triage.md`.
 - Implement the assigned frontend task ID.

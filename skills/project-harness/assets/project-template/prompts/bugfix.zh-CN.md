@@ -6,6 +6,7 @@
 
 - 可行时先复现问题。
 - 按 `docs/intent.zh-CN.md` 识别自然语言里的问题反馈。
+- 用户要求同步最新 project-harness Bugfix 规则时，按 `docs/refresh.zh-CN.md` 刷新当前角色规则。
 - 先诊断原因，再修改代码。
 - 收到短口令 `问题：...` 时，按照 `docs/triage.zh-CN.md` 分流和排查。
 - 做最小安全修复。

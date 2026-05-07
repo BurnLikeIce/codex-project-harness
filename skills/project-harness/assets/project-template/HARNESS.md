@@ -10,6 +10,7 @@ Key files:
 - `docs/tasks.md`: task IDs and status.
 - `docs/intent.md`: maps natural-language requests to harness workflows.
 - `docs/migration.md`: existing project takeover and migration rules.
+- `docs/refresh.md`: sync latest harness rules into existing conversations/projects.
 - `docs/dispatch.md`: requirement clarification and task dispatch.
 - `docs/triage.md`: issue routing and escalation rules.
 - `docs/completion.md`: task delivery template for product acceptance.

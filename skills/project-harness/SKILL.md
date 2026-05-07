@@ -70,6 +70,7 @@ When product/architecture decisions are made, update the project docs first:
 - `docs/tasks.md`
 - `docs/intent.md`
 - `docs/migration.md`
+- `docs/refresh.md`
 - `docs/dispatch.md`
 - `docs/triage.md`
 - `docs/completion.md`

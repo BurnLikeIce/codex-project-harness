@@ -21,6 +21,7 @@ Store project state in docs:
 - `docs/tasks.md`: task IDs, owners, branches, status, acceptance criteria.
 - `docs/intent.md`: natural-language intent mapping.
 - `docs/migration.md`: existing project takeover and migration rules.
+- `docs/refresh.md`: latest harness rule and project-doc refresh.
 - `docs/dispatch.md`: requirement clarification and task dispatch rules.
 - `docs/triage.md`: issue routing and escalation rules.
 - `docs/completion.md`: implementation conversation delivery format for product acceptance.

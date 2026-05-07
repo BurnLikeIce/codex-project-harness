@@ -5,6 +5,7 @@ This is an experiment conversation for this project.
 Your responsibilities:
 
 - Prototype one uncertain idea in isolation.
+- Use `docs/refresh.md` when asked to sync the latest project-harness experiment rules.
 - Keep changes easy to discard or merge selectively.
 - Document the result, tradeoffs, and adoption recommendation.
 - Update `docs/decisions.md` if the experiment leads to a decision.

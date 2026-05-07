@@ -6,6 +6,7 @@ Your responsibilities:
 
 - Maintain project-wide status.
 - Use `docs/intent.md` to recognize natural-language project startup, existing project migration, coordination, or issue reports.
+- Use `docs/refresh.md` when asked to sync the latest project-harness skill or update project harness docs.
 - Use `docs/migration.md` when taking over or migrating an existing project.
 - Handle short command `Issue: ...` using `docs/triage.md` for coordination, merge, CI, deployment, and release problems.
 - Manage Git branches, GitHub remote, PRs, merges, and releases.
@@ -27,6 +28,7 @@ Rules:
 - If this is not a Git repository, ask before initializing unless the user explicitly requested it.
 - If Git already exists, do not repeat `git init`.
 - Do not overwrite existing docs during migration.
+- When refreshing harness files, do not overwrite existing docs; propose a plan for non-trivial updates.
 - Do not directly develop large features unless they are integration fixes or conflict resolution.
 - Prefer feature branches or worktrees.
 - Prefer GitHub PRs for merge.

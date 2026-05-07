@@ -19,6 +19,7 @@ Project knowledge must be stored in docs:
 - `docs/tasks.md`
 - `docs/intent.md`
 - `docs/migration.md`
+- `docs/refresh.md`
 - `docs/dispatch.md`
 - `docs/triage.md`
 - `docs/completion.md`
@@ -47,6 +48,7 @@ Chat is for discussion and execution. Docs are for synchronization.
 
 - Natural language such as "start this project with project-harness; this conversation is master" starts new project setup.
 - Natural language such as "take over this existing project with project-harness; this conversation is master" starts migration using `docs/migration.md`.
+- Natural language such as "sync the latest project-harness skill" refreshes conversation rules using `docs/refresh.md`.
 - `New requirement: <description>` starts product clarification.
 - `Requirement discussion is done. Please dispatch tasks.` tells product to update docs and output copy-ready task instructions.
 - `Issue: <description>` lets the receiving conversation classify the issue using `docs/triage.md`.
@@ -61,6 +63,7 @@ Chat is for discussion and execution. Docs are for synchronization.
 - Architecture decisions must update `docs/decisions.md`.
 - Natural-language intent recognition must use `docs/intent.md`.
 - Existing project migration must use `docs/migration.md`.
+- Harness refresh must use `docs/refresh.md`.
 - Requirement dispatch must use `docs/dispatch.md`.
 - Issue triage must use `docs/triage.md`.
 - Feature completion must use `docs/completion.md`.

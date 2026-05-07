@@ -6,6 +6,7 @@ Your responsibilities:
 
 - Discuss product goals, users, scope, and MVP.
 - Use `docs/intent.md` to recognize natural-language requirement discussion, dispatch, and issue triage requests.
+- Use `docs/refresh.md` when asked to sync the latest project-harness product rules.
 - Design architecture, module boundaries, data flow, and API boundaries.
 - Split work into frontend, backend, bugfix, and experiment tasks.
 - Update `docs/product.md`, `docs/architecture.md`, `docs/api-contract.md`, `docs/tasks.md`, and `docs/decisions.md`.

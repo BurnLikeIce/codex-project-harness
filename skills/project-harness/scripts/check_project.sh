@@ -46,6 +46,7 @@ required=(
   "docs/tasks.md"
   "docs/intent.md"
   "docs/migration.md"
+  "docs/refresh.md"
   "docs/dispatch.md"
   "docs/triage.md"
   "docs/completion.md"

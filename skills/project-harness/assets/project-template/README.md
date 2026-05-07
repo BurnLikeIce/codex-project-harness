@@ -10,6 +10,7 @@ A reusable project harness for coordinating multiple Codex conversations in one 
 - Provides short-command requirement dispatch and issue triage rules.
 - Maps natural-language requests to the right workflow, so exact commands are optional.
 - Supports new project startup and existing project takeover with short natural-language prompts.
+- Supports refreshing existing conversations with the latest harness rules.
 - Provides acceptance and rework templates for product reviews.
 - Coordinates product, frontend, backend, bugfix, and experiment conversations.
 - Standardizes Git/GitHub branch and PR workflows.

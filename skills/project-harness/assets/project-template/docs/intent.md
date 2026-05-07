@@ -41,6 +41,19 @@ Treat similar expressions as existing project migration using `docs/migration.md
 
 For high confidence, inspect first and produce a migration plan. Do not overwrite existing docs or change business code before user approval.
 
+## Harness Refresh
+
+Treat similar expressions as refresh requests using `docs/refresh.md`:
+
+- "Sync the latest project-harness skill."
+- "Refresh project-harness rules."
+- "Continue with the latest harness rules."
+- "Update this project to the latest harness docs."
+- "Check whether this project has the latest harness."
+- "Use the latest project-harness frontend/backend/product/master rules."
+
+Any conversation can refresh its own role rules. Master/control conversation owns project harness file refresh.
+
 ## Requirement Dispatch
 
 Treat similar expressions as `Requirement discussion is done. Please dispatch tasks.`:

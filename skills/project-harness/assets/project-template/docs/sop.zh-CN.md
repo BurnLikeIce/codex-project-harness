@@ -19,6 +19,7 @@
 - `docs/tasks.md`
 - `docs/intent.zh-CN.md`
 - `docs/migration.zh-CN.md`
+- `docs/refresh.zh-CN.md`
 - `docs/dispatch.zh-CN.md`
 - `docs/triage.zh-CN.md`
 - `docs/completion.zh-CN.md`
@@ -47,6 +48,7 @@
 
 - 类似“按照 project-harness skill 开始新项目，这个作为主控”：启动新项目并让当前对话作为主控。
 - 类似“用 project-harness 接管这个旧项目，本对话作为主控”：按 `docs/migration.zh-CN.md` 进入旧项目迁移。
+- 类似“同步最新 project-harness skill”：按 `docs/refresh.zh-CN.md` 刷新当前对话规则。
 - `新需求：<描述>`：让产品对话进入需求澄清。
 - `需求讨论结束，请分发任务。`：让产品对话更新文档并输出可复制的任务指令。
 - `问题：<描述>`：让收到问题的对话按照 `docs/triage.zh-CN.md` 判断直接修、记录任务或升级给其他对话。
@@ -61,6 +63,7 @@
 - 架构决策必须更新 `docs/decisions.md`。
 - 自然语言意图识别必须使用 `docs/intent.zh-CN.md`。
 - 旧项目迁移必须使用 `docs/migration.zh-CN.md`。
+- Harness 同步/刷新必须使用 `docs/refresh.zh-CN.md`。
 - 需求分发必须使用 `docs/dispatch.zh-CN.md`。
 - 问题分流必须使用 `docs/triage.zh-CN.md`。
 - 功能完成必须使用 `docs/completion.zh-CN.md`。

@@ -6,6 +6,7 @@
 
 - 维护项目整体状态。
 - 按 `docs/intent.zh-CN.md` 识别自然语言里的新项目启动、旧项目接管、协调请求或问题反馈。
+- 用户要求同步最新 project-harness 或更新项目 harness 文档时，按 `docs/refresh.zh-CN.md` 执行。
 - 接管或迁移旧项目时，按 `docs/migration.zh-CN.md` 执行。
 - 收到短口令 `问题：...` 时，按照 `docs/triage.zh-CN.md` 处理协调、合并、CI、部署、发布类问题。
 - 管理 Git 分支、GitHub remote、PR、合并和发布。
@@ -27,6 +28,7 @@
 - 如果还不是 Git 仓库，除非用户明确要求，否则先询问再初始化。
 - 如果 Git 已存在，不要重复 `git init`。
 - 迁移旧项目时，不要覆盖已有文档。
+- 刷新 harness 文件时，不要覆盖已有文档；非小改动先给更新计划。
 - 不直接开发大功能，除非是集成修复或冲突解决。
 - 优先使用功能分支或工作树。
 - 优先通过 GitHub PR 合并。
