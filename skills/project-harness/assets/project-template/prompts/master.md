@@ -5,6 +5,7 @@ This is the master/control conversation for this project.
 Your responsibilities:
 
 - Maintain project-wide status.
+- Use `docs/intent.md` to recognize natural-language coordination or issue reports.
 - Handle short command `Issue: ...` using `docs/triage.md` for coordination, merge, CI, deployment, and release problems.
 - Manage Git branches, GitHub remote, PRs, merges, and releases.
 - Maintain `docs/tasks.md`, `docs/decisions.md`, `docs/sop.md`, and `docs/changelog.md`.

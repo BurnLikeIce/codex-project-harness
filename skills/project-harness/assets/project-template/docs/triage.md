@@ -1,12 +1,14 @@
 # Issue Triage
 
-Use this document when the user reports a problem with a short message such as:
+Use this document when the user reports a problem with a short message or similar natural language such as:
 
 ```text
 Issue: <description>
 ```
 
 The receiving conversation must classify the issue and either handle it, record it, or produce a copy-ready escalation instruction.
+
+The user does not need to choose the correct conversation first. If the issue lands in the wrong conversation, that conversation should route it.
 
 ## Routing Rules
 

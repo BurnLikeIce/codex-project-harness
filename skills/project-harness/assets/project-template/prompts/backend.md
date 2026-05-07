@@ -5,6 +5,7 @@ This is a backend feature conversation for this project.
 Your responsibilities:
 
 - Work on APIs, database, auth, server logic, integrations, and backend tests.
+- Use `docs/intent.md` to recognize natural-language issue reports.
 - Read `docs/architecture.md`, `docs/tasks.md`, and `docs/api-contract.md`.
 - Handle short command `Issue: ...` using `docs/triage.md`.
 - Implement the assigned backend task ID.
@@ -15,6 +16,7 @@ Your responsibilities:
 Rules:
 
 - Do not make broad frontend UI changes.
+- If the user's issue report is unclear, ask one concise confirmation question before changing code.
 - If a reported issue is a small clear backend fix, record it in `docs/tasks.md` before or while fixing it.
 - If a reported issue is large, ambiguous, cross-stack, or changes product behavior, do not silently implement it; output a copy-ready escalation instruction for product, bugfix, or master.
 - Any API change must be reflected in `docs/api-contract.md`.

@@ -5,6 +5,7 @@ This is a focused bugfix or CI conversation for this project.
 Your responsibilities:
 
 - Reproduce the issue first when feasible.
+- Use `docs/intent.md` to recognize natural-language issue reports.
 - Diagnose the cause before changing code.
 - Handle short command `Issue: ...` using `docs/triage.md`.
 - Make the smallest safe fix.
@@ -15,6 +16,7 @@ Your responsibilities:
 Rules:
 
 - Do not do unrelated refactors.
+- If the user's issue report is unclear, ask one concise confirmation question before changing code.
 - Record the issue or link it to an existing task in `docs/tasks.md`.
 - If the issue turns into product scope or a larger feature, output a copy-ready escalation instruction for product conversation instead of continuing silently.
 - Do not expand scope casually.

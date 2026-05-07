@@ -17,6 +17,7 @@ Project knowledge must be stored in docs:
 - `docs/architecture.md`
 - `docs/api-contract.md`
 - `docs/tasks.md`
+- `docs/intent.md`
 - `docs/dispatch.md`
 - `docs/triage.md`
 - `docs/completion.md`
@@ -46,6 +47,7 @@ Chat is for discussion and execution. Docs are for synchronization.
 - `New requirement: <description>` starts product clarification.
 - `Requirement discussion is done. Please dispatch tasks.` tells product to update docs and output copy-ready task instructions.
 - `Issue: <description>` lets the receiving conversation classify the issue using `docs/triage.md`.
+- Similar natural-language expressions also count. Use `docs/intent.md` to map informal wording to the right workflow.
 
 ## Rules
 
@@ -54,6 +56,7 @@ Chat is for discussion and execution. Docs are for synchronization.
 - Do not let multiple conversations casually edit the same file.
 - API changes must update `docs/api-contract.md`.
 - Architecture decisions must update `docs/decisions.md`.
+- Natural-language intent recognition must use `docs/intent.md`.
 - Requirement dispatch must use `docs/dispatch.md`.
 - Issue triage must use `docs/triage.md`.
 - Feature completion must use `docs/completion.md`.

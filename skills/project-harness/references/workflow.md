@@ -19,6 +19,7 @@ Store project state in docs:
 - `docs/architecture.md`: system boundaries, modules, data flow.
 - `docs/api-contract.md`: request/response contracts.
 - `docs/tasks.md`: task IDs, owners, branches, status, acceptance criteria.
+- `docs/intent.md`: natural-language intent mapping.
 - `docs/dispatch.md`: requirement clarification and task dispatch rules.
 - `docs/triage.md`: issue routing and escalation rules.
 - `docs/completion.md`: implementation conversation delivery format for product acceptance.
@@ -39,8 +40,8 @@ Chat can contain reasoning, but decisions must be written into docs before other
 
 ## Work Cycle
 
-1. Product conversation handles `New requirement: ...` and clarifies the change.
-2. Product conversation handles `Requirement discussion is done. Please dispatch tasks.` by updating docs and outputting copy-ready task instructions.
+1. Product conversation handles `New requirement: ...` or similar natural language and clarifies the change.
+2. Product conversation handles `Requirement discussion is done. Please dispatch tasks.` or similar natural language by updating docs and outputting copy-ready task instructions.
 3. Master conversation reviews the task split.
 4. Feature conversations work on assigned task IDs using separate branches or worktrees.
 5. Feature conversations update docs, run relevant checks, commit, and output task deliveries for product acceptance.
@@ -49,7 +50,7 @@ Chat can contain reasoning, but decisions must be written into docs before other
 8. Accepted work moves to master for technical review, verification, PR handling, and merge.
 9. Master updates task status and changelog.
 
-For issues, send `Issue: ...` to the most relevant conversation. That conversation should use `docs/triage.md` to handle, record, or escalate the issue.
+For issues, send `Issue: ...` or similar natural language to the most relevant conversation. That conversation should use `docs/intent.md` and `docs/triage.md` to handle, record, or escalate the issue.
 
 ## Handoff
 

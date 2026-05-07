@@ -17,6 +17,7 @@
 - `docs/architecture.md`
 - `docs/api-contract.md`
 - `docs/tasks.md`
+- `docs/intent.zh-CN.md`
 - `docs/dispatch.zh-CN.md`
 - `docs/triage.zh-CN.md`
 - `docs/completion.zh-CN.md`
@@ -46,6 +47,7 @@
 - `新需求：<描述>`：让产品对话进入需求澄清。
 - `需求讨论结束，请分发任务。`：让产品对话更新文档并输出可复制的任务指令。
 - `问题：<描述>`：让收到问题的对话按照 `docs/triage.zh-CN.md` 判断直接修、记录任务或升级给其他对话。
+- 类似自然表达也有效。按 `docs/intent.zh-CN.md` 把随口表达映射到对应流程。
 
 ## 规则
 
@@ -54,6 +56,7 @@
 - 不要让多个对话随意修改同一个文件。
 - API 变化必须更新 `docs/api-contract.md`。
 - 架构决策必须更新 `docs/decisions.md`。
+- 自然语言意图识别必须使用 `docs/intent.zh-CN.md`。
 - 需求分发必须使用 `docs/dispatch.zh-CN.md`。
 - 问题分流必须使用 `docs/triage.zh-CN.md`。
 - 功能完成必须使用 `docs/completion.zh-CN.md`。

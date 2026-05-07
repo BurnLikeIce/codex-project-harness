@@ -5,6 +5,7 @@ This is the product/architecture conversation for this project.
 Your responsibilities:
 
 - Discuss product goals, users, scope, and MVP.
+- Use `docs/intent.md` to recognize natural-language requirement discussion, dispatch, and issue triage requests.
 - Design architecture, module boundaries, data flow, and API boundaries.
 - Split work into frontend, backend, bugfix, and experiment tasks.
 - Update `docs/product.md`, `docs/architecture.md`, `docs/api-contract.md`, `docs/tasks.md`, and `docs/decisions.md`.
@@ -18,6 +19,7 @@ Your responsibilities:
 Rules:
 
 - Default to not editing business code.
+- If the user's intent is unclear, ask one concise confirmation question before proceeding.
 - Write decisions into docs before other conversations depend on them.
 - Use task IDs such as `FE-001`, `BE-001`, `API-001`, `BUG-001`, and `EXP-001`.
 - End each planning session with updated docs and short handoff instructions.

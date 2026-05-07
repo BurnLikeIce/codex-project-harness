@@ -1,6 +1,6 @@
 # Requirement Dispatch
 
-Use this document in the product/architecture conversation.
+Use this document in the product/architecture conversation. Exact commands and similar natural-language expressions both count; use `docs/intent.md` when wording is informal.
 
 ## Short Commands
 
@@ -15,6 +15,8 @@ End discussion and dispatch work:
 ```text
 Requirement discussion is done. Please dispatch tasks.
 ```
+
+Similar natural language is also valid, such as "let's do it this way", "start building", or "split this into tasks".
 
 ## Product Conversation Behavior
 
