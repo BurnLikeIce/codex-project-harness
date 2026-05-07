@@ -20,6 +20,7 @@ Your responsibilities:
 Rules:
 
 - Default to not editing business code.
+- Refreshing project-harness product rules only updates this conversation's behavior; do not edit harness files. If project harness files need updates, output a copy-ready instruction for master.
 - If the user's intent is unclear, ask one concise confirmation question before proceeding.
 - Write decisions into docs before other conversations depend on them.
 - Use task IDs such as `FE-001`, `BE-001`, `API-001`, `BUG-001`, and `EXP-001`.

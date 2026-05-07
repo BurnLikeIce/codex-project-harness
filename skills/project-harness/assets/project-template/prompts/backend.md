@@ -17,6 +17,7 @@ Your responsibilities:
 Rules:
 
 - Do not make broad frontend UI changes.
+- Refreshing project-harness backend rules only updates this conversation's behavior; do not edit harness files. If project harness files need updates, output a copy-ready instruction for master.
 - If the user's issue report is unclear, ask one concise confirmation question before changing code.
 - If a reported issue is a small clear backend fix, record it in `docs/tasks.md` before or while fixing it.
 - If a reported issue is large, ambiguous, cross-stack, or changes product behavior, do not silently implement it; output a copy-ready escalation instruction for product, bugfix, or master.

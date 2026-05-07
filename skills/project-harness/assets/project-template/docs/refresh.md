@@ -10,17 +10,26 @@ Sync the latest project-harness skill.
 
 Similar natural-language requests also count.
 
-## Two Levels
+## Hard Boundary
 
-### Conversation Rule Refresh
+There are two different refresh actions:
 
-Any conversation can do this.
+- Conversation rule refresh: any conversation may do this.
+- Project harness file refresh: only the master/control conversation may do this.
+
+Non-master conversations must not edit harness files such as `docs/`, `prompts/`, `HARNESS.md`, README, or `.github` just because the user asked to sync the latest project-harness skill.
+
+If a non-master conversation notices missing or outdated harness docs, it should output a copy-ready instruction for the master conversation instead of editing files.
+
+## Conversation Rule Refresh
+
+Any conversation can refresh its own behavior.
 
 When asked to sync the latest project-harness skill:
 
-- Re-orient to the current conversation role: master, product, frontend, backend, bugfix, experiment, or other.
+- Identify the current conversation role: master, product, frontend, backend, bugfix, experiment, or other.
 - Read or follow the matching role prompt in `prompts/` when present.
-- Use the latest workflow docs relevant to that role:
+- Use the workflow docs relevant to that role:
   - `docs/intent.md`
   - `docs/dispatch.md`
   - `docs/triage.md`
@@ -28,12 +37,13 @@ When asked to sync the latest project-harness skill:
   - `docs/acceptance.md`
   - `docs/migration.md`
 - Continue future work using the latest rules.
+- Do not edit harness files unless this is the master/control conversation and the user asked to update project harness docs.
 
-### Project Harness File Refresh
+## Project Harness File Refresh
 
-Master/control conversation owns this.
+Only the master/control conversation owns this.
 
-When asked to update the project's harness docs:
+When the master conversation is asked to update the project's harness docs:
 
 - Inspect current `docs/`, `prompts/`, `HARNESS.md`, README, and `.github`.
 - Compare against the latest project-harness template.
@@ -41,30 +51,15 @@ When asked to update the project's harness docs:
 - Propose an update plan if changes are more than trivial.
 - Add missing templates, or create index/link files when existing docs already cover the content.
 
-## Role-Specific Short Prompts
+## Non-Master Escalation
+
+If a product/frontend/backend/bugfix/experiment conversation finds that project harness files need updating, output:
 
 ```text
-Sync the latest project-harness skill.
-```
+Please send this to the master/control conversation:
 
-```text
-Sync the latest project-harness master rules.
-```
-
-```text
-Sync the latest project-harness product rules.
-```
-
-```text
-Sync the latest project-harness frontend rules.
-```
-
-```text
-Sync the latest project-harness backend rules.
-```
-
-```text
-Sync the latest project-harness bugfix rules.
+Sync the latest project-harness skill and check whether this project's harness docs need updating.
+Do not overwrite existing docs. If updates are needed, propose a plan first.
 ```
 
 ## Output
@@ -73,5 +68,5 @@ After refresh, briefly report:
 
 - Role understood:
 - Rules/docs now in effect:
-- Missing project docs, if any:
+- Whether project-file refresh is needed:
 - Next recommended action:

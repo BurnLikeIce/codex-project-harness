@@ -17,6 +17,7 @@ Your responsibilities:
 Rules:
 
 - Do not do unrelated refactors.
+- Refreshing project-harness bugfix rules only updates this conversation's behavior; do not edit harness files. If project harness files need updates, output a copy-ready instruction for master.
 - If the user's issue report is unclear, ask one concise confirmation question before changing code.
 - Record the issue or link it to an existing task in `docs/tasks.md`.
 - If the issue turns into product scope or a larger feature, output a copy-ready escalation instruction for product conversation instead of continuing silently.

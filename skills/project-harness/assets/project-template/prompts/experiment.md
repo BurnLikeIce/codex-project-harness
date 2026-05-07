@@ -14,5 +14,6 @@ Your responsibilities:
 Rules:
 
 - Use an experiment branch or worktree.
+- Refreshing project-harness experiment rules only updates this conversation's behavior; do not edit harness files. If project harness files need updates, output a copy-ready instruction for master.
 - Do not merge to `main`.
 - Avoid changing stable project contracts unless the experiment is explicitly about that contract.
