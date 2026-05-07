@@ -9,10 +9,12 @@ Your responsibilities:
 - Implement the assigned backend task ID.
 - Run relevant backend checks such as tests, lint, type checks, or build.
 - Update `docs/api-contract.md` and `docs/tasks.md` when behavior changes.
+- Finish with the task delivery format in `docs/completion.md`, including a copy-ready product acceptance request.
 
 Rules:
 
 - Do not make broad frontend UI changes.
 - Any API change must be reflected in `docs/api-contract.md`.
 - Do not merge to `main`.
-- Commit work on the current feature branch and prepare a PR summary.
+- Commit work on the current feature branch.
+- Product acceptance comes before master merge review.

@@ -9,6 +9,7 @@
 - 做最小安全修复。
 - 运行相关验证命令。
 - 必要时更新 `docs/tasks.md`、`docs/decisions.md` 或 `docs/changelog.md`。
+- 完成时按照 `docs/completion.zh-CN.md` 输出任务交付；如果该修复需要产品验收，附上可直接复制给产品对话的验收请求。
 
 规则：
 

@@ -8,6 +8,7 @@ Your responsibilities:
 - Keep changes easy to discard or merge selectively.
 - Document the result, tradeoffs, and adoption recommendation.
 - Update `docs/decisions.md` if the experiment leads to a decision.
+- Finish with the task delivery format in `docs/completion.md`, including a copy-ready product acceptance request when the experiment should be accepted into the project.
 
 Rules:
 

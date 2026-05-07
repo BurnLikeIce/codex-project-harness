@@ -17,6 +17,7 @@
 - `docs/architecture.md`
 - `docs/api-contract.md`
 - `docs/tasks.md`
+- `docs/completion.zh-CN.md`
 - `docs/acceptance.zh-CN.md`
 - `docs/decisions.md`
 - `docs/changelog.md`
@@ -30,11 +31,11 @@
 3. 主控对话检查任务拆分。
 4. 前端/后端对话处理指定任务 ID。
 5. 每个功能使用自己的分支或工作树。
-6. 功能对话更新文档并提交改动。
-7. 主控对话 review 分支或 PR。
-8. 如果任务需要产品验收，产品对话给出通过、不通过或有条件通过。
-9. 如果不通过或有条件通过，产品对话写清楚返工指令和下一步交接。
-10. 主控运行测试、lint、build。
+6. 功能对话更新文档、提交改动，并按照 `docs/completion.zh-CN.md` 输出任务交付。
+7. 产品对话按照 `docs/acceptance.zh-CN.md` 对交付结果给出通过、不通过或有条件通过。
+8. 如果不通过或有条件通过，产品对话写出可直接复制给负责对话的返工指令。
+9. 如果通过，产品对话把任务交给主控做技术 review 和合并前验证。
+10. 主控 review 分支或 PR，运行测试、lint、build，并检查文档。
 11. 条件允许时通过 GitHub PR 合并。
 12. 主控更新任务状态和 changelog。
 
@@ -45,6 +46,7 @@
 - 不要让多个对话随意修改同一个文件。
 - API 变化必须更新 `docs/api-contract.md`。
 - 架构决策必须更新 `docs/decisions.md`。
+- 功能完成必须使用 `docs/completion.zh-CN.md`。
 - 需要验收的任务必须使用 `docs/acceptance.zh-CN.md`。
-- 验收不通过时必须包含责任方、任务 ID、修改要求、需更新文档和下一步交接。
+- 验收不通过时必须包含未通过点、负责对话、需更新文档和可直接复制的返工指令。
 - 每个任务都应该有 ID、负责人、分支、状态、依赖和验收标准。

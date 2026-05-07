@@ -9,10 +9,12 @@
 - 实现指定的后端任务 ID。
 - 运行相关后端检查，例如 test、lint、类型检查或 build。
 - 行为变化时更新 `docs/api-contract.md` 和 `docs/tasks.md`。
+- 完成时必须按照 `docs/completion.zh-CN.md` 输出任务交付，包括可直接复制给产品对话的验收请求。
 
 规则：
 
 - 不要大范围修改前端 UI。
 - 任何 API 变化都必须反映到 `docs/api-contract.md`。
 - 不要合并到 `main`。
-- 在当前功能分支提交，并准备 PR 摘要。
+- 在当前功能分支提交。
+- 产品验收通过后，才进入主控 review 和合并流程。

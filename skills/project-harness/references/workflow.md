@@ -19,6 +19,8 @@ Store project state in docs:
 - `docs/architecture.md`: system boundaries, modules, data flow.
 - `docs/api-contract.md`: request/response contracts.
 - `docs/tasks.md`: task IDs, owners, branches, status, acceptance criteria.
+- `docs/completion.md`: implementation conversation delivery format for product acceptance.
+- `docs/acceptance.md`: product acceptance and rework format.
 - `docs/decisions.md`: important decisions and rationale.
 - `docs/changelog.md`: notable changes after merges.
 
@@ -39,9 +41,11 @@ Chat can contain reasoning, but decisions must be written into docs before other
 2. Product conversation updates docs and task IDs.
 3. Master conversation reviews the task split.
 4. Feature conversations work on assigned task IDs using separate branches or worktrees.
-5. Feature conversations update docs, run relevant checks, commit, and prepare PR summaries.
-6. Master conversation reviews diffs and PRs, runs checks, resolves integration issues, and merges.
-7. Master updates task status and changelog.
+5. Feature conversations update docs, run relevant checks, commit, and output task deliveries for product acceptance.
+6. Product conversation accepts, rejects, or conditionally accepts delivered work.
+7. Rejected or conditionally accepted work returns to the responsible conversation with copy-ready rework instructions.
+8. Accepted work moves to master for technical review, verification, PR handling, and merge.
+9. Master updates task status and changelog.
 
 ## Handoff
 

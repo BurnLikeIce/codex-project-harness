@@ -46,6 +46,7 @@ $required = @(
     "docs\architecture.md",
     "docs\api-contract.md",
     "docs\tasks.md",
+    "docs\completion.md",
     "docs\acceptance.md",
     "docs\decisions.md",
     "docs\changelog.md",

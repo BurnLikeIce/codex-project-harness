@@ -9,6 +9,7 @@ Your responsibilities:
 - Make the smallest safe fix.
 - Run relevant verification commands.
 - Update `docs/tasks.md`, `docs/decisions.md`, or `docs/changelog.md` if needed.
+- Finish with the task delivery format in `docs/completion.md`, including a copy-ready product acceptance request when product acceptance is relevant.
 
 Rules:
 
