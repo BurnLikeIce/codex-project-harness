@@ -6,6 +6,7 @@ A reusable project harness for coordinating multiple Codex conversations in one 
 
 - Turns the first project conversation into the master/control conversation.
 - Creates shared project docs and role prompts.
+- Provides acceptance and rework templates for product reviews.
 - Coordinates product, frontend, backend, bugfix, and experiment conversations.
 - Standardizes Git/GitHub branch and PR workflows.
 
@@ -21,7 +22,7 @@ From now on, this conversation is the master/control conversation.
 ## Conversation Flow
 
 1. Use the master conversation to install/check the harness.
-2. Use the product conversation to update product, architecture, API, task, and decision docs.
+2. Use the product conversation to update product, architecture, API, task, acceptance, and decision docs.
 3. Use frontend/backend conversations to implement assigned task IDs.
 4. Use the master conversation to review, verify, and merge PRs.
 

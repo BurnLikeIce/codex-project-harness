@@ -25,6 +25,7 @@ For Chinese-language projects, prefer the `.zh-CN.md` prompt and SOP templates w
    - `docs/sop.md`
    - `docs/sop.zh-CN.md` when the user wants Chinese docs
    - `docs/tasks.md`
+   - `docs/acceptance.md`
    - `prompts/master.md`
    - `prompts/master.zh-CN.md` when the user wants Chinese prompts
    - `.github/pull_request_template.md`

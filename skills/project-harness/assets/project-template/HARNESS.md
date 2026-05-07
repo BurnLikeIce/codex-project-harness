@@ -8,6 +8,7 @@ Key files:
 
 - `docs/sop.md`: workflow rules.
 - `docs/tasks.md`: task IDs and status.
+- `docs/acceptance.md`: acceptance and rework template.
 - `docs/product.md`: product context.
 - `docs/architecture.md`: architecture context.
 - `docs/api-contract.md`: API contracts.
