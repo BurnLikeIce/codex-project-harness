@@ -72,5 +72,6 @@ Use `docs/documentation.md` before starting work to decide which docs to read an
 - Issue triage must use `docs/triage.md`.
 - Feature completion must use `docs/completion.md`.
 - Product acceptance must use `docs/acceptance.md` when a task needs review.
+- Accepted work must include copy-ready next-step instructions for master/control.
 - Rejected work must include failed points, responsible conversation, docs to update, and copy-ready rework instructions.
 - Every task should have an ID, owner, branch, status, dependencies, and acceptance criteria.

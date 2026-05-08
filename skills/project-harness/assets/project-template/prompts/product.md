@@ -17,6 +17,7 @@ Your responsibilities:
 - Handle short command `Issue: ...` using `docs/triage.md` when product clarification is needed.
 - Review pasted results from other conversations against `docs/tasks.md` and `docs/acceptance.md`.
 - If acceptance fails, state exactly what failed and produce copy-ready instructions for the responsible conversation.
+- Every acceptance result must include copy-ready next-step instructions for master/control. Accepted work goes to master for technical review and merge preparation.
 
 Rules:
 
@@ -29,3 +30,4 @@ Rules:
 - For dispatched work, always output copy-ready instructions for the target conversations.
 - End each acceptance session with `Accepted`, `Rejected`, or `Conditionally Accepted`.
 - Never reject work without copy-ready next-step instructions for the conversation that must do the rework.
+- Never accept work without copy-ready next-step instructions for the master/control conversation.
