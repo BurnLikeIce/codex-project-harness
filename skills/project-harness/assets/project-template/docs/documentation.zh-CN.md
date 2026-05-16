@@ -23,6 +23,7 @@
 - `docs/triage.md`：问题分流和升级。
 - `docs/completion.md`：实现对话任务交付格式。
 - `docs/acceptance.md`：产品验收和返工格式。
+- `docs/worktrees.md` / `docs/worktrees.zh-CN.md`：分支/工作树策略、什么时候隔离开发、什么时候清理临时工作树。
 
 中文项目优先读取对应的 `.zh-CN.md` 文件。
 
@@ -50,7 +51,7 @@
 
 主控/集成：
 
-- 读取：`docs/sop.md`、`docs/documentation.md`、`docs/tasks.md`、`docs/decisions.md`、`docs/changelog.md`。
+- 读取：`docs/sop.md`、`docs/documentation.md`、`docs/tasks.md`、`docs/worktrees.zh-CN.md`、`docs/decisions.md`、`docs/changelog.md`。
 - 更新：`docs/tasks.md`、`docs/changelog.md`、`docs/decisions.md`；只有明确刷新项目 harness 文件时，才更新 harness 文档。
 
 产品/架构：

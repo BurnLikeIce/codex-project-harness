@@ -25,6 +25,7 @@
 - `docs/triage.zh-CN.md`
 - `docs/completion.zh-CN.md`
 - `docs/acceptance.zh-CN.md`
+- `docs/worktrees.zh-CN.md`
 - `docs/decisions.md`
 - `docs/changelog.md`
 
@@ -38,7 +39,7 @@
 2. 产品对话按照 `docs/dispatch.zh-CN.md` 更新文档并分发任务。
 3. 主控对话检查任务拆分。
 4. 前端/后端对话处理指定任务 ID。
-5. 每个功能使用自己的分支或工作树。
+5. 主控/集成对话按照 `docs/worktrees.zh-CN.md` 判断使用同一工作树、功能分支还是独立工作树。
 6. 功能对话更新文档、提交改动，并按照 `docs/completion.zh-CN.md` 输出任务交付。
 7. 产品对话按照 `docs/acceptance.zh-CN.md` 对交付结果给出通过、不通过或有条件通过。
 8. 如果不通过或有条件通过，产品对话写出可直接复制给负责对话的返工指令。
@@ -72,6 +73,9 @@
 - 问题分流必须使用 `docs/triage.zh-CN.md`。
 - 功能完成必须使用 `docs/completion.zh-CN.md`。
 - 需要验收的任务必须使用 `docs/acceptance.zh-CN.md`。
+- 分支和工作树决策必须使用 `docs/worktrees.zh-CN.md`。
+- 产品/文档类对话默认使用主工作树；独立工作树主要用于非小型实现、高风险修复、实验或并行开发。
+- 主控/集成负责工作树盘点和清理建议；未经用户明确确认，不要删除工作树或分支。
 - 验收通过时，必须包含可直接复制给主控/集成对话的下一步指令。
 - 验收不通过时必须包含未通过点、负责对话、需更新文档和可直接复制的返工指令。
 - 每个任务都应该有 ID、负责人、分支、状态、依赖和验收标准。

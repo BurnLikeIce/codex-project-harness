@@ -23,6 +23,7 @@ Not every project needs every optional document. Every task should still identif
 - `docs/triage.md`: issue routing and escalation.
 - `docs/completion.md`: implementation task delivery format.
 - `docs/acceptance.md`: product acceptance and rework format.
+- `docs/worktrees.md`: branch/worktree policy, when to isolate work, and cleanup rules.
 
 ## Optional Docs By Project Need
 
@@ -48,7 +49,7 @@ Every conversation should ask:
 
 Master/control:
 
-- Read: `docs/sop.md`, `docs/documentation.md`, `docs/tasks.md`, `docs/decisions.md`, `docs/changelog.md`.
+- Read: `docs/sop.md`, `docs/documentation.md`, `docs/tasks.md`, `docs/worktrees.md`, `docs/decisions.md`, `docs/changelog.md`.
 - Update: `docs/tasks.md`, `docs/changelog.md`, `docs/decisions.md`, harness docs when explicitly refreshing project files.
 
 Product/architecture:

@@ -25,6 +25,7 @@ Project knowledge must be stored in docs:
 - `docs/triage.md`
 - `docs/completion.md`
 - `docs/acceptance.md`
+- `docs/worktrees.md`
 - `docs/decisions.md`
 - `docs/changelog.md`
 
@@ -38,7 +39,7 @@ Use `docs/documentation.md` before starting work to decide which docs to read an
 2. Product conversation handles `New requirement: ...` and dispatches tasks using `docs/dispatch.md`.
 3. Master conversation reviews task split.
 4. Frontend/backend conversations work on assigned task IDs.
-5. Each feature uses its own branch or worktree.
+5. Master/control chooses same working tree, branch, or separate worktree using `docs/worktrees.md`.
 6. Feature conversations update docs, commit changes, and output a task delivery using `docs/completion.md`.
 7. Product conversation accepts, rejects, or conditionally accepts the delivered work using `docs/acceptance.md`.
 8. If rejected or conditionally accepted, product conversation writes copy-ready rework instructions for the responsible conversation.
@@ -72,6 +73,9 @@ Use `docs/documentation.md` before starting work to decide which docs to read an
 - Issue triage must use `docs/triage.md`.
 - Feature completion must use `docs/completion.md`.
 - Product acceptance must use `docs/acceptance.md` when a task needs review.
+- Worktree and branch decisions must use `docs/worktrees.md`.
+- Product/documentation conversations default to the main working tree; separate worktrees are for non-trivial implementation, risky fixes, experiments, or parallel work.
+- Master/control owns worktree audits and cleanup; do not delete worktrees or branches without explicit user approval.
 - Accepted work must include copy-ready next-step instructions for master/control.
 - Rejected work must include failed points, responsible conversation, docs to update, and copy-ready rework instructions.
 - Every task should have an ID, owner, branch, status, dependencies, and acceptance criteria.

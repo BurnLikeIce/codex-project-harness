@@ -54,6 +54,7 @@ $required = @(
     "docs\triage.md",
     "docs\completion.md",
     "docs\acceptance.md",
+    "docs\worktrees.md",
     "docs\decisions.md",
     "docs\changelog.md",
     "prompts\master.md",

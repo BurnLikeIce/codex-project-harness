@@ -32,6 +32,7 @@ For Chinese-language projects, prefer the `.zh-CN.md` prompt and SOP templates w
    - `docs/triage.md`
    - `docs/completion.md`
    - `docs/acceptance.md`
+   - `docs/worktrees.md`
    - `prompts/master.md`
    - `prompts/master.zh-CN.md` when the user wants Chinese prompts
    - `.github/pull_request_template.md`
@@ -76,6 +77,7 @@ When product/architecture decisions are made, update the project docs first:
 - `docs/dispatch.md`
 - `docs/triage.md`
 - `docs/completion.md`
+- `docs/worktrees.md`
 - `docs/decisions.md`
 
 Then give the user short handoff instructions such as:

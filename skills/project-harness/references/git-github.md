@@ -38,6 +38,18 @@ Use one branch per feature or fix:
 
 Prefer worktrees when multiple conversations are editing in parallel.
 
+## Worktrees
+
+Branches are lightweight. Worktrees are real local folders and can consume significant disk space.
+
+Use the main working tree for product discussion, documentation-only work, master/control review, merge, changelog updates, and small fixes that do not conflict with active work.
+
+Use separate worktrees for non-trivial frontend/backend implementation, risky bugfixes, experiments, prototypes, and parallel work that may conflict.
+
+The master/control conversation owns worktree decisions, audits, and cleanup. Before creating a worktree, check current status, existing worktrees, whether the task already has a branch/worktree, and whether the task is small enough to stay in the current working tree.
+
+After merges, master/control should periodically list branches and worktrees, recommend what is active, merged, stale, or abandoned, and ask the user before deleting anything.
+
 ## PR Merge
 
 Feature conversations prepare PR summaries. The master conversation handles review, verification, merge order, and changelog updates.
