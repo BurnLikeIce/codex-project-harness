@@ -55,6 +55,8 @@ $required = @(
     "docs\completion.md",
     "docs\acceptance.md",
     "docs\worktrees.md",
+    "docs\single-conversation-harness.md",
+    "docs\handovers\current-control-state.md",
     "docs\decisions.md",
     "docs\changelog.md",
     "prompts\master.md",

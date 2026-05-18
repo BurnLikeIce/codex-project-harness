@@ -54,6 +54,36 @@ Treat similar expressions as refresh requests using `docs/refresh.md`:
 
 Any conversation can refresh its own role rules. Master/control conversation owns project harness file refresh.
 
+## Single-Conversation Harness Mode
+
+Treat similar expressions as a request to keep work in one master/control conversation unless specialist isolation is useful:
+
+- "Use single-conversation harness mode."
+- "Don't make me open frontend/backend/bugfix conversations unless needed."
+- "Let's keep this in the main control conversation."
+- "Can we do this in one conversation?"
+
+Use `docs/single-conversation-harness.md`. The master/control conversation may switch between product, control, implementation, acceptance, release, and migration modes inside the same thread.
+
+## Control Handoff Packet
+
+Treat similar expressions as a request to prepare a state packet for a new master/control conversation:
+
+- "Make a control handoff packet."
+- "Prepare this project for a new master conversation."
+- "Summarize the current control state."
+- "This conversation is getting too long."
+
+Default: output the packet in chat and do not edit files.
+
+Treat similar expressions as permission to update the handoff file:
+
+- "Write the control handoff packet."
+- "Save the control handoff packet."
+- "Update the handoff doc."
+
+When explicitly asked to write/save it, update `docs/handovers/current-control-state.md` or the matching localized file.
+
 ## Requirement Dispatch
 
 Treat similar expressions as `Requirement discussion is done. Please dispatch tasks.`:

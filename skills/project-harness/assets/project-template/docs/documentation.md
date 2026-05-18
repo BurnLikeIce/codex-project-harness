@@ -24,6 +24,8 @@ Not every project needs every optional document. Every task should still identif
 - `docs/completion.md`: implementation task delivery format.
 - `docs/acceptance.md`: product acceptance and rework format.
 - `docs/worktrees.md`: branch/worktree policy, when to isolate work, and cleanup rules.
+- `docs/single-conversation-harness.md`: default one-master-conversation operating mode.
+- `docs/handovers/current-control-state.md`: current master/control handoff packet for moving to a new conversation.
 
 ## Optional Docs By Project Need
 
@@ -44,13 +46,14 @@ Every conversation should ask:
 - Which docs will this task change?
 - Does this need product acceptance?
 - Does this need master review/merge?
+- Can this stay in the master/control conversation, or does it truly need a specialist conversation/worktree?
 
 ## Role Guide
 
 Master/control:
 
-- Read: `docs/sop.md`, `docs/documentation.md`, `docs/tasks.md`, `docs/worktrees.md`, `docs/decisions.md`, `docs/changelog.md`.
-- Update: `docs/tasks.md`, `docs/changelog.md`, `docs/decisions.md`, harness docs when explicitly refreshing project files.
+- Read: `docs/sop.md`, `docs/single-conversation-harness.md`, `docs/documentation.md`, `docs/tasks.md`, `docs/worktrees.md`, `docs/decisions.md`, `docs/changelog.md`, and `docs/handovers/current-control-state.md` when taking over or migrating.
+- Update: `docs/tasks.md`, `docs/changelog.md`, `docs/decisions.md`, handoff packet when explicitly requested, and harness docs when explicitly refreshing project files.
 
 Product/architecture:
 

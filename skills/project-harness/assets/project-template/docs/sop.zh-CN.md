@@ -26,6 +26,8 @@
 - `docs/completion.zh-CN.md`
 - `docs/acceptance.zh-CN.md`
 - `docs/worktrees.zh-CN.md`
+- `docs/single-conversation-harness.zh-CN.md`
+- `docs/handovers/current-control-state.zh-CN.md`
 - `docs/decisions.md`
 - `docs/changelog.md`
 
@@ -35,24 +37,27 @@
 
 ## 工作流
 
-1. 产品对话处理 `新需求：...`，进入需求澄清。
-2. 产品对话按照 `docs/dispatch.zh-CN.md` 更新文档并分发任务。
-3. 主控对话检查任务拆分。
-4. 前端/后端对话处理指定任务 ID。
-5. 主控/集成对话按照 `docs/worktrees.zh-CN.md` 判断使用同一工作树、功能分支还是独立工作树。
-6. 功能对话更新文档、提交改动，并按照 `docs/completion.zh-CN.md` 输出任务交付。
-7. 产品对话按照 `docs/acceptance.zh-CN.md` 对交付结果给出通过、不通过或有条件通过。
-8. 如果不通过或有条件通过，产品对话写出可直接复制给负责对话的返工指令。
-9. 如果通过，产品对话把任务交给主控做技术 review 和合并前验证。
-10. 主控 review 分支或 PR，运行测试、lint、build，并检查文档。
-11. 条件允许时通过 GitHub PR 合并。
-12. 主控更新任务状态和 changelog。
+1. 默认使用 `docs/single-conversation-harness.zh-CN.md` 定义的单主对话模式。
+2. 在主控/主产品对话中讨论需求，或进入产品模式澄清需求。
+3. 范围变化时，先更新产品、任务、决策和接口等文档，再进入实现。
+4. 小任务和中等任务优先在主控对话中顺序完成。
+5. 只有确实能降低风险或推进并行时，才使用专项对话、后台执行单元、分支或 worktree。
+6. 主控/集成对话按照 `docs/worktrees.zh-CN.md` 判断使用同一工作树、功能分支还是独立工作树。
+7. 需要产品验收时，按照 `docs/acceptance.zh-CN.md` 给出通过、不通过或有条件通过。
+8. 如果不通过或有条件通过，写出可直接复制给负责对话或执行模式的返工指令。
+9. 如果通过，进入技术 review、测试/lint/build 和文档检查。
+10. 条件允许时通过 GitHub PR 合并。
+11. 主控更新任务状态和 changelog。
+12. 主控对话变长或需要换新对话时，按照 `docs/single-conversation-harness.zh-CN.md` 创建或写入主控迁移包。
 
 ## 短口令
 
 - 类似“按照 project-harness skill 开始新项目，这个作为主控”：启动新项目并让当前对话作为主控。
 - 类似“用 project-harness 接管这个旧项目，本对话作为主控”：按 `docs/migration.zh-CN.md` 进入旧项目迁移。
 - 类似“同步最新 project-harness skill”：按 `docs/refresh.zh-CN.md` 刷新当前对话规则。
+- 类似“使用单主对话 harness 模式”：把产品、主控、实现和验收优先收敛到同一个主控对话。
+- 类似“做一次主控迁移包”：在聊天中输出迁移给新主控对话的状态摘要，不改文件。
+- 类似“写入主控迁移包”：更新 `docs/handovers/current-control-state.zh-CN.md`。
 - `新需求：<描述>`：让产品对话进入需求澄清。
 - `需求讨论结束，请分发任务。`：让产品对话更新文档并输出可复制的任务指令。
 - `问题：<描述>`：让收到问题的对话按照 `docs/triage.zh-CN.md` 判断直接修、记录任务或升级给其他对话。
@@ -74,7 +79,8 @@
 - 功能完成必须使用 `docs/completion.zh-CN.md`。
 - 需要验收的任务必须使用 `docs/acceptance.zh-CN.md`。
 - 分支和工作树决策必须使用 `docs/worktrees.zh-CN.md`。
-- 产品/文档类对话默认使用主工作树；独立工作树主要用于非小型实现、高风险修复、实验或并行开发。
+- 单主对话模式必须使用 `docs/single-conversation-harness.zh-CN.md`。
+- 产品/文档类工作默认留在主控对话和主工作树；独立对话或独立工作树主要用于非小型实现、高风险修复、实验或并行开发。
 - 主控/集成负责工作树盘点和清理建议；未经用户明确确认，不要删除工作树或分支。
 - 验收通过时，必须包含可直接复制给主控/集成对话的下一步指令。
 - 验收不通过时必须包含未通过点、负责对话、需更新文档和可直接复制的返工指令。

@@ -1,6 +1,6 @@
 # Branch and Worktree Management
 
-Use this document when deciding whether a conversation should share the current working tree, create a branch, or use a separate Git worktree.
+Use this document when deciding whether work should stay in the current working tree, use a branch, or use a separate Git worktree. In single-conversation harness mode, worktrees are optional isolation tools, not a requirement to open a new conversation.
 
 ## Core Rule
 
@@ -9,6 +9,7 @@ Use this document when deciding whether a conversation should share the current 
 - The master/control conversation owns worktree policy, cleanup, integration, and merge order.
 - Product and documentation conversations should normally use the main working tree.
 - Feature, bugfix, backend, frontend, and experiment conversations may use separate worktrees when isolation is useful.
+- Do not create worktrees by default for every task.
 
 ## Default Choice
 
@@ -18,6 +19,7 @@ Use the same working tree for:
 - Documentation-only updates.
 - Small fixes that do not overlap with active feature work.
 - Master/control review, merge, and changelog work.
+- Ordinary single-conversation implementation that has clear scope and low conflict risk.
 
 Use a separate worktree for:
 
@@ -47,7 +49,7 @@ The master/control conversation should check:
 - Whether the task is small enough to stay in the current working tree.
 - Whether the user wants to conserve disk space.
 
-Do not create new worktrees automatically for product discussion, acceptance, or documentation-only coordination.
+Do not create new worktrees automatically for product discussion, acceptance, documentation-only coordination, or ordinary single-conversation work.
 
 ## Naming
 

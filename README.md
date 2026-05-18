@@ -1,15 +1,17 @@
 # Codex Project Harness
 
-A bilingual Codex skill for managing multi-conversation software projects with shared docs, role prompts, Git branches, and GitHub PR workflows.
+A bilingual Codex skill for managing software projects with one master/control conversation, optional specialist conversations, shared docs, task IDs, Git branches, worktrees, and GitHub PR workflows.
 
-This project is an experimental workflow template for Codex. It helps you start a new project, migrate an existing project, and coordinate multiple Codex conversations without copying long chat transcripts between them.
+This project is an experimental workflow template for Codex. It helps you start a new project, migrate an existing project, keep ordinary work in one long-lived master/control conversation, and use specialist conversations only when they are actually useful.
 
 ## What It Does
 
 - Turns the first project conversation into the master/control conversation.
+- Supports single-conversation harness mode for product discussion, implementation, acceptance, and release decisions in one thread.
+- Provides a control handoff packet template for migrating a long-running master conversation to a new one.
 - Creates shared project docs for product, architecture, API contracts, tasks, decisions, and changelog.
 - Provides role prompts for master, product, frontend, backend, bugfix, and experiment conversations.
-- Standardizes Git/GitHub branch, PR, review, and merge workflows.
+- Standardizes Git/GitHub branch, worktree, PR, review, and merge workflows.
 - Includes English and Chinese templates.
 
 ## Repository Structure
@@ -88,28 +90,28 @@ Project name: <your project name>
 I use Git and GitHub.
 ```
 
+By default, keep the project in single-conversation harness mode. Create frontend/backend/bugfix conversations only when parallelism or isolation is useful.
+
 For an existing project, say:
 
 ```text
-Please use the project-harness skill to migrate this existing project into the multi-conversation workflow.
+Please use the project-harness skill to migrate this existing project into the project harness workflow.
 Do not overwrite existing docs. First inspect the project and propose a migration plan.
 From now on, this conversation is the master/control conversation.
 ```
 
 ## Conversation Model
 
-- Master/control conversation: Git, GitHub, PRs, merges, releases, and project-wide coordination.
-- Product/architecture conversation: requirements, architecture, task splitting, and decisions.
-- Frontend conversation: pages, components, styling, interaction, and client behavior.
-- Backend conversation: APIs, database, auth, server logic, and backend tests.
-- Bugfix/CI conversation: focused debugging and failing checks.
-- Experiment conversation: isolated prototypes and uncertain ideas.
+- Default: one long-lived master/control conversation switches between product, control, implementation, acceptance, release, and migration modes.
+- Optional product/frontend/backend/bugfix/experiment conversations can still be created for larger, risky, or parallel work.
+- Worktrees are optional isolation tools, not the default for every task.
+- When a master/control conversation gets too long, use `docs/handovers/current-control-state.md` to migrate to a new master/control conversation.
 
 ## Core Rule
 
 Chat is for discussion and execution. Docs are for synchronization.
 
-When product or architecture decisions are made, update project docs first, then hand off short task IDs such as:
+When product or architecture decisions are made, update project docs first. If specialist conversations are needed, hand off short task IDs such as:
 
 ```text
 Frontend: read prompts/frontend.md and implement FE-001 from docs/tasks.md.

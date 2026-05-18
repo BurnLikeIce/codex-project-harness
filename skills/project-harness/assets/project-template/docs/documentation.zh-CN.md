@@ -24,6 +24,8 @@
 - `docs/completion.md`：实现对话任务交付格式。
 - `docs/acceptance.md`：产品验收和返工格式。
 - `docs/worktrees.md` / `docs/worktrees.zh-CN.md`：分支/工作树策略、什么时候隔离开发、什么时候清理临时工作树。
+- `docs/single-conversation-harness.md` / `docs/single-conversation-harness.zh-CN.md`：默认单主控对话工作模式。
+- `docs/handovers/current-control-state.md` / `docs/handovers/current-control-state.zh-CN.md`：迁移到新主控对话时使用的当前状态快照。
 
 中文项目优先读取对应的 `.zh-CN.md` 文件。
 
@@ -46,13 +48,14 @@
 - 本任务会影响哪些文档？
 - 本任务是否需要产品验收？
 - 本任务是否需要主控 review/合并？
+- 本任务是否可以留在主控对话中完成，还是确实需要专项对话或 worktree？
 
 ## 角色指南
 
 主控/集成：
 
-- 读取：`docs/sop.md`、`docs/documentation.md`、`docs/tasks.md`、`docs/worktrees.zh-CN.md`、`docs/decisions.md`、`docs/changelog.md`。
-- 更新：`docs/tasks.md`、`docs/changelog.md`、`docs/decisions.md`；只有明确刷新项目 harness 文件时，才更新 harness 文档。
+- 读取：`docs/sop.md`、`docs/single-conversation-harness.zh-CN.md`、`docs/documentation.md`、`docs/tasks.md`、`docs/worktrees.zh-CN.md`、`docs/decisions.md`、`docs/changelog.md`；接管或迁移时读取 `docs/handovers/current-control-state.zh-CN.md`。
+- 更新：`docs/tasks.md`、`docs/changelog.md`、`docs/decisions.md`；用户明确要求写入迁移包时，更新 `docs/handovers/current-control-state.zh-CN.md`；只有明确刷新项目 harness 文件时，才更新 harness 文档。
 
 产品/架构：
 

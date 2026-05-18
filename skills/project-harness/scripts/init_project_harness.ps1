@@ -42,4 +42,4 @@ Get-ChildItem -LiteralPath $templateRoot -Recurse -File | ForEach-Object {
 
 Write-Output ""
 Write-Output "Project harness installed at: $resolvedProject"
-Write-Output "Next: use prompts/master.md in this conversation, then create product/frontend/backend conversations as needed."
+Write-Output "Next: use prompts/master.md in this conversation. Default to single-conversation harness mode; create specialist conversations only when useful."

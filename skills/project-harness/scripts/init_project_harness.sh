@@ -31,4 +31,4 @@ done < <(find "$TEMPLATE_ROOT" -type f -print0)
 
 echo
 echo "Project harness installed at: $PROJECT_ROOT"
-echo "Next: use prompts/master.md in this conversation, then create product/frontend/backend conversations as needed."
+echo "Next: use prompts/master.md in this conversation. Default to single-conversation harness mode; create specialist conversations only when useful."
