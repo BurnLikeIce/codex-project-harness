@@ -1,107 +1,114 @@
 ---
 name: project-harness
-description: Use when starting, migrating, or operating a software project with Codex project discipline: one master/control conversation, optional single-conversation mode, optional specialist conversations, shared docs, task IDs, acceptance, handoff/migration packets, worktrees, Git/GitHub, or natural-language workflow intent. Also use for Chinese requests such as 启动项目, 旧项目接管, 本对话作为主控, 单主对话, 多对话协作, 主控迁移包, 工作树管理.
+description: Use when initializing or adopting project governance, updating an existing Project Harness project, preserving durable tasks or decisions, coordinating parallel project work, accepting and integrating results, handing control to a new conversation, or interpreting project-workflow requests such as start this project, use this conversation as control, sync the latest project-harness, update this project's harness, 验收结果, 启动项目, 旧项目接管, 同步最新规则, 更新当前项目, or 主控交接. Do not use for an ordinary isolated code change unless durable project state, coordination, acceptance, or release boundaries must change.
 ---
 
 # Project Harness
 
-Use this skill to start or normalize a project so Codex can collaborate through shared files, task discipline, Git branches, and GitHub PRs. The default mode is a long-lived master/control conversation. Specialist conversations and worktrees are optional tools, not mandatory ceremony.
+## Mission
 
-For Chinese-language projects, prefer the `.zh-CN.md` prompt and SOP templates when present.
+Keep project-specific facts, decisions, constraints, task state, acceptance evidence, and coordination boundaries usable across long-running agent work.
 
-## Core Model
+Manage the project-level contract. Do not prescribe the agent's internal planning, implementation, debugging, testing, review, tool, or delegation method.
 
-- Treat the first project conversation as the **master/control conversation** unless the user says otherwise.
-- Prefer **single-conversation harness mode** for ordinary work: product discussion, task planning, implementation, acceptance, and release decisions can happen in one master/control conversation with explicit mode switches.
-- Use specialist conversations only when they reduce risk or unblock parallel work.
-- Use project docs as the source of truth. Chat is for discussion and execution; docs are for synchronization.
-- Use Git branches or worktrees when isolation is useful; do not create worktrees by default for every task.
-- Use GitHub Issues/PRs for reviewable collaboration when the project has a GitHub remote.
-- Use a control handoff packet when the master/control conversation becomes too long or must migrate to a new conversation.
-- Do not repeatedly initialize Git. Check first.
+Reply and create project-facing content in the user's language unless the project already establishes another language.
 
-## Quick Start Workflow
+## Core Rules
 
-1. Inspect the current directory.
-2. Check whether the project already has:
-   - `.git`
-   - `docs/sop.md`
-   - `docs/sop.zh-CN.md` when the user wants Chinese docs
-   - `docs/documentation.md`
-   - `docs/tasks.md`
-   - `docs/intent.md`
-   - `docs/migration.md`
-   - `docs/dispatch.md`
-   - `docs/triage.md`
-   - `docs/completion.md`
-   - `docs/acceptance.md`
-   - `docs/worktrees.md`
-   - `docs/single-conversation-harness.md`
-   - `docs/handovers/current-control-state.md`
-   - `prompts/master.md`
-   - `prompts/master.zh-CN.md` when the user wants Chinese prompts
-   - `.github/pull_request_template.md`
-3. If harness files are missing, copy the bundled templates from `assets/project-template/` into the project.
-4. If Git is missing, ask whether to initialize it unless the user explicitly requested initialization.
-5. If Git exists, check branch, status, and remotes.
-6. Tell the user that the current conversation is now the master/control conversation.
-7. Tell the user the default mode is a single master/control conversation, and list optional specialist conversations only when useful.
+1. Inspect before initializing, adopting, updating, or migrating a project.
+2. Reuse existing project documents as sources of truth; do not create duplicate canonical files.
+3. Record work according to durable impact, not code size.
+4. Keep one active coordinator for each governed task.
+5. Use one control conversation for ordinary work; add parallel execution only when it provides a concrete benefit.
+6. Prefer mechanical verification for repeatable invariants and keep prose focused on intent and boundaries.
+7. Do not repeat `git init`, overwrite existing documentation, or perform structural migration without explicit intent.
+8. Do not commit, push, publish, deploy, release, delete, or materially expand scope without authorization from the user or established project policy.
 
-Prefer running the platform script for template installation:
+## Route Semantic Intent
 
-- Windows: `scripts/init_project_harness.ps1`
-- macOS/Linux: `scripts/init_project_harness.sh`
+Interpret meaning rather than matching exact commands.
 
-Use the matching `check_project` script to inspect the project state.
+- **Start a new project:** inspect, initialize only missing minimal governance files, and establish the current conversation as the control context unless the user chooses otherwise.
+- **Adopt an existing project:** inspect and map existing sources of truth; do not reorganize them to match a template.
+- **Sync the latest Project Harness:** reload the latest skill rules for this conversation only. Do not edit files or change Git state.
+- **Update the current project's Harness:** perform a backward-compatible in-place protocol update. Preserve files and custom content; update only managed Harness entry sections.
+- **Migrate project structure:** inspect and propose a migration plan first. Require confirmation before moving, merging, archiving, or deleting files.
+- **Discuss a possible change:** explore without creating an implementation task until the user commits to the change or durable discussion output must be recorded.
+- **Proceed with the agreed change:** convert the settled outcome into the smallest sufficient task and decision records, then execute or coordinate it.
+- **Report a problem:** triage directly. Fix it as a bounded task when safe; create or update durable records when impact, uncertainty, coordination, or acceptance requires them.
+- **Accept or review results:** evaluate recorded criteria and evidence, then always return the control context's next action.
 
-## Bundled Resources
+Read [routing.md](references/routing.md) when intent or routing is ambiguous.
 
-- `assets/project-template/`: files to copy into a new project.
-- `references/workflow.md`: complete project SOP.
-- `references/conversation-roles.md`: role boundaries and handoff rules.
-- `references/git-github.md`: Git/GitHub branch and PR workflow.
-- `scripts/init_project_harness.ps1`: install harness files into a project directory on Windows.
-- `scripts/check_project.ps1`: inspect Git, docs, prompts, and GitHub template readiness on Windows.
-- `scripts/init_project_harness.sh`: install harness files into a project directory on macOS/Linux.
-- `scripts/check_project.sh`: inspect Git, docs, prompts, and GitHub template readiness on macOS/Linux.
+## Classify Work on Two Axes
 
-Load only the reference file needed for the user request.
+### Durable Impact
 
-## Conversation Handoff Rule
+Create or update a durable task when work changes product behavior, records a meaningful decision, changes a contract or release boundary, affects downstream work, needs acceptance or rollback, or must survive a conversation or ownership change.
 
-When product/architecture decisions are made, update the project docs first:
+Record a decision when a product or technical choice and its rationale should constrain future work. A tiny change can require both a task and a decision. Purely mechanical work may remain traceable through Git alone.
 
-- `docs/product.md`
-- `docs/architecture.md`
-- `docs/api-contract.md`
-- `docs/documentation.md`
-- `docs/tasks.md`
-- `docs/intent.md`
-- `docs/migration.md`
-- `docs/refresh.md`
-- `docs/dispatch.md`
-- `docs/triage.md`
-- `docs/completion.md`
-- `docs/worktrees.md`
-- `docs/single-conversation-harness.md`
-- `docs/handovers/current-control-state.md`
-- `docs/decisions.md`
+### Execution Topology
 
-For ordinary work, keep the user in the master/control conversation. When specialist conversations are useful, give the user short handoff instructions such as:
+- **Direct:** one bounded owner can complete and verify the work.
+- **Structured:** risk, ambiguity, cross-module impact, or verification stages require an explicit execution record.
+- **Coordinated:** independent units benefit from parallel ownership.
 
-```text
-Frontend: read prompts/frontend.md and implement FE-001 from docs/tasks.md.
-Backend: read prompts/backend.md and implement BE-001 from docs/tasks.md.
-```
+The active agent chooses how to execute. Harness records only the project contract, ownership, constraints, evidence, and integration state.
 
-Do not make the user copy long chat transcripts between conversations. Use task docs or a control handoff packet instead.
+Read [project-state.md](references/project-state.md) for record rules and [coordination.md](references/coordination.md) for coordinated work.
 
-## Completion Output
+## Use the Minimal Project Map
 
-After initialization, report:
+For a new project, default to:
 
-- Files created or already present.
-- Git/GitHub status.
-- Which conversation this is now.
-- Whether the project should stay in single-conversation mode or use optional specialist conversations.
-- Exact short prompts to paste into any new conversation only when those conversations are actually needed.
+- `HARNESS.md`: project map, protocol metadata, authority boundaries, and links;
+- `docs/tasks.md`: durable task state;
+- `docs/decisions.md`: durable product and technical decisions;
+- a short managed pointer in `AGENTS.md` when safe.
+
+Create product, architecture, API, security, deployment, testing, release, or handoff documents only when needed. Reuse equivalent existing files.
+
+For an old Harness project, keep its existing layout. Updating is not migration.
+
+## Govern Completion and Acceptance
+
+An implementation result must state the task, outcome, changed scope, verification evidence, unresolved risks, and whether it is ready for acceptance. Keep the format proportional to the task.
+
+Acceptance ends in exactly one state:
+
+- **Accepted:** criteria are satisfied; state the next control action.
+- **Rework required:** identify failed criteria and provide a directly usable instruction for the responsible execution context.
+- **Blocked:** identify the dependency, owner, and required next action.
+- **Superseded:** identify the replacing task or decision.
+
+Read [acceptance.md](references/acceptance.md) when reviewing or handing off results.
+
+## Respect Git and Release Boundaries
+
+Use branches or worktrees only when isolation, review, or parallelism justifies them. Record ownership and integration order when concurrent writes could conflict. Keep remote writes, merges, releases, deployments, and cleanup explicitly authorized.
+
+Read [git-release.md](references/git-release.md) for Git, GitHub, worktree, integration, and release guidance.
+
+## Use Bundled Scripts for Deterministic Operations
+
+- Inspect: `scripts/inspect-project.ps1` or `scripts/inspect-project.sh`
+- Initialize: `scripts/init-project.ps1` or `scripts/init-project.sh`
+- Update in place: `scripts/update-project.ps1` or `scripts/update-project.sh`
+- Validate: `scripts/validate-project.ps1` or `scripts/validate-project.sh`
+
+Use `-Language zh-CN` or `--language zh-CN` for Chinese templates. Follow the existing project's language during adoption or update.
+
+Read [update-existing-project.md](references/update-existing-project.md) before updating or migrating an existing project.
+
+## Report Project-Governance Actions
+
+After initialization, adoption, update, migration, acceptance, integration, or handoff, report only what matters:
+
+- detected project state and sources of truth;
+- files changed or intentionally left unchanged;
+- Git and authorization state;
+- task, decision, acceptance, or coordination state;
+- the exact next action for the control context.
+
+Do not manufacture specialist roles, task IDs, branches, worktrees, or documents before the project needs them.

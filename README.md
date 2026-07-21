@@ -1,123 +1,155 @@
 # Codex Project Harness
 
-A bilingual Codex skill for managing software projects with one master/control conversation, optional specialist conversations, shared docs, task IDs, Git branches, worktrees, and GitHub PR workflows.
+Project Harness is a bilingual, adaptive project-governance skill for Codex. It keeps durable project facts, decisions, constraints, task state, acceptance evidence, and coordination boundaries usable across long-running software work.
 
-This project is an experimental workflow template for Codex. It helps you start a new project, migrate an existing project, keep ordinary work in one long-lived master/control conversation, and use specialist conversations only when they are actually useful.
+It gives Codex a small project map and stable sources of truth without prescribing how every implementation task must be planned or executed.
 
-## What It Does
+[中文说明](README.zh-CN.md)
 
-- Turns the first project conversation into the master/control conversation.
-- Supports single-conversation harness mode for product discussion, implementation, acceptance, and release decisions in one thread.
-- Provides a control handoff packet template for migrating a long-running master conversation to a new one.
-- Creates shared project docs for product, architecture, API contracts, tasks, decisions, and changelog.
-- Provides role prompts for master, product, frontend, backend, bugfix, and experiment conversations.
-- Standardizes Git/GitHub branch, worktree, PR, review, and merge workflows.
-- Includes English and Chinese templates.
+## What It Manages
 
-## Repository Structure
+- Project knowledge maps and sources of truth
+- Durable task and decision records
+- Product, architecture, contract, authority, and release boundaries
+- Acceptance evidence and required next actions
+- Control handoff between long-running conversations
+- Coordination boundaries for parallel tasks, branches, or worktrees
+- Backward-compatible updates for projects created with Project Harness V1
+
+Project Harness does not require a fixed development methodology, number of conversations, branch strategy, worktree strategy, or auxiliary skill.
+
+## Adaptive Behavior
+
+Project Harness makes two independent decisions:
+
+1. **Durable impact:** whether work must be recorded because it changes product behavior, contains a meaningful decision, affects a shared contract, or must survive acceptance, ownership, or conversation changes.
+2. **Execution topology:** whether work is best handled directly, as structured multi-stage work, or as coordinated parallel units.
+
+A tiny product or technical decision can require a durable record. A large mechanical edit may need structured execution without creating a permanent decision.
+
+## Minimal New-Project Footprint
+
+New projects receive only:
 
 ```text
-codex-project-harness/
-  README.md
-  README.zh-CN.md
-  LICENSE
-  skills/
-    project-harness/
-      SKILL.md
-      agents/
-      assets/
-      references/
-      scripts/
+AGENTS.md
+HARNESS.md
+docs/
+  tasks.md
+  decisions.md
 ```
+
+Product, architecture, API, security, deployment, testing, release, and handoff documents are created only when the project needs them. Equivalent existing files are reused instead of duplicated.
 
 ## Install
 
-Copy this folder:
+### Download Without a Terminal
 
-```text
-skills/project-harness
-```
-
-to your local Codex skills directory:
-
-```text
-~/.codex/skills/project-harness
-```
-
-Then restart Codex.
-
-The final path should look like this:
-
-```text
-~/.codex/skills/project-harness/SKILL.md
-```
-
-## Install Without Terminal on macOS
-
-1. Download this repository as a ZIP file.
+1. Download this repository as a ZIP from GitHub.
 2. Unzip it.
-3. Open Finder.
-4. Press `Command + Shift + G`.
-5. Enter:
+3. Copy `skills/project-harness` into your Codex skills directory.
+4. Restart Codex.
 
-```text
-~/.codex/skills
-```
-
-6. Drag the `project-harness` folder from `skills/project-harness` into that directory.
-7. Restart Codex.
-
-Make sure the final path is:
+The final path must be:
 
 ```text
 ~/.codex/skills/project-harness/SKILL.md
 ```
 
-not:
+On macOS, open Finder, press `Command + Shift + G`, and enter `~/.codex/skills`.
+
+On Windows, the usual destination is `%USERPROFILE%\.codex\skills\project-harness`.
+
+### Install With Git
+
+Clone the repository, then copy or link `skills/project-harness` into `~/.codex/skills/project-harness`. Restart Codex after installation or replacement.
+
+## Quick Start
+
+Project Harness recognizes natural-language meaning; the examples below are not exact commands.
+
+### New Project
 
 ```text
-~/.codex/skills/project-harness/project-harness/SKILL.md
+Use project-harness to start this project. This conversation is the control conversation.
 ```
 
-## Usage
-
-In the first conversation for a new project, say:
+### Existing Project
 
 ```text
-Please use the project-harness skill to start this new project.
-From now on, this conversation is the master/control conversation.
-Project name: <your project name>
-I use Git and GitHub.
+Use project-harness in this existing project. Preserve the current files and make this the control conversation.
 ```
 
-By default, keep the project in single-conversation harness mode. Create frontend/backend/bugfix conversations only when parallelism or isolation is useful.
-
-For an existing project, say:
+### Sync a Conversation
 
 ```text
-Please use the project-harness skill to migrate this existing project into the project harness workflow.
-Do not overwrite existing docs. First inspect the project and propose a migration plan.
-From now on, this conversation is the master/control conversation.
+Sync the latest project-harness.
 ```
 
-## Conversation Model
+This reloads the current skill rules and must not edit project files.
 
-- Default: one long-lived master/control conversation switches between product, control, implementation, acceptance, release, and migration modes.
-- Optional product/frontend/backend/bugfix/experiment conversations can still be created for larger, risky, or parallel work.
-- Worktrees are optional isolation tools, not the default for every task.
-- When a master/control conversation gets too long, use `docs/handovers/current-control-state.md` to migrate to a new master/control conversation.
-
-## Core Rule
-
-Chat is for discussion and execution. Docs are for synchronization.
-
-When product or architecture decisions are made, update project docs first. If specialist conversations are needed, hand off short task IDs such as:
+### Update an Existing Harness Project
 
 ```text
-Frontend: read prompts/frontend.md and implement FE-001 from docs/tasks.md.
-Backend: read prompts/backend.md and implement BE-001 from docs/tasks.md.
+Update this project's project-harness.
 ```
+
+This performs an in-place compatibility update. It preserves existing files and custom content and updates only clearly marked Harness sections in `HARNESS.md` and `AGENTS.md`.
+
+### Optional Structural Migration
+
+```text
+Migrate this project to the latest Harness structure.
+```
+
+Migration is optional. Codex must inspect and propose a plan before moving, merging, archiving, or deleting existing files.
+
+## Update Is Not Migration
+
+Projects created with V1 can use the latest Project Harness without reorganizing their documents. V2 understands the V1 layout and maps existing task, decision, product, architecture, API, acceptance, handoff, and workflow files.
+
+The in-place updater is idempotent and does not modify content outside managed blocks. Repeated updates with the same project state produce no additional diff.
+
+## Bundled Scripts
+
+Windows PowerShell:
+
+```powershell
+skills/project-harness/scripts/inspect-project.ps1 -ProjectPath <path>
+skills/project-harness/scripts/init-project.ps1 -ProjectPath <path> -Language en
+skills/project-harness/scripts/update-project.ps1 -ProjectPath <path> -Language en
+skills/project-harness/scripts/validate-project.ps1 -ProjectPath <path>
+```
+
+macOS/Linux:
+
+```bash
+skills/project-harness/scripts/inspect-project.sh <path>
+skills/project-harness/scripts/init-project.sh --project-path <path> --language en
+skills/project-harness/scripts/update-project.sh --project-path <path> --language en
+skills/project-harness/scripts/validate-project.sh <path>
+```
+
+Use `zh-CN` for Chinese project templates and managed sections.
+
+## Development and Validation
+
+```powershell
+tests/run-tests.ps1
+```
+
+```bash
+sh tests/run-tests.sh
+```
+
+The test suite covers minimal English and Chinese initialization, V1 custom-content preservation, source mapping, in-place update idempotence, and managed-structure validation.
+
+## Project Status
+
+Harness 2.0 is under active development. The V1 baseline remains available through the `v1.0.0` Git tag.
+
+This is a community project and is not an official OpenAI project.
 
 ## License
 
-MIT
+[MIT](LICENSE)

@@ -1,126 +1,153 @@
 # Codex Project Harness
 
-一个中英文通用的 Codex Skill，用来管理软件项目：单主控对话、可选专项对话、共享文档、任务 ID、Git 分支、worktree、GitHub PR 和合并流程。
+Project Harness 是一个面向 Codex 的中英文自适应项目治理 Skill。它用于长期保存项目事实、决策、约束、任务状态、验收证据和协作边界，让软件项目在长对话、任务切换和并行执行中仍然可以可靠恢复。
 
-这是一个实验性的 Codex 工作流模板。它可以帮助你启动新项目、迁移已有项目，把日常工作收敛到一个长期主控对话里，并且只在确实有用时才创建专项对话。
+它为 Codex 提供简洁的项目地图和稳定的事实来源，但不规定每个实现任务必须怎样思考和执行。
 
-## 它能做什么
+[English README](README.md)
 
-- 把项目第一个对话变成主控/集成对话。
-- 支持“单主对话 Harness 模式”：产品讨论、实现、验收和发布决策优先在一个主控对话里完成。
-- 提供“主控迁移包”模板，方便长对话迁移到新的主控对话。
-- 创建共享项目文档：产品、架构、API 约定、任务、决策、changelog。
-- 提供不同角色的提示词：主控、产品、前端、后端、Bug/CI、实验。
-- 标准化 Git/GitHub 分支、worktree、PR、review、合并流程。
-- 提供英文和中文模板。
+## 它管理什么
 
-## 仓库结构
+- 项目知识地图和事实来源
+- 需要长期保存的任务与决策
+- 产品、架构、契约、授权和发布边界
+- 验收证据和明确的下一步行动
+- 长对话之间的主控交接
+- 并行任务、分支或工作树的协作边界
+- 对旧版 Project Harness 项目的兼容更新
+
+Project Harness 不要求固定的开发方法、对话数量、分支策略、工作树策略或辅助 Skill。
+
+## 自适应判断
+
+Project Harness 会分别判断两个维度：
+
+1. **长期影响**：工作是否因为改变产品行为、包含重要决策、影响共享契约，或者需要跨验收、负责人和对话持续保存而必须记录。
+2. **执行结构**：工作适合直接完成、结构化多阶段执行，还是拆成可以协调并行的单元。
+
+很小的产品或技术决定也可能需要长期记录。大型机械修改可能需要结构化执行，但不一定需要永久决策记录。
+
+## 新项目最小结构
+
+新项目默认只创建：
 
 ```text
-codex-project-harness/
-  README.md
-  README.zh-CN.md
-  LICENSE
-  skills/
-    project-harness/
-      SKILL.md
-      agents/
-      assets/
-      references/
-      scripts/
+AGENTS.md
+HARNESS.md
+docs/
+  tasks.md
+  decisions.md
 ```
+
+产品、架构、API、安全、部署、测试、发布和交接文档只在项目实际需要时创建。已有同类文件会直接复用，不建立重复的事实来源。
 
 ## 安装
 
-把这个文件夹：
+### 不使用终端安装
 
-```text
-skills/project-harness
-```
-
-复制到你的本地 Codex skills 目录：
-
-```text
-~/.codex/skills/project-harness
-```
-
-然后重启 Codex。
-
-最终路径应该是：
-
-```text
-~/.codex/skills/project-harness/SKILL.md
-```
-
-## Mac 不用终端的安装方法
-
-1. 在 GitHub 下载这个仓库的 ZIP。
+1. 从 GitHub 下载仓库 ZIP。
 2. 解压 ZIP。
-3. 打开 Finder。
-4. 按 `Command + Shift + G`。
-5. 输入：
+3. 把 `skills/project-harness` 文件夹复制到 Codex 的 Skills 目录。
+4. 重启 Codex。
 
-```text
-~/.codex/skills
-```
-
-6. 从解压后的仓库里找到 `skills/project-harness` 文件夹。
-7. 把 `project-harness` 文件夹拖进 `~/.codex/skills`。
-8. 重启 Codex。
-
-请确认最终路径是：
+最终路径必须是：
 
 ```text
 ~/.codex/skills/project-harness/SKILL.md
 ```
 
-而不是：
+macOS 可以在 Finder 中按 `Command + Shift + G`，输入 `~/.codex/skills`。
+
+Windows 通常放在 `%USERPROFILE%\.codex\skills\project-harness`。
+
+### 使用 Git 安装
+
+克隆仓库，然后把 `skills/project-harness` 复制或链接到 `~/.codex/skills/project-harness`。安装或替换后重启 Codex。
+
+## 快速使用
+
+Project Harness 根据自然语言含义判断，不要求一字不差地输入下面的句子。
+
+### 新项目
 
 ```text
-~/.codex/skills/project-harness/project-harness/SKILL.md
+按照 project-harness 启动这个项目，这个对话作为主控。
 ```
 
-## 使用方法
-
-新项目的第一个对话里说：
+### 已有项目
 
 ```text
-请使用 project-harness skill 启动这个新项目。
-从现在开始，本对话就是项目主控/集成对话。
-项目名是：<你的项目名>
-我使用 Git 和 GitHub。
+让这个旧项目开始使用 project-harness，保留现有文件，这个对话作为主控。
 ```
 
-默认使用单主对话 Harness 模式。只有需要并行、隔离或降低风险时，才创建前端/后端/Bugfix 等专项对话。
-
-已有项目迁移时说：
+### 同步当前对话
 
 ```text
-请使用 project-harness skill，把当前已有项目迁移到项目 harness 工作流里。
-不要覆盖已有文档，先检查项目并提出迁移计划。
-从现在开始，本对话就是项目主控/集成对话。
+同步最新的 project-harness。
 ```
 
-## 对话分工
+这个操作只让当前对话重新读取最新规则，不能修改项目文件。
 
-- 默认：一个长期主控/主产品对话在同一线程里切换产品、主控、实现、验收、发布和迁移模式。
-- 可选：产品、前端、后端、Bugfix、实验对话仍可用于大型、高风险或并行任务。
-- worktree 是可选隔离工具，不是每个任务的默认动作。
-- 主控对话太长时，使用 `docs/handovers/current-control-state.zh-CN.md` 迁移到新的主控对话。
-
-## 核心规则
-
-聊天负责讨论和执行，文档负责同步。
-
-产品或架构讨论出结论后，先更新项目文档。确实需要专项对话时，再用简短任务 ID 交接，例如：
+### 更新旧版 Harness 项目
 
 ```text
-前端：读取 prompts/frontend.zh-CN.md，处理 docs/tasks.md 里的 FE-001。
-后端：读取 prompts/backend.zh-CN.md 和 docs/api-contract.md，处理 BE-001。
+更新当前项目的 project-harness。
 ```
 
-不要在多个对话之间复制大段聊天记录。
+这个操作执行原地兼容更新。它保留现有文件和自定义内容，只更新 `HARNESS.md` 和 `AGENTS.md` 中带有明确标记的 Harness 管理区块。
 
-## License
+### 可选的结构迁移
 
-MIT
+```text
+把这个项目迁移到最新的 Harness 结构。
+```
+
+迁移不是必需操作。移动、合并、归档或删除文件之前，Codex 必须先检查并提出方案。
+
+## 更新不等于迁移
+
+使用 V1 创建的项目不需要重新整理文档，也能继续使用最新 Project Harness。V2 可以理解 V1 的文件结构，并映射已有的任务、决策、产品、架构、API、验收、交接和流程文件。
+
+原地更新脚本可以重复执行，不会修改管理区块之外的内容。在项目状态和 Skill 版本不变时，重复更新不会产生新的差异。
+
+## 内置脚本
+
+Windows PowerShell：
+
+```powershell
+skills/project-harness/scripts/inspect-project.ps1 -ProjectPath <路径>
+skills/project-harness/scripts/init-project.ps1 -ProjectPath <路径> -Language zh-CN
+skills/project-harness/scripts/update-project.ps1 -ProjectPath <路径> -Language zh-CN
+skills/project-harness/scripts/validate-project.ps1 -ProjectPath <路径>
+```
+
+macOS/Linux：
+
+```bash
+skills/project-harness/scripts/inspect-project.sh <路径>
+skills/project-harness/scripts/init-project.sh --project-path <路径> --language zh-CN
+skills/project-harness/scripts/update-project.sh --project-path <路径> --language zh-CN
+skills/project-harness/scripts/validate-project.sh <路径>
+```
+
+## 开发与验证
+
+```powershell
+tests/run-tests.ps1
+```
+
+```bash
+sh tests/run-tests.sh
+```
+
+测试覆盖中英文最小初始化、V1 自定义内容保留、事实来源映射、原地更新幂等性和管理结构验证。
+
+## 项目状态
+
+Harness 2.0 正在开发中。旧版基线保存在 `v1.0.0` Git 标签中。
+
+这是一个社区项目，不是 OpenAI 官方项目。
+
+## 许可证
+
+[MIT](LICENSE)
