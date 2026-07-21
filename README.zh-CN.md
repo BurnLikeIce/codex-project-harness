@@ -144,7 +144,7 @@ sh tests/run-tests.sh
 
 ## 项目状态
 
-Harness 2.0 正在开发中。旧版基线保存在 `v1.0.0` Git 标签中。
+Harness 2.0 是当前正式版本。旧版基线保存在 `v1.0.0` Git 标签中。
 
 这是一个社区项目，不是 OpenAI 官方项目。
 

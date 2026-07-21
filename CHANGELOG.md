@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 - Unreleased
+## 2.0.0 - 2026-07-21
 
 - Reframed Project Harness as an adaptive project-governance layer.
 - Reduced the default project footprint to `AGENTS.md`, `HARNESS.md`, `docs/tasks.md`, and `docs/decisions.md`.

@@ -146,7 +146,7 @@ The test suite covers minimal English and Chinese initialization, V1 custom-cont
 
 ## Project Status
 
-Harness 2.0 is under active development. The V1 baseline remains available through the `v1.0.0` Git tag.
+Harness 2.0 is the current release. The V1 baseline remains available through the `v1.0.0` Git tag.
 
 This is a community project and is not an official OpenAI project.
 
