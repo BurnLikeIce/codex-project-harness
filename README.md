@@ -63,31 +63,35 @@ On Windows, the usual destination is `%USERPROFILE%\.codex\skills\project-harnes
 
 Clone the repository, then copy or link `skills/project-harness` into `~/.codex/skills/project-harness`. Restart Codex after installation or replacement.
 
-## Quick Start
+## Start Naturally
 
-In the project conversation, say:
-
-```text
-Use project-harness to set up project governance here and make this conversation the control context.
-```
-
-Project Harness recognizes natural-language meaning, so equivalent phrasing works. It inspects the project first, preserves existing files, establishes the project map, and creates only the governance files that are actually missing.
-
-After that, work normally. Examples include:
+Project Harness has no required activation phrase. After installation, ordinary project language can activate it, for example:
 
 ```text
-Let's discuss whether this feature should be built.
+I want to build a personal finance app.
 ```
 
 ```text
-Proceed with what we agreed.
+Continue this project and check the current progress first.
 ```
 
 ```text
-Accept these implementation results and tell me the next action.
+Can this feature be built?
 ```
 
-To make a long-running conversation reload the currently installed rules, say:
+```text
+This page is wrong. Please investigate it.
+```
+
+Project Harness infers whether the user is exploring, starting, resuming, implementing, reporting a problem, accepting results, or handing off work. Exploratory discussion remains read-only. Once execution is clearly requested, it inspects the project, preserves existing files, and creates only missing governance files. Projects with a Harness entry continue using the installed rules automatically.
+
+Users do not need to understand control-context or specialist-conversation terminology. Naming or selecting Project Harness remains an optional reliable fallback:
+
+```text
+Use project-harness to manage this project.
+```
+
+To reload updated rules in a long-running conversation, say:
 
 ```text
 Sync the latest project-harness.

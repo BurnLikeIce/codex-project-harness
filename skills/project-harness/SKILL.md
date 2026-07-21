@@ -1,6 +1,6 @@
 ---
 name: project-harness
-description: Use when applying or refreshing project governance, preserving durable tasks or decisions, coordinating parallel project work, accepting and integrating results, handing control to a new conversation, or interpreting project-workflow requests such as use project-harness here, use this conversation as control, sync the latest project-harness, 验收结果, 管理这个项目, 同步最新规则, or 主控交接. Do not use for an ordinary isolated code change unless durable project state, coordination, acceptance, or release boundaries must change.
+description: Use for ongoing software-project work when a user starts or resumes a project, asks whether a feature can be built, agrees to implement, reports a project problem, asks to review or accept results, requests project status, coordinates parallel work, or hands work to another conversation. Also use when HARNESS.md or a Project Harness entry is present and work may affect requirements, tasks, decisions, defects, acceptance, coordination, handoff, or release boundaries. Recognize ordinary English or Chinese such as "I want to build an app", "continue this project", "can this feature be done?", "go ahead with this", "this page is wrong", "review the result", "我想做一个项目", "接着做", "按这个开始", "这里不对", or "验收一下". Do not require the user to name the skill or know control-context terminology. Do not use for unrelated Q&A, translation, or isolated mechanical edits with no durable project impact.
 ---
 
 # Project Harness
@@ -15,20 +15,24 @@ Reply and create project-facing content in the user's language unless the projec
 
 ## Core Rules
 
-1. Inspect before applying governance, refreshing managed sections, or changing project structure.
-2. Reuse existing project documents as sources of truth; do not create duplicate canonical files.
-3. Record work according to durable impact, not code size.
-4. Keep one active coordinator for each governed task.
-5. Use one control conversation for ordinary work; add parallel execution only when it provides a concrete benefit.
-6. Prefer mechanical verification for repeatable invariants and keep prose focused on intent and boundaries.
-7. Do not repeat `git init`, overwrite existing documentation, or perform structural migration without explicit intent.
-8. Do not commit, push, publish, deploy, release, delete, or materially expand scope without authorization from the user or established project policy.
+1. Infer project intent from ordinary language; do not require exact phrases or internal Harness vocabulary.
+2. Inspect before applying governance, refreshing managed sections, or changing project structure.
+3. Treat broad activation as permission to route and inspect, not automatic permission to write files. Keep exploration read-only until the user clearly starts, resumes, or approves execution.
+4. Reuse existing project documents as sources of truth; do not create duplicate canonical files.
+5. Record work according to durable impact, not code size.
+6. Keep one active coordinator for each governed task. Treat coordinator and control-context terminology as internal unless coordination or handoff requires explanation.
+7. Use one conversation for ordinary work; add parallel execution only when it provides a concrete benefit.
+8. Prefer mechanical verification for repeatable invariants and keep prose focused on intent and boundaries.
+9. Do not repeat `git init`, overwrite existing documentation, or perform structural migration without explicit intent.
+10. Do not commit, push, publish, deploy, release, delete, or materially expand scope without authorization from the user or established project policy.
 
 ## Route Semantic Intent
 
 Interpret meaning rather than matching exact commands.
 
-- **Apply Project Harness here:** inspect the current state, map reusable sources of truth, create only missing governance files, and establish the current conversation as the control context unless the user chooses otherwise. Whether the repository is empty, active, or already governed is an internal routing decision, not a question the user must answer.
+- **Start or resume project work:** activate from ordinary project language. If the user is only exploring, discuss without creating governance files or implementation records. When the user clearly starts, resumes, or approves execution, inspect the current state, map reusable sources of truth, create only missing governance files, and use the current conversation as the internal coordinator unless another owner is already established.
+- **Continue a governed project:** when `HARNESS.md` or a Project Harness entry in `AGENTS.md` is present, read the project map before durable changes and apply the currently installed rules automatically. Do not ask the user to invoke the skill again.
+- **Explicitly apply Project Harness:** treat naming or selecting the skill as a reliable fallback. Inspect and apply the same state-aware behavior; do not expose extra setup choices that can be inferred safely.
 - **Sync the latest Project Harness:** reload the latest skill rules for this conversation only. Do not edit files or change Git state.
 - **Refresh project bindings:** when the user asks to apply the installed rules to project files, preserve files and custom content and update only managed Harness entry sections.
 - **Migrate project structure:** inspect and propose a migration plan first. Require confirmation before moving, merging, archiving, or deleting files.
@@ -37,7 +41,7 @@ Interpret meaning rather than matching exact commands.
 - **Report a problem:** triage directly. Fix it as a bounded task when safe; create or update durable records when impact, uncertainty, coordination, or acceptance requires them.
 - **Accept or review results:** evaluate recorded criteria and evidence, then always return the control context's next action.
 
-Read [routing.md](references/routing.md) when intent or routing is ambiguous.
+Read [routing.md](references/routing.md) for the activation order, persistence boundary, and semantic routing matrix.
 
 ## Classify Work on Two Axes
 

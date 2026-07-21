@@ -83,7 +83,7 @@ if [ "$language" = "zh-CN" ]; then
 EOF
   cat > "$agents_block" <<'EOF'
 <!-- project-harness:entry:start -->
-在修改长期项目状态、任务、决策、协调、验收或发布边界之前，先阅读 `HARNESS.md`。使用当前安装的 Project Harness 规则，并保留项目已有的事实来源。
+项目工作可能影响需求、任务、决策、缺陷、验收、进度、协调、交接或发布边界时，自动使用当前安装的 Project Harness 规则，并在修改长期状态前阅读 `HARNESS.md`。根据日常表达判断项目意图，不要求用户说出 Skill 名称或理解主控等内部术语。保留已映射的事实来源；在用户明确开始、继续或批准执行之前，探索性讨论保持只读。
 <!-- project-harness:entry:end -->
 EOF
   harness_heading='# Project Harness'
@@ -107,7 +107,7 @@ else
 EOF
   cat > "$agents_block" <<'EOF'
 <!-- project-harness:entry:start -->
-Read `HARNESS.md` before changing durable project state, tasks, decisions, coordination, acceptance, or release boundaries. Use the currently installed Project Harness rules and preserve existing project sources of truth.
+For project work that may affect requirements, tasks, decisions, defects, acceptance, progress, coordination, handoff, or release boundaries, use the currently installed Project Harness rules and read `HARNESS.md` before changing durable state. Infer project intent from ordinary language; do not require the user to name the skill or understand control-context terminology. Preserve mapped sources of truth, and keep exploratory discussion read-only until the user clearly starts, resumes, or approves execution.
 <!-- project-harness:entry:end -->
 EOF
   harness_heading='# Project Harness'

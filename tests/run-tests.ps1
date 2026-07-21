@@ -29,6 +29,17 @@ try {
     Remove-SafeTemp
     New-Item -ItemType Directory -Path "$temp\new-en", "$temp\new-zh", "$temp\v1\docs", "$temp\v1\prompts" -Force | Out-Null
 
+    $skillInstructions = [IO.File]::ReadAllText((Join-Path $skill 'SKILL.md'))
+    foreach ($expected in @(
+        'starts or resumes a project',
+        'Do not require the user to name the skill',
+        'Explicitly apply Project Harness'
+    )) {
+        if (-not $skillInstructions.Contains($expected)) {
+            throw "Missing activation contract in SKILL.md: $expected"
+        }
+    }
+
     Write-Utf8 "$temp\v1\HARNESS.md" "# Existing Harness`n`nCustom project fact: KEEP-ME"
     Write-Utf8 "$temp\v1\AGENTS.md" "# Existing Instructions`n`nCustom rule: KEEP-AGENT"
     Write-Utf8 "$temp\v1\docs\tasks.md" "# Old tasks`n`nTASK-CONTENT"
@@ -46,6 +57,13 @@ try {
         & "$skill\scripts\validate-project.ps1" -ProjectPath "$temp\$name" | Out-Host
     }
 
+    if (-not (Select-String -LiteralPath "$temp\new-en\AGENTS.md" -Pattern 'Infer project intent from ordinary language' -Quiet)) {
+        throw 'English project entry does not enable semantic activation'
+    }
+    if (-not (Select-String -LiteralPath "$temp\new-zh\AGENTS.md" -Pattern '根据日常表达判断项目意图' -Quiet)) {
+        throw 'Chinese project entry does not enable semantic activation'
+    }
+
     & "$skill\scripts\update-project.ps1" -ProjectPath "$temp\v1" -Language en | Out-Host
     $first = Get-TreeFingerprint "$temp\v1"
     & "$skill\scripts\update-project.ps1" -ProjectPath "$temp\v1" -Language en | Out-Host
@@ -56,6 +74,9 @@ try {
     $inspection = & "$skill\scripts\inspect-project.ps1" -ProjectPath "$temp\v1" | ConvertFrom-Json
     if ($inspection.protocol -ne '2') { throw "Unexpected protocol: $($inspection.protocol)" }
     if ($inspection.sources.tasks -ne 'docs/tasks.md') { throw 'Task source map failed' }
+    if (-not (Select-String -LiteralPath "$temp\v1\AGENTS.md" -Pattern 'Infer project intent from ordinary language' -Quiet)) {
+        throw 'Updated project entry does not enable semantic activation'
+    }
 
     foreach ($check in @(
         @("$temp\v1\HARNESS.md", 'KEEP-ME'),

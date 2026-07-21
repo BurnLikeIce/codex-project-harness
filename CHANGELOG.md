@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.2 - 2026-07-21
+
+- Added three-layer activation through ordinary project intent, project-level continuity, and explicit fallback.
+- Kept exploratory discussion read-only until the user clearly starts, resumes, or approves execution.
+- Made coordinator and control-context terminology internal by default.
+- Added persistent semantic-activation guidance to generated English and Chinese `AGENTS.md` entries.
+
 ## 2.0.1 - 2026-07-21
 
 - Unified project setup behind one state-aware natural-language entry point.
