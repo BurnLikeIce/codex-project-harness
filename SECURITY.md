@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Security fixes are applied to the latest released Project Harness version. The V1 tag is retained as a compatibility baseline and may not receive workflow improvements.
+Security fixes are applied to the latest released Project Harness version.
 
 ## Reporting a Vulnerability
 

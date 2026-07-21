@@ -2,7 +2,7 @@
 ## Harness Protocol
 
 - Protocol: 2
-- Storage: compatible with the current project layout; update is not migration.
+- Storage: preserve the current project layout and mapped sources of truth.
 - Tasks: {{TASKS}}
 - Decisions: {{DECISIONS}}
 - Product: {{PRODUCT}}

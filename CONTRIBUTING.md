@@ -6,7 +6,7 @@ Thank you for helping improve Project Harness.
 
 Contributions must preserve the core boundary: Project Harness manages durable project state, constraints, acceptance, and coordination. It does not prescribe a specific implementation methodology, runtime, auxiliary skill, number of conversations, branch strategy, or worktree strategy.
 
-Backward-compatible project update is the default. Structural migration must remain optional and explicit.
+Applying governance must preserve project files and custom content by default. Structural reorganization must remain optional and explicit.
 
 ## Before Opening a Pull Request
 

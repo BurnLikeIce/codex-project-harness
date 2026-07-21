@@ -1,6 +1,6 @@
 # Codex Project Harness
 
-Project Harness is a bilingual, adaptive project-governance skill for Codex. It keeps durable project facts, decisions, constraints, task state, acceptance evidence, and coordination boundaries usable across long-running software work.
+Project Harness is a bilingual, adaptive project-governance skill for Codex. It keeps project facts, decisions, constraints, task state, acceptance evidence, and coordination boundaries usable across long-running software work.
 
 It gives Codex a small project map and stable sources of truth without prescribing how every implementation task must be planned or executed.
 
@@ -14,11 +14,10 @@ It gives Codex a small project map and stable sources of truth without prescribi
 - Acceptance evidence and required next actions
 - Control handoff between long-running conversations
 - Coordination boundaries for parallel tasks, branches, or worktrees
-- Backward-compatible updates for projects created with Project Harness V1
 
 Project Harness does not require a fixed development methodology, number of conversations, branch strategy, worktree strategy, or auxiliary skill.
 
-## Adaptive Behavior
+## How It Adapts
 
 Project Harness makes two independent decisions:
 
@@ -27,9 +26,9 @@ Project Harness makes two independent decisions:
 
 A tiny product or technical decision can require a durable record. A large mechanical edit may need structured execution without creating a permanent decision.
 
-## Minimal New-Project Footprint
+## Project Footprint
 
-New projects receive only:
+The default governance footprint is intentionally small:
 
 ```text
 AGENTS.md
@@ -39,15 +38,15 @@ docs/
   decisions.md
 ```
 
-Product, architecture, API, security, deployment, testing, release, and handoff documents are created only when the project needs them. Equivalent existing files are reused instead of duplicated.
+Product, architecture, API, security, deployment, testing, release, and handoff documents are created only when the project needs them. Project Harness inspects the repository and reuses equivalent files instead of creating duplicate sources of truth.
 
 ## Install
 
 ### Download Without a Terminal
 
-1. Download this repository as a ZIP from GitHub.
+1. Download the Project Harness Skill ZIP from the [latest release](https://github.com/BurnLikeIce/codex-project-harness/releases/latest).
 2. Unzip it.
-3. Copy `skills/project-harness` into your Codex skills directory.
+3. Copy the `project-harness` folder into your Codex skills directory.
 4. Restart Codex.
 
 The final path must be:
@@ -66,49 +65,35 @@ Clone the repository, then copy or link `skills/project-harness` into `~/.codex/
 
 ## Quick Start
 
-Project Harness recognizes natural-language meaning; the examples below are not exact commands.
-
-### New Project
+In the project conversation, say:
 
 ```text
-Use project-harness to start this project. This conversation is the control conversation.
+Use project-harness to set up project governance here and make this conversation the control context.
 ```
 
-### Existing Project
+Project Harness recognizes natural-language meaning, so equivalent phrasing works. It inspects the project first, preserves existing files, establishes the project map, and creates only the governance files that are actually missing.
+
+After that, work normally. Examples include:
 
 ```text
-Use project-harness in this existing project. Preserve the current files and make this the control conversation.
+Let's discuss whether this feature should be built.
 ```
 
-### Sync a Conversation
+```text
+Proceed with what we agreed.
+```
+
+```text
+Accept these implementation results and tell me the next action.
+```
+
+To make a long-running conversation reload the currently installed rules, say:
 
 ```text
 Sync the latest project-harness.
 ```
 
-This reloads the current skill rules and must not edit project files.
-
-### Update an Existing Harness Project
-
-```text
-Update this project's project-harness.
-```
-
-This performs an in-place compatibility update. It preserves existing files and custom content and updates only clearly marked Harness sections in `HARNESS.md` and `AGENTS.md`.
-
-### Optional Structural Migration
-
-```text
-Migrate this project to the latest Harness structure.
-```
-
-Migration is optional. Codex must inspect and propose a plan before moving, merging, archiving, or deleting existing files.
-
-## Update Is Not Migration
-
-Projects created with V1 can use the latest Project Harness without reorganizing their documents. V2 understands the V1 layout and maps existing task, decision, product, architecture, API, acceptance, handoff, and workflow files.
-
-The in-place updater is idempotent and does not modify content outside managed blocks. Repeated updates with the same project state produce no additional diff.
+Syncing conversation rules does not edit project files.
 
 ## Bundled Scripts
 
@@ -117,7 +102,6 @@ Windows PowerShell:
 ```powershell
 skills/project-harness/scripts/inspect-project.ps1 -ProjectPath <path>
 skills/project-harness/scripts/init-project.ps1 -ProjectPath <path> -Language en
-skills/project-harness/scripts/update-project.ps1 -ProjectPath <path> -Language en
 skills/project-harness/scripts/validate-project.ps1 -ProjectPath <path>
 ```
 
@@ -126,7 +110,6 @@ macOS/Linux:
 ```bash
 skills/project-harness/scripts/inspect-project.sh <path>
 skills/project-harness/scripts/init-project.sh --project-path <path> --language en
-skills/project-harness/scripts/update-project.sh --project-path <path> --language en
 skills/project-harness/scripts/validate-project.sh <path>
 ```
 
@@ -142,11 +125,9 @@ tests/run-tests.ps1
 sh tests/run-tests.sh
 ```
 
-The test suite covers minimal English and Chinese initialization, V1 custom-content preservation, source mapping, in-place update idempotence, and managed-structure validation.
+The test suite covers English and Chinese initialization, preservation of project content, source mapping, idempotent managed updates, and structure validation.
 
 ## Project Status
-
-Harness 2.0 is the current release. The V1 baseline remains available through the `v1.0.0` Git tag.
 
 This is a community project and is not an official OpenAI project.
 

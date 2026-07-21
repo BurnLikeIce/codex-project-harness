@@ -1,6 +1,6 @@
 ---
 name: project-harness
-description: Use when initializing or adopting project governance, updating an existing Project Harness project, preserving durable tasks or decisions, coordinating parallel project work, accepting and integrating results, handing control to a new conversation, or interpreting project-workflow requests such as start this project, use this conversation as control, sync the latest project-harness, update this project's harness, 验收结果, 启动项目, 旧项目接管, 同步最新规则, 更新当前项目, or 主控交接. Do not use for an ordinary isolated code change unless durable project state, coordination, acceptance, or release boundaries must change.
+description: Use when applying or refreshing project governance, preserving durable tasks or decisions, coordinating parallel project work, accepting and integrating results, handing control to a new conversation, or interpreting project-workflow requests such as use project-harness here, use this conversation as control, sync the latest project-harness, 验收结果, 管理这个项目, 同步最新规则, or 主控交接. Do not use for an ordinary isolated code change unless durable project state, coordination, acceptance, or release boundaries must change.
 ---
 
 # Project Harness
@@ -15,7 +15,7 @@ Reply and create project-facing content in the user's language unless the projec
 
 ## Core Rules
 
-1. Inspect before initializing, adopting, updating, or migrating a project.
+1. Inspect before applying governance, refreshing managed sections, or changing project structure.
 2. Reuse existing project documents as sources of truth; do not create duplicate canonical files.
 3. Record work according to durable impact, not code size.
 4. Keep one active coordinator for each governed task.
@@ -28,10 +28,9 @@ Reply and create project-facing content in the user's language unless the projec
 
 Interpret meaning rather than matching exact commands.
 
-- **Start a new project:** inspect, initialize only missing minimal governance files, and establish the current conversation as the control context unless the user chooses otherwise.
-- **Adopt an existing project:** inspect and map existing sources of truth; do not reorganize them to match a template.
+- **Apply Project Harness here:** inspect the current state, map reusable sources of truth, create only missing governance files, and establish the current conversation as the control context unless the user chooses otherwise. Whether the repository is empty, active, or already governed is an internal routing decision, not a question the user must answer.
 - **Sync the latest Project Harness:** reload the latest skill rules for this conversation only. Do not edit files or change Git state.
-- **Update the current project's Harness:** perform a backward-compatible in-place protocol update. Preserve files and custom content; update only managed Harness entry sections.
+- **Refresh project bindings:** when the user asks to apply the installed rules to project files, preserve files and custom content and update only managed Harness entry sections.
 - **Migrate project structure:** inspect and propose a migration plan first. Require confirmation before moving, merging, archiving, or deleting files.
 - **Discuss a possible change:** explore without creating an implementation task until the user commits to the change or durable discussion output must be recorded.
 - **Proceed with the agreed change:** convert the settled outcome into the smallest sufficient task and decision records, then execute or coordinate it.
@@ -60,7 +59,7 @@ Read [project-state.md](references/project-state.md) for record rules and [coord
 
 ## Use the Minimal Project Map
 
-For a new project, default to:
+When the project has no equivalent governance sources, default to:
 
 - `HARNESS.md`: project map, protocol metadata, authority boundaries, and links;
 - `docs/tasks.md`: durable task state;
@@ -69,7 +68,7 @@ For a new project, default to:
 
 Create product, architecture, API, security, deployment, testing, release, or handoff documents only when needed. Reuse equivalent existing files.
 
-For an old Harness project, keep its existing layout. Updating is not migration.
+Before creating any file, map equivalent project sources and preserve the current layout. Structural reorganization is a separate, explicit operation.
 
 ## Govern Completion and Acceptance
 
@@ -97,9 +96,9 @@ Read [git-release.md](references/git-release.md) for Git, GitHub, worktree, inte
 - Update in place: `scripts/update-project.ps1` or `scripts/update-project.sh`
 - Validate: `scripts/validate-project.ps1` or `scripts/validate-project.sh`
 
-Use `-Language zh-CN` or `--language zh-CN` for Chinese templates. Follow the existing project's language during adoption or update.
+Use `-Language zh-CN` or `--language zh-CN` for Chinese templates. Follow the project's established language when refreshing managed sections.
 
-Read [update-existing-project.md](references/update-existing-project.md) before updating or migrating an existing project.
+Read [update-existing-project.md](references/update-existing-project.md) before refreshing managed sections or changing project structure.
 
 ## Report Project-Governance Actions
 

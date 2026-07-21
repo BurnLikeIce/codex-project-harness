@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.1 - 2026-07-21
+
+- Unified project setup behind one state-aware natural-language entry point.
+- Made project classification and compatibility handling internal Harness behavior.
+- Simplified the public README files around installation, governance, and everyday use.
+- Preserved project layouts and mapped sources of truth by default.
+
 ## 2.0.0 - 2026-07-21
 
 - Reframed Project Harness as an adaptive project-governance layer.

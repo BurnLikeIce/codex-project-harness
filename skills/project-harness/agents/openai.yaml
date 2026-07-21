@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Harness"
   short_description: "Adaptive project governance for coding agents"
-  default_prompt: "Use project-harness to adopt this project, preserve existing sources of truth, and treat this conversation as the control context."
+  default_prompt: "Use project-harness to manage this project and treat this conversation as the control context."

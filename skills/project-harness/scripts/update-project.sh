@@ -70,7 +70,7 @@ if [ "$language" = "zh-CN" ]; then
 ## Harness 协议
 
 - 协议版本：2
-- 存储方式：兼容当前项目结构，更新不等于迁移。
+- 存储方式：保留当前项目结构和已映射的事实来源。
 - 任务记录：\`$tasks\`
 - 决策记录：\`$decisions\`
 - 产品事实：\`$product\`
@@ -94,7 +94,7 @@ else
 ## Harness Protocol
 
 - Protocol: 2
-- Storage: compatible with the current project layout; update is not migration.
+- Storage: preserve the current project layout and mapped sources of truth.
 - Tasks: \`$tasks\`
 - Decisions: \`$decisions\`
 - Product: \`$product\`
