@@ -13,7 +13,7 @@ jobs:
     name: PowerShell on Windows
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run PowerShell tests
         shell: pwsh
         run: ./tests/run-tests.ps1
@@ -28,6 +28,6 @@ jobs:
           - ubuntu-latest
           - macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run shell tests
         run: sh tests/run-tests.sh
