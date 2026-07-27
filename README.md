@@ -85,11 +85,15 @@ This page is wrong. Please investigate it.
 
 Project Harness infers whether the user is exploring, starting, resuming, implementing, reporting a problem, accepting results, or handing off work. Exploratory discussion remains read-only. Once execution is clearly requested, it inspects the project, preserves existing files, and creates only missing governance files. Projects with a Harness entry continue using the installed rules automatically.
 
-Users do not need to understand control-context or specialist-conversation terminology. Naming or selecting Project Harness remains an optional reliable fallback:
+Users do not need to understand control-context or specialist-conversation terminology. To explicitly adopt and persist Project Harness, select it or say:
 
 ```text
 Use project-harness to manage this project.
 ```
+
+Explicit adoption allows the agent to inspect the project and write the minimal binding instead of enabling the Skill only for the current conversation. The agent preserves existing `AGENTS.md` content and project documents, creates only missing content, validates the result, and reports `ADOPTED`, `ALREADY_ADOPTED`, or `BLOCKED`.
+
+After adoption, task and decision records primarily serve future agents. Agents assign stable `TASK-0001` and `DEC-0001` identifiers, retain history, update status, and check related work for continuation, reuse, or conflicts before creating a new task. Users do not maintain these records manually.
 
 To reload updated rules in a long-running conversation, say:
 

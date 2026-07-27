@@ -1,11 +1,25 @@
-# Tasks
+# Project Tasks
 
-Record work that must survive a conversation, ownership, acceptance, integration, or release boundary. Do not record purely mechanical edits unless the project needs durable tracking.
+This is the agent-maintained history of durable project work. Users may inspect it, but agents assign identifiers, inspect earlier work, update status and evidence, and retain completed history. Do not record prompt text or purely mechanical execution details.
+
+Use stable `TASK-0001` identifiers. Never reuse an identifier.
 
 ## Active
 
-No active governed tasks.
+No active tasks.
+
+## Next
+
+No queued tasks.
+
+## Blocked
+
+No blocked tasks.
 
 ## Completed
 
-No completed governed tasks.
+No completed tasks.
+
+## Cancelled or Superseded
+
+No cancelled or superseded tasks.

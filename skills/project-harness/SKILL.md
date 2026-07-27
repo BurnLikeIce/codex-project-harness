@@ -32,7 +32,7 @@ Interpret meaning rather than matching exact commands.
 
 - **Start or resume project work:** activate from ordinary project language. If the user is only exploring, discuss without creating governance files or implementation records. When the user clearly starts, resumes, or approves execution, inspect the current state, map reusable sources of truth, create only missing governance files, and use the current conversation as the internal coordinator unless another owner is already established.
 - **Continue a governed project:** when `HARNESS.md` or a Project Harness entry in `AGENTS.md` is present, read the project map before durable changes and apply the currently installed rules automatically. Do not ask the user to invoke the skill again.
-- **Explicitly apply Project Harness:** treat naming or selecting the skill as a reliable fallback. Inspect and apply the same state-aware behavior; do not expose extra setup choices that can be inferred safely.
+- **Explicitly adopt Project Harness:** Explicit adoption is a write request. When the user selects Project Harness or asks to use it to manage the current project, inspect and persist the smallest safe project binding, reuse equivalent sources, validate the result, and report `ADOPTED`, `ALREADY_ADOPTED`, or `BLOCKED`. Do not silently activate only in the conversation.
 - **Sync the latest Project Harness:** reload the latest skill rules for this conversation only. Do not edit files or change Git state.
 - **Refresh project bindings:** when the user asks to apply the installed rules to project files, preserve files and custom content and update only managed Harness entry sections.
 - **Migrate project structure:** inspect and propose a migration plan first. Require confirmation before moving, merging, archiving, or deleting files.
@@ -40,6 +40,14 @@ Interpret meaning rather than matching exact commands.
 - **Proceed with the agreed change:** convert the settled outcome into the smallest sufficient task and decision records, then execute or coordinate it.
 - **Report a problem:** triage directly. Fix it as a bounded task when safe; create or update durable records when impact, uncertainty, coordination, or acceptance requires them.
 - **Accept or review results:** evaluate recorded criteria and evidence, then always return the control context's next action.
+
+## Maintain Agent-First Project History
+
+Users may inspect task and decision records, but the active coordinator maintains identifiers, status, evidence, and history automatically.
+
+Before creating a durable task, inspect relevant task and decision history. Continue active work when it matches, reuse an accepted result when it already satisfies the request, link regressions and extensions to their earlier work, and surface conflicts before replacing an accepted decision.
+
+When the project has no established identifier system, use stable `TASK-0001` and `DEC-0001` identifiers. Never reuse an identifier or delete completed, cancelled, or superseded history.
 
 Read [routing.md](references/routing.md) for the activation order, persistence boundary, and semantic routing matrix.
 

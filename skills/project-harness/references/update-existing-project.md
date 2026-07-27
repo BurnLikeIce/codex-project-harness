@@ -13,6 +13,14 @@ Apply one state-aware flow:
 
 Do not ask the user to classify the project before inspection. Do not install a template over equivalent project files merely because their names differ.
 
+## Persistently Adopt a Project
+
+Explicit adoption is permission to write the minimal project binding, not merely to load the Skill in the current conversation.
+
+Inspect first. If the project has no equivalent governance sources, run the initializer. If equivalent sources already exist, run the updater so `HARNESS.md` maps them without creating duplicate canonical files. Then run validation.
+
+Report `ADOPTED` when a binding was created or repaired, `ALREADY_ADOPTED` when a valid binding already existed and nothing changed, or `BLOCKED` with the exact required action when safe adoption or validation cannot complete.
+
 ## Sync Conversation Rules
 
 "Sync the latest Project Harness" is read-only. Reload the installed skill and continue using the project's existing facts. Do not run initialization or update scripts. Confirm that no project files or Git state changed.

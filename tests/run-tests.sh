@@ -21,7 +21,9 @@ mkdir -p "$temp/new-en" "$temp/new-zh" "$temp/v1/docs" "$temp/v1/prompts"
 
 grep -F 'starts or resumes a project' "$skill/SKILL.md" >/dev/null
 grep -F 'Do not require the user to name the skill' "$skill/SKILL.md" >/dev/null
-grep -F 'Explicitly apply Project Harness' "$skill/SKILL.md" >/dev/null
+grep -F 'Explicit adoption is a write request' "$skill/SKILL.md" >/dev/null
+grep -F 'TASK-0001' "$skill/SKILL.md" >/dev/null
+grep -F 'inspect relevant task and decision history' "$skill/SKILL.md" >/dev/null
 
 printf '# Existing Harness\n\nCustom project fact: KEEP-ME\n' > "$temp/v1/HARNESS.md"
 printf '# Existing Instructions\n\nCustom rule: KEEP-AGENT\n' > "$temp/v1/AGENTS.md"
@@ -38,6 +40,8 @@ for name in new-en new-zh; do
   count=$(find "$temp/$name" -type f | wc -l | tr -d ' ')
   [ "$count" -eq 4 ] || { printf '%s should contain four files, found %s\n' "$name" "$count" >&2; exit 1; }
   sh "$skill/scripts/validate-project.sh" "$temp/$name"
+  grep -F 'TASK-0001' "$temp/$name/docs/tasks.md" >/dev/null
+  grep -F 'DEC-0001' "$temp/$name/docs/decisions.md" >/dev/null
 done
 
 grep -F 'Infer project intent from ordinary language' "$temp/new-en/AGENTS.md" >/dev/null

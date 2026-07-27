@@ -4,7 +4,7 @@
 
 Use the first matching layer:
 
-1. **Explicit fallback:** the user names or selects Project Harness.
+1. **Explicit adoption:** the user selects Project Harness or asks to use it to manage the project.
 2. **Project-level continuity:** `HARNESS.md` or a managed Project Harness entry is present and the request may affect durable project work.
 3. **Semantic activation:** ordinary language clearly indicates starting, resuming, discussing, implementing, debugging, accepting, summarizing, coordinating, or handing off project work.
 4. **No activation:** unrelated Q&A, translation, casual conversation, or an isolated mechanical edit with no durable project impact.
@@ -17,6 +17,7 @@ Infer intent from the user's meaning and current project state. Examples are ill
 
 | Intent | Typical meaning | Harness action |
 | --- | --- | --- |
+| Adopt | "Use Project Harness to manage this project" | Inspect, persist the minimal safe binding, validate it, and report `ADOPTED`, `ALREADY_ADOPTED`, or `BLOCKED`. |
 | Start | "I want to build an app" | Inspect the workspace. When the intent is to begin execution, establish the minimal missing project map and proceed. |
 | Resume | "Continue this project" | Inspect and read current state, reuse existing sources, and continue without repeated initialization. |
 | Explore | "Can this be done?" | Discuss; do not start implementation unless durable output is requested. |
@@ -37,8 +38,8 @@ Activation and persistence are separate decisions.
 
 | Project state and intent | Allowed behavior |
 | --- | --- |
-| No Harness marker; exploration only | Discuss and inspect read-only context as needed. Do not initialize governance files or implementation records. |
-| No Harness marker; clear start, resume, or approved execution | Inspect first, reuse equivalent sources, then create only the minimal missing governance files. |
+| No Harness marker; exploration only | Discuss and inspect read-only context as needed. Do not initialize governance files, implementation records, or claim adoption. |
+| No Harness marker; explicit adoption or approved execution | Inspect first, reuse equivalent sources, persist only the minimal missing governance files, and validate the result. |
 | Harness marker present; durable project work | Read `HARNESS.md`, apply current rules automatically, and update only records justified by durable impact. |
 | Explicit conversation sync | Reload installed rules and leave files and Git state unchanged. |
 | Unrelated or purely mechanical request | Continue normally without introducing Harness records or terminology. |

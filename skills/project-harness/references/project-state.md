@@ -10,7 +10,7 @@ Use `HARNESS.md` as a map, not an encyclopedia. Keep deep product, architecture,
 
 A durable task should contain only the state needed to resume and govern the work:
 
-- stable identifier when the project already uses IDs;
+- stable identifier using the project's scheme, or `TASK-0001` when no scheme exists;
 - outcome and scope;
 - status and owner or control context;
 - durable constraints and linked decisions;
@@ -31,6 +31,14 @@ Record:
 - status and linked task.
 
 Do not turn routine implementation choices into permanent decisions.
+
+## Stable Identity and History
+
+Use `TASK-0001` and `DEC-0001` identifiers when the project has no established identifier system. The active coordinator assigns identifiers, never reuses them, and keeps completed, cancelled, and superseded records available.
+
+Before creating a durable task, inspect relevant active and historical tasks plus linked decisions. Continue matching active work, reuse an accepted result that already satisfies the request, create linked work for a regression or extension, and surface a material conflict before changing an accepted decision.
+
+Users do not need to assign identifiers or move records between states. Agents maintain queued, active, blocked, completed, cancelled, and superseded state as part of normal project work.
 
 ## Update Timing
 

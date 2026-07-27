@@ -33,7 +33,9 @@ try {
     foreach ($expected in @(
         'starts or resumes a project',
         'Do not require the user to name the skill',
-        'Explicitly apply Project Harness'
+        'Explicit adoption is a write request',
+        'TASK-0001',
+        'inspect relevant task and decision history'
     )) {
         if (-not $skillInstructions.Contains($expected)) {
             throw "Missing activation contract in SKILL.md: $expected"
@@ -55,6 +57,8 @@ try {
         $files = @(Get-ChildItem -Recurse -File "$temp\$name")
         if ($files.Count -ne 4) { throw "$name should contain exactly four initialized files, found $($files.Count)" }
         & "$skill\scripts\validate-project.ps1" -ProjectPath "$temp\$name" | Out-Host
+        if (-not (Select-String -LiteralPath "$temp\$name\docs\tasks.md" -Pattern 'TASK-0001' -Quiet)) { throw "$name task template has no stable ID guidance" }
+        if (-not (Select-String -LiteralPath "$temp\$name\docs\decisions.md" -Pattern 'DEC-0001' -Quiet)) { throw "$name decision template has no stable ID guidance" }
     }
 
     if (-not (Select-String -LiteralPath "$temp\new-en\AGENTS.md" -Pattern 'Infer project intent from ordinary language' -Quiet)) {
