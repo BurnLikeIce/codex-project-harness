@@ -14,8 +14,40 @@ if (-not (Test-Path -LiteralPath $templateRoot -PathType Container)) {
     throw "Template root not found: $templateRoot"
 }
 
+function Find-MappedExisting {
+    param([string]$Pattern)
+
+    $harnessPath = Join-Path $project 'HARNESS.md'
+    if (-not (Test-Path -LiteralPath $harnessPath -PathType Leaf)) { return $null }
+
+    $text = [IO.File]::ReadAllText($harnessPath)
+    $managed = [regex]::Match(
+        $text,
+        '<!-- project-harness:managed:start -->(.*?)<!-- project-harness:managed:end -->',
+        [Text.RegularExpressions.RegexOptions]::Singleline
+    )
+    if (-not $managed.Success) { return $null }
+
+    $match = [regex]::Match($managed.Groups[1].Value, $Pattern, [Text.RegularExpressions.RegexOptions]::Multiline)
+    if (-not $match.Success) { return $null }
+
+    $mapped = $match.Groups[1].Value.Trim().Trim([char[]]'`')
+    if ($mapped -eq '(not mapped)') { return $null }
+    $mappedPath = if ([IO.Path]::IsPathRooted($mapped)) { $mapped } else { Join-Path $project $mapped }
+    if (Test-Path -LiteralPath $mappedPath -PathType Leaf) {
+        return $mapped.Replace('\', '/')
+    }
+    return $null
+}
+
 function Find-FirstExisting {
-    param([string[]]$Candidates)
+    param(
+        [string[]]$Candidates,
+        [string]$MappingPattern
+    )
+
+    $mapped = Find-MappedExisting -Pattern $MappingPattern
+    if ($mapped) { return $mapped }
 
     foreach ($candidate in $Candidates) {
         if (Test-Path -LiteralPath (Join-Path $project $candidate) -PathType Leaf) {
@@ -72,12 +104,12 @@ function Set-ManagedBlock {
 }
 
 Copy-MissingFile 'HARNESS.md'
-if (-not (Find-FirstExisting @('docs/tasks.md', 'TASKS.md', 'docs/task.md'))) {
+if (-not (Find-FirstExisting -Candidates @('docs/tasks.md', 'TASKS.md', 'docs/task.md') -MappingPattern '^\s*-\s*(?:Tasks|任务记录)\s*[:：]\s*(.+?)\s*$')) {
     Copy-MissingFile 'docs/tasks.md'
 } else {
     Write-Output 'REUSE existing task source'
 }
-if (-not (Find-FirstExisting @('docs/decisions.md', 'DECISIONS.md', 'docs/decision-log.md'))) {
+if (-not (Find-FirstExisting -Candidates @('docs/decisions.md', 'DECISIONS.md', 'docs/decision-log.md') -MappingPattern '^\s*-\s*(?:Decisions|决策记录)\s*[:：]\s*(.+?)\s*$')) {
     Copy-MissingFile 'docs/decisions.md'
 } else {
     Write-Output 'REUSE existing decision source'

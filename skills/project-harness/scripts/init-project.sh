@@ -31,7 +31,33 @@ copy_missing() {
   printf 'CREATE: %s\n' "$relative"
 }
 
+mapped_existing() {
+  pattern="$1"
+  [ -f "$project_path/HARNESS.md" ] || return 1
+  managed=$(awk '
+    /<!-- project-harness:managed:start -->/ { active = 1; next }
+    /<!-- project-harness:managed:end -->/ { active = 0 }
+    active { print }
+  ' "$project_path/HARNESS.md")
+  line=$(printf '%s\n' "$managed" | grep -E "$pattern" | head -n 1 || true)
+  [ -n "$line" ] || return 1
+  value=$(printf '%s\n' "$line" | sed -E 's/^[[:space:]]*-[[:space:]]*[^:：]+[:：][[:space:]]*//; s/^`//; s/`$//')
+  [ "$value" != "(not mapped)" ] || return 1
+  case "$value" in
+    /*) mapped_path="$value" ;;
+    *) mapped_path="$project_path/$value" ;;
+  esac
+  [ -f "$mapped_path" ] || return 1
+  printf '%s' "$value"
+}
+
 first_existing() {
+  pattern="$1"
+  shift
+  if mapped=$(mapped_existing "$pattern"); then
+    printf '%s' "$mapped"
+    return
+  fi
   for candidate in "$@"; do
     if [ -f "$project_path/$candidate" ]; then
       printf '%s' "$candidate"
@@ -73,12 +99,12 @@ replace_managed_block() {
 }
 
 copy_missing HARNESS.md
-if task_source=$(first_existing docs/tasks.md TASKS.md docs/task.md); then
+if task_source=$(first_existing '^[[:space:]]*-[[:space:]]*(Tasks|任务记录)[：:]' docs/tasks.md TASKS.md docs/task.md); then
   printf 'REUSE existing task source: %s\n' "$task_source"
 else
   copy_missing docs/tasks.md
 fi
-if decision_source=$(first_existing docs/decisions.md DECISIONS.md docs/decision-log.md); then
+if decision_source=$(first_existing '^[[:space:]]*-[[:space:]]*(Decisions|决策记录)[：:]' docs/decisions.md DECISIONS.md docs/decision-log.md); then
   printf 'REUSE existing decision source: %s\n' "$decision_source"
 else
   copy_missing docs/decisions.md

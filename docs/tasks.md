@@ -18,7 +18,7 @@ Record work that must survive a conversation, ownership, acceptance, integration
 - Acceptance criteria:
   - Explicit adoption creates or confirms an observable, validated project binding.
   - Selecting or naming the Skill without adoption or execution intent remains read-only.
-  - Adoption reuses partial existing task or decision sources, creates only missing ledgers, and validation rejects unresolved required mappings.
+  - Adoption preserves valid custom mappings, reuses partial existing task or decision sources, creates only missing ledgers, and validation rejects unresolved required mappings.
   - Durable tasks receive stable `TASK-0001`-style identifiers.
   - One active project coordinator reserves project-wide task and decision identifiers before parallel dispatch.
   - Agents check existing tasks and decisions before creating a new durable task.
@@ -28,8 +28,8 @@ Record work that must survive a conversation, ownership, acceptance, integration
   - The original initialization, update, validation, and cross-platform script entry points remain available.
   - Existing tests cover the revised Skill, adoption, validation, handoff, and template contract.
 - Linked decisions: `DEC-0001`
-- Evidence: PowerShell and POSIX behavior suites pass for English and Chinese initialization, V1-compatible update, partial-source adoption, idempotence, and rejection of unresolved mappings. PowerShell and shell syntax checks pass, the Skill validator passes in UTF-8 mode, and `git diff --check` reports no whitespace errors.
-- Next action: push the repaired PR branch and review Windows, Linux, and macOS CI before deciding whether to merge.
+- Evidence: PowerShell and POSIX behavior suites pass for English and Chinese initialization, V1-compatible update, partial-source adoption, custom mapped sources, idempotence, and rejection of unresolved mappings. PowerShell and shell syntax checks pass, the Skill validator passes in UTF-8 mode, and `git diff --check` reports no whitespace errors.
+- Next action: the repository owner reviews the final Windows, Linux, and macOS CI result and decides whether to mark the pull request ready and merge it.
 
 ## Completed
 

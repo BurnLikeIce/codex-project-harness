@@ -17,7 +17,7 @@ fingerprint() {
 }
 
 cleanup
-mkdir -p "$temp/new-en" "$temp/new-zh" "$temp/v1/docs" "$temp/v1/prompts" "$temp/partial/docs" "$temp/invalid"
+mkdir -p "$temp/new-en" "$temp/new-zh" "$temp/v1/docs" "$temp/v1/prompts" "$temp/partial/docs" "$temp/custom/project" "$temp/invalid"
 
 grep -F 'starts or resumes a project' "$skill/SKILL.md" >/dev/null
 grep -F 'Do not require the user to name the skill' "$skill/SKILL.md" >/dev/null
@@ -36,6 +36,19 @@ printf '# Legacy SOP\n\nSOP-CONTENT\n' > "$temp/v1/docs/sop.md"
 printf '# Legacy prompt\n\nPROMPT-CONTENT\n' > "$temp/v1/prompts/master.md"
 printf '# Existing tasks\n\nPARTIAL-TASK-CONTENT\n' > "$temp/partial/TASKS.md"
 printf '# Existing product\n\nPARTIAL-PRODUCT-CONTENT\n' > "$temp/partial/docs/product.md"
+printf '# Custom tasks\n\nCUSTOM-TASK-CONTENT\n' > "$temp/custom/project/work-items.md"
+printf '# Custom decisions\n\nCUSTOM-DECISION-CONTENT\n' > "$temp/custom/project/choices.md"
+cat > "$temp/custom/HARNESS.md" <<'EOF'
+# Existing Harness
+
+<!-- project-harness:managed:start -->
+## Harness Protocol
+
+- Protocol: 2
+- Tasks: `project/work-items.md`
+- Decisions: `project/choices.md`
+<!-- project-harness:managed:end -->
+EOF
 
 sh "$skill/scripts/init-project.sh" --project-path "$temp/new-en" --language en
 sh "$skill/scripts/init-project.sh" --project-path "$temp/new-zh" --language zh-CN
@@ -61,6 +74,18 @@ fingerprint "$temp/partial" > "$temp/partial-first.cksum"
 sh "$skill/scripts/init-project.sh" --project-path "$temp/partial" --language en
 fingerprint "$temp/partial" > "$temp/partial-second.cksum"
 cmp -s "$temp/partial-first.cksum" "$temp/partial-second.cksum" || { printf 'Partial adoption is not idempotent\n' >&2; exit 1; }
+
+sh "$skill/scripts/init-project.sh" --project-path "$temp/custom" --language en
+[ ! -f "$temp/custom/docs/tasks.md" ] || { printf 'Custom task mapping was duplicated\n' >&2; exit 1; }
+[ ! -f "$temp/custom/docs/decisions.md" ] || { printf 'Custom decision mapping was duplicated\n' >&2; exit 1; }
+sh "$skill/scripts/inspect-project.sh" "$temp/custom" | grep -F 'tasks=project/work-items.md' >/dev/null
+sh "$skill/scripts/inspect-project.sh" "$temp/custom" | grep -F 'decisions=project/choices.md' >/dev/null
+grep -F 'CUSTOM-TASK-CONTENT' "$temp/custom/project/work-items.md" >/dev/null
+grep -F 'CUSTOM-DECISION-CONTENT' "$temp/custom/project/choices.md" >/dev/null
+fingerprint "$temp/custom" > "$temp/custom-first.cksum"
+sh "$skill/scripts/init-project.sh" --project-path "$temp/custom" --language en
+fingerprint "$temp/custom" > "$temp/custom-second.cksum"
+cmp -s "$temp/custom-first.cksum" "$temp/custom-second.cksum" || { printf 'Custom mapped adoption is not idempotent\n' >&2; exit 1; }
 
 sh "$skill/scripts/update-project.sh" --project-path "$temp/invalid" --language en
 if sh "$skill/scripts/validate-project.sh" "$temp/invalid"; then

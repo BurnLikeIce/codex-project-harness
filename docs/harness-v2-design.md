@@ -259,7 +259,7 @@ V2 is ready for installation and public release only when:
 11. current files and Git history pass privacy and secret review;
 12. README files describe V2 behavior accurately.
 13. selecting the Skill during exploration causes no project-file changes;
-14. adoption reuses partial existing sources, creates only missing ledgers, and rejects unmapped required sources;
+14. adoption preserves valid custom mappings, reuses partial existing sources, creates only missing ledgers, and rejects unmapped required sources;
 15. coordinator-owned identifiers cannot be allocated independently by parallel execution units;
 16. conversation handoff produces durable resumable state and a directly usable restart instruction.
 

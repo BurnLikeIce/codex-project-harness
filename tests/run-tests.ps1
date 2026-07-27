@@ -27,7 +27,7 @@ function Get-TreeFingerprint {
 
 try {
     Remove-SafeTemp
-    New-Item -ItemType Directory -Path "$temp\new-en", "$temp\new-zh", "$temp\v1\docs", "$temp\v1\prompts", "$temp\partial\docs", "$temp\invalid" -Force | Out-Null
+    New-Item -ItemType Directory -Path "$temp\new-en", "$temp\new-zh", "$temp\v1\docs", "$temp\v1\prompts", "$temp\partial\docs", "$temp\custom\project", "$temp\invalid" -Force | Out-Null
 
     $skillInstructions = [IO.File]::ReadAllText((Join-Path $skill 'SKILL.md'))
     foreach ($expected in @(
@@ -53,6 +53,19 @@ try {
     Write-Utf8 "$temp\v1\prompts\master.md" "# Legacy prompt`n`nPROMPT-CONTENT"
     Write-Utf8 "$temp\partial\TASKS.md" "# Existing tasks`n`nPARTIAL-TASK-CONTENT"
     Write-Utf8 "$temp\partial\docs\product.md" "# Existing product`n`nPARTIAL-PRODUCT-CONTENT"
+    Write-Utf8 "$temp\custom\project\work-items.md" "# Custom tasks`n`nCUSTOM-TASK-CONTENT"
+    Write-Utf8 "$temp\custom\project\choices.md" "# Custom decisions`n`nCUSTOM-DECISION-CONTENT"
+    Write-Utf8 "$temp\custom\HARNESS.md" @"
+# Existing Harness
+
+<!-- project-harness:managed:start -->
+## Harness Protocol
+
+- Protocol: 2
+- Tasks: ``project/work-items.md``
+- Decisions: ``project/choices.md``
+<!-- project-harness:managed:end -->
+"@
 
     & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\new-en" -Language en | Out-Host
     & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\new-zh" -Language zh-CN | Out-Host
@@ -91,6 +104,27 @@ try {
     & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\partial" -Language en | Out-Host
     $partialSecond = Get-TreeFingerprint "$temp\partial"
     if ($partialFirst -cne $partialSecond) { throw 'Partial adoption is not idempotent' }
+
+    & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\custom" -Language en | Out-Host
+    if ((Test-Path -LiteralPath "$temp\custom\docs\tasks.md") -or
+        (Test-Path -LiteralPath "$temp\custom\docs\decisions.md")) {
+        throw 'Custom mapped sources were duplicated by default ledgers'
+    }
+    $customInspection = & "$skill\scripts\inspect-project.ps1" -ProjectPath "$temp\custom" | ConvertFrom-Json
+    if ($customInspection.sources.tasks -ne 'project/work-items.md') { throw 'Custom task mapping was not preserved' }
+    if ($customInspection.sources.decisions -ne 'project/choices.md') { throw 'Custom decision mapping was not preserved' }
+    foreach ($check in @(
+        @("$temp\custom\project\work-items.md", 'CUSTOM-TASK-CONTENT'),
+        @("$temp\custom\project\choices.md", 'CUSTOM-DECISION-CONTENT')
+    )) {
+        if (-not [IO.File]::ReadAllText($check[0]).Contains($check[1])) {
+            throw "Custom mapped content was not preserved in $($check[0]): $($check[1])"
+        }
+    }
+    $customFirst = Get-TreeFingerprint "$temp\custom"
+    & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\custom" -Language en | Out-Host
+    $customSecond = Get-TreeFingerprint "$temp\custom"
+    if ($customFirst -cne $customSecond) { throw 'Custom mapped adoption is not idempotent' }
 
     & "$skill\scripts\update-project.ps1" -ProjectPath "$temp\invalid" -Language en | Out-Host
     $pwsh = (Get-Process -Id $PID).Path

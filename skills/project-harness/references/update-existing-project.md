@@ -17,7 +17,7 @@ Do not ask the user to classify the project before inspection. Do not install a 
 
 Selecting or naming the Skill only activates its rules. An explicit request to use, adopt, set up, or apply Project Harness to manage the project is permission to write the minimal project binding.
 
-Inspect first, then run the state-aware initializer for adoption. It must reuse each equivalent task or decision source independently, create only the missing ledger for an unmapped category, refresh the managed project map, and run validation. A project with `TASKS.md` but no decision ledger, for example, keeps `TASKS.md` and receives only a missing decision ledger.
+Inspect first, then run the state-aware initializer for adoption. It must preserve valid custom paths already mapped from `HARNESS.md`, reuse each equivalent task or decision source independently, create only the missing ledger for an unmapped category, refresh the managed project map, and run validation. A project with `TASKS.md` but no decision ledger, for example, keeps `TASKS.md` and receives only a missing decision ledger.
 
 The updater is a refresh-only operation. It maps sources that already exist and may leave an unresolved category visible, but validation must reject a persistent binding whose required task or decision source is unmapped or missing.
 
