@@ -14,6 +14,17 @@ if (-not (Test-Path -LiteralPath $templateRoot -PathType Container)) {
     throw "Template root not found: $templateRoot"
 }
 
+function Find-FirstExisting {
+    param([string[]]$Candidates)
+
+    foreach ($candidate in $Candidates) {
+        if (Test-Path -LiteralPath (Join-Path $project $candidate) -PathType Leaf) {
+            return $candidate
+        }
+    }
+    return $null
+}
+
 function Copy-MissingFile {
     param([string]$RelativePath)
 
@@ -61,11 +72,21 @@ function Set-ManagedBlock {
 }
 
 Copy-MissingFile 'HARNESS.md'
-Copy-MissingFile 'docs/tasks.md'
-Copy-MissingFile 'docs/decisions.md'
+if (-not (Find-FirstExisting @('docs/tasks.md', 'TASKS.md', 'docs/task.md'))) {
+    Copy-MissingFile 'docs/tasks.md'
+} else {
+    Write-Output 'REUSE existing task source'
+}
+if (-not (Find-FirstExisting @('docs/decisions.md', 'DECISIONS.md', 'docs/decision-log.md'))) {
+    Copy-MissingFile 'docs/decisions.md'
+} else {
+    Write-Output 'REUSE existing decision source'
+}
 
 $heading = '# Agent Instructions'
 $block = [IO.File]::ReadAllText((Join-Path $managedRoot 'agents-block.md')).TrimEnd()
 
 Set-ManagedBlock -Path (Join-Path $project 'AGENTS.md') -Heading $heading -Block $block
-Write-Output "Project Harness 2 initialized at: $project"
+& (Join-Path $PSScriptRoot 'update-project.ps1') -ProjectPath $project -Language $Language
+& (Join-Path $PSScriptRoot 'validate-project.ps1') -ProjectPath $project
+Write-Output "Project Harness 2 initialized or adopted at: $project"

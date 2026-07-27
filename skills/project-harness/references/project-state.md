@@ -34,7 +34,11 @@ Do not turn routine implementation choices into permanent decisions.
 
 ## Stable Identity and History
 
-Use `TASK-0001` and `DEC-0001` identifiers when the project has no established identifier system. The active coordinator assigns identifiers, never reuses them, and keeps completed, cancelled, and superseded records available.
+Use `TASK-0001` and `DEC-0001` identifiers when the project has no established identifier system. The active project coordinator is the only allocator for these global sequences. It re-reads the ledger, chooses the next unused identifier, and reserves the record in shared durable state before dispatching parallel execution.
+
+Execution units must not independently allocate durable global identifiers. They return an unnumbered task or decision proposal to the coordinator when new durable work is discovered. If shared state cannot be updated before parallel work begins, use a temporary execution reference and allocate the durable identifier during integration.
+
+The coordinator never reuses identifiers and keeps completed, cancelled, and superseded records available.
 
 Before creating a durable task, inspect relevant active and historical tasks plus linked decisions. Continue matching active work, reuse an accepted result that already satisfies the request, create linked work for a regression or extension, and surface a material conflict before changing an accepted decision.
 

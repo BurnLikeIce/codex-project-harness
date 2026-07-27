@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Separated Skill activation from authorization to persist project files.
+- Made adoption reuse partial existing task and decision sources and create only missing ledgers.
+- Made validation reject missing or unresolved required source mappings.
+- Assigned global task and decision identifier allocation to one active project coordinator.
+- Restored an explicit, lightweight conversation-handoff contract with `READY_TO_HANDOFF`.
+
 ## 2.0.2 - 2026-07-21
 
 - Added three-layer activation through ordinary project intent, project-level continuity, and explicit fallback.

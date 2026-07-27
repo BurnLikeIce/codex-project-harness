@@ -17,15 +17,19 @@ Record work that must survive a conversation, ownership, acceptance, integration
   - The repository owner retains merge and release authority.
 - Acceptance criteria:
   - Explicit adoption creates or confirms an observable, validated project binding.
+  - Selecting or naming the Skill without adoption or execution intent remains read-only.
+  - Adoption reuses partial existing task or decision sources, creates only missing ledgers, and validation rejects unresolved required mappings.
   - Durable tasks receive stable `TASK-0001`-style identifiers.
+  - One active project coordinator reserves project-wide task and decision identifiers before parallel dispatch.
   - Agents check existing tasks and decisions before creating a new durable task.
   - Completed, cancelled, and superseded task history remains available.
   - Existing `AGENTS.md` content is preserved outside one managed Harness block.
-  - The original initialization, update, validation, and cross-platform script structure remains unchanged.
-  - Existing tests receive only small assertions for the new Skill and template contract.
+  - Conversation handoff produces durable resumable state, `READY_TO_HANDOFF`, and a directly usable restart instruction.
+  - The original initialization, update, validation, and cross-platform script entry points remain available.
+  - Existing tests cover the revised Skill, adoption, validation, handoff, and template contract.
 - Linked decisions: `DEC-0001`
-- Evidence: Original script changes were restored; no new adoption script remains. The PowerShell suite passes with the new Skill and template assertions. Local POSIX execution is unavailable because WSL has no installed distribution.
-- Next action: review the pull request and its Windows, Linux, and macOS CI results before deciding whether to merge.
+- Evidence: PowerShell and POSIX behavior suites pass for English and Chinese initialization, V1-compatible update, partial-source adoption, idempotence, and rejection of unresolved mappings. PowerShell and shell syntax checks pass, the Skill validator passes in UTF-8 mode, and `git diff --check` reports no whitespace errors.
+- Next action: push the repaired PR branch and review Windows, Linux, and macOS CI before deciding whether to merge.
 
 ## Completed
 

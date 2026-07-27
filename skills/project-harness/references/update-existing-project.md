@@ -15,9 +15,11 @@ Do not ask the user to classify the project before inspection. Do not install a 
 
 ## Persistently Adopt a Project
 
-Explicit adoption is permission to write the minimal project binding, not merely to load the Skill in the current conversation.
+Selecting or naming the Skill only activates its rules. An explicit request to use, adopt, set up, or apply Project Harness to manage the project is permission to write the minimal project binding.
 
-Inspect first. If the project has no equivalent governance sources, run the initializer. If equivalent sources already exist, run the updater so `HARNESS.md` maps them without creating duplicate canonical files. Then run validation.
+Inspect first, then run the state-aware initializer for adoption. It must reuse each equivalent task or decision source independently, create only the missing ledger for an unmapped category, refresh the managed project map, and run validation. A project with `TASKS.md` but no decision ledger, for example, keeps `TASKS.md` and receives only a missing decision ledger.
+
+The updater is a refresh-only operation. It maps sources that already exist and may leave an unresolved category visible, but validation must reject a persistent binding whose required task or decision source is unmapped or missing.
 
 Report `ADOPTED` when a binding was created or repaired, `ALREADY_ADOPTED` when a valid binding already existed and nothing changed, or `BLOCKED` with the exact required action when safe adoption or validation cannot complete.
 

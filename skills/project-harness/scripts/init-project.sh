@@ -31,6 +31,16 @@ copy_missing() {
   printf 'CREATE: %s\n' "$relative"
 }
 
+first_existing() {
+  for candidate in "$@"; do
+    if [ -f "$project_path/$candidate" ]; then
+      printf '%s' "$candidate"
+      return
+    fi
+  done
+  return 1
+}
+
 replace_managed_block() {
   path="$1"
   heading="$2"
@@ -63,8 +73,16 @@ replace_managed_block() {
 }
 
 copy_missing HARNESS.md
-copy_missing docs/tasks.md
-copy_missing docs/decisions.md
+if task_source=$(first_existing docs/tasks.md TASKS.md docs/task.md); then
+  printf 'REUSE existing task source: %s\n' "$task_source"
+else
+  copy_missing docs/tasks.md
+fi
+if decision_source=$(first_existing docs/decisions.md DECISIONS.md docs/decision-log.md); then
+  printf 'REUSE existing decision source: %s\n' "$decision_source"
+else
+  copy_missing docs/decisions.md
+fi
 
 block_file="$project_path/.project-harness-entry.tmp"
 if [ "$language" = "zh-CN" ]; then
@@ -85,4 +103,6 @@ fi
 
 replace_managed_block "$project_path/AGENTS.md" "$heading" "$block_file"
 rm -f "$block_file"
-printf 'Project Harness 2 initialized at: %s\n' "$project_path"
+sh "$script_dir/update-project.sh" --project-path "$project_path" --language "$language"
+sh "$script_dir/validate-project.sh" "$project_path"
+printf 'Project Harness 2 initialized or adopted at: %s\n' "$project_path"

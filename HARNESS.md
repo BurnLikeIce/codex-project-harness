@@ -20,5 +20,4 @@
 
 - The repository owner reviews and decides whether to merge pull requests.
 - Do not push branches, create or merge pull requests, tag versions, or publish releases without explicit authorization.
-- Develop v2.1 on `feat/v2.1-agent-first-harness`; keep `master` as the accepted baseline.
-- Release v2.1.0 directly after acceptance; no prerelease is planned.
+- Active development, review, integration, and release state are recorded in `docs/tasks.md` and `docs/decisions.md`.
