@@ -27,8 +27,35 @@ check_managed_file() {
 check_managed_file HARNESS.md '<!-- project-harness:managed:start -->' '<!-- project-harness:managed:end -->'
 check_managed_file AGENTS.md '<!-- project-harness:entry:start -->' '<!-- project-harness:entry:end -->'
 
-[ -f "$project_path/docs/tasks.md" ] || printf 'WARNING: docs/tasks.md is absent; HARNESS.md must map an equivalent source.\n' >&2
-[ -f "$project_path/docs/decisions.md" ] || printf 'WARNING: docs/decisions.md is absent; HARNESS.md must map an equivalent source.\n' >&2
+check_mapped_source() {
+  label="$1"
+  pattern="$2"
+  managed=$(awk '
+    /<!-- project-harness:managed:start -->/ { active = 1; next }
+    /<!-- project-harness:managed:end -->/ { active = 0 }
+    active { print }
+  ' "$project_path/HARNESS.md")
+  line=$(printf '%s\n' "$managed" | grep -E "$pattern" | head -n 1 || true)
+  if [ -z "$line" ]; then
+    printf 'ERROR: HARNESS.md does not map %s\n' "$label" >&2
+    errors=$((errors + 1))
+    return
+  fi
+
+  value=$(printf '%s\n' "$line" | sed -E 's/^[[:space:]]*-[[:space:]]*[^:：]+[:：][[:space:]]*//; s/^`//; s/`$//')
+  if [ "$value" = "(not mapped)" ]; then
+    printf 'ERROR: HARNESS.md leaves %s as (not mapped)\n' "$label" >&2
+    errors=$((errors + 1))
+    return
+  fi
+  if [ ! -f "$project_path/$value" ]; then
+    printf 'ERROR: HARNESS.md maps %s to missing file: %s\n' "$label" "$value" >&2
+    errors=$((errors + 1))
+  fi
+}
+
+check_mapped_source tasks '^[[:space:]]*-[[:space:]]*(Tasks|任务记录)[：:]'
+check_mapped_source decisions '^[[:space:]]*-[[:space:]]*(Decisions|决策记录)[：:]'
 
 if [ "$errors" -ne 0 ]; then exit 1; fi
 printf 'VALID: Project Harness managed structure at %s\n' "$project_path"

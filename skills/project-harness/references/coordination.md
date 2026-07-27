@@ -16,6 +16,10 @@ Each governed task has one active coordinator responsible for:
 
 Execution units may implement and report results, but they do not independently expand product scope or change shared contracts without returning the decision to the coordinator.
 
+## Identifier Ownership
+
+The active project coordinator owns allocation of project-wide task and decision identifiers. It must reserve durable records before parallel dispatch whenever possible. Execution units use the assigned task reference and return unnumbered proposals for newly discovered durable work; they do not race to allocate the next global identifier.
+
 ## Execution Unit Contract
 
 Provide each independent unit with:
@@ -38,12 +42,20 @@ Before integration, verify the expected base, changed scope, tests, unresolved r
 
 ## Handoff
 
-Before moving control to another conversation, update durable state and provide:
+Before moving control to another conversation, update durable tasks, decisions, evidence, and the project map. In most projects, those repository sources are the handoff packet.
+
+Create or update a focused handoff file such as `docs/handovers/current-control-state.md` only when important unresolved context cannot fit the existing ledgers. Map that file from `HARNESS.md`, and remove or supersede it after the receiving context absorbs the state.
+
+The handoff state must cover:
 
 - current objective and accepted baseline;
 - active tasks, owners, branches, and worktrees;
 - settled decisions and protected constraints;
 - verification and release state;
 - unresolved questions and exact next action.
+
+Return `READY_TO_HANDOFF` and one directly usable restart instruction, localized to the user when practical. A valid generic instruction is:
+
+> Continue this project. Read `AGENTS.md`, `HARNESS.md`, and the current task and decision state first, then resume the recorded next action.
 
 The receiving context should be able to resume from repository files and this concise packet without reconstructing old chat history.

@@ -27,13 +27,17 @@ function Get-TreeFingerprint {
 
 try {
     Remove-SafeTemp
-    New-Item -ItemType Directory -Path "$temp\new-en", "$temp\new-zh", "$temp\v1\docs", "$temp\v1\prompts" -Force | Out-Null
+    New-Item -ItemType Directory -Path "$temp\new-en", "$temp\new-zh", "$temp\v1\docs", "$temp\v1\prompts", "$temp\partial\docs", "$temp\custom\project", "$temp\invalid" -Force | Out-Null
 
     $skillInstructions = [IO.File]::ReadAllText((Join-Path $skill 'SKILL.md'))
     foreach ($expected in @(
         'starts or resumes a project',
         'Do not require the user to name the skill',
-        'Explicitly apply Project Harness'
+        'selection alone does not authorize project-file changes',
+        'READY_TO_HANDOFF',
+        'TASK-0001',
+        'project coordinator owns allocation',
+        'inspect relevant task and decision history'
     )) {
         if (-not $skillInstructions.Contains($expected)) {
             throw "Missing activation contract in SKILL.md: $expected"
@@ -47,6 +51,21 @@ try {
     Write-Utf8 "$temp\v1\docs\product.md" "# Product`n`nPRODUCT-CONTENT"
     Write-Utf8 "$temp\v1\docs\sop.md" "# Legacy SOP`n`nSOP-CONTENT"
     Write-Utf8 "$temp\v1\prompts\master.md" "# Legacy prompt`n`nPROMPT-CONTENT"
+    Write-Utf8 "$temp\partial\TASKS.md" "# Existing tasks`n`nPARTIAL-TASK-CONTENT"
+    Write-Utf8 "$temp\partial\docs\product.md" "# Existing product`n`nPARTIAL-PRODUCT-CONTENT"
+    Write-Utf8 "$temp\custom\project\work-items.md" "# Custom tasks`n`nCUSTOM-TASK-CONTENT"
+    Write-Utf8 "$temp\custom\project\choices.md" "# Custom decisions`n`nCUSTOM-DECISION-CONTENT"
+    Write-Utf8 "$temp\custom\HARNESS.md" @"
+# Existing Harness
+
+<!-- project-harness:managed:start -->
+## Harness Protocol
+
+- Protocol: 2
+- Tasks: ``project/work-items.md``
+- Decisions: ``project/choices.md``
+<!-- project-harness:managed:end -->
+"@
 
     & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\new-en" -Language en | Out-Host
     & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\new-zh" -Language zh-CN | Out-Host
@@ -55,6 +74,8 @@ try {
         $files = @(Get-ChildItem -Recurse -File "$temp\$name")
         if ($files.Count -ne 4) { throw "$name should contain exactly four initialized files, found $($files.Count)" }
         & "$skill\scripts\validate-project.ps1" -ProjectPath "$temp\$name" | Out-Host
+        if (-not (Select-String -LiteralPath "$temp\$name\docs\tasks.md" -Pattern 'TASK-0001' -Quiet)) { throw "$name task template has no stable ID guidance" }
+        if (-not (Select-String -LiteralPath "$temp\$name\docs\decisions.md" -Pattern 'DEC-0001' -Quiet)) { throw "$name decision template has no stable ID guidance" }
     }
 
     if (-not (Select-String -LiteralPath "$temp\new-en\AGENTS.md" -Pattern 'Infer project intent from ordinary language' -Quiet)) {
@@ -63,6 +84,52 @@ try {
     if (-not (Select-String -LiteralPath "$temp\new-zh\AGENTS.md" -Pattern '根据日常表达判断项目意图' -Quiet)) {
         throw 'Chinese project entry does not enable semantic activation'
     }
+
+    & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\partial" -Language en | Out-Host
+    if (Test-Path -LiteralPath "$temp\partial\docs\tasks.md") {
+        throw 'Partial adoption duplicated the existing TASKS.md source'
+    }
+    if (-not (Test-Path -LiteralPath "$temp\partial\docs\decisions.md") -or
+        -not (Test-Path -LiteralPath "$temp\partial\HARNESS.md") -or
+        -not (Test-Path -LiteralPath "$temp\partial\AGENTS.md")) {
+        throw 'Partial adoption did not create the missing governance files'
+    }
+    $partialInspection = & "$skill\scripts\inspect-project.ps1" -ProjectPath "$temp\partial" | ConvertFrom-Json
+    if ($partialInspection.sources.tasks -ne 'TASKS.md') { throw 'Partial task source was not reused' }
+    if ($partialInspection.sources.decisions -ne 'docs/decisions.md') { throw 'Missing decision source was not created and mapped' }
+    if (-not (Select-String -LiteralPath "$temp\partial\TASKS.md" -Pattern 'PARTIAL-TASK-CONTENT' -Quiet)) {
+        throw 'Partial task content was not preserved'
+    }
+    $partialFirst = Get-TreeFingerprint "$temp\partial"
+    & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\partial" -Language en | Out-Host
+    $partialSecond = Get-TreeFingerprint "$temp\partial"
+    if ($partialFirst -cne $partialSecond) { throw 'Partial adoption is not idempotent' }
+
+    & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\custom" -Language en | Out-Host
+    if ((Test-Path -LiteralPath "$temp\custom\docs\tasks.md") -or
+        (Test-Path -LiteralPath "$temp\custom\docs\decisions.md")) {
+        throw 'Custom mapped sources were duplicated by default ledgers'
+    }
+    $customInspection = & "$skill\scripts\inspect-project.ps1" -ProjectPath "$temp\custom" | ConvertFrom-Json
+    if ($customInspection.sources.tasks -ne 'project/work-items.md') { throw 'Custom task mapping was not preserved' }
+    if ($customInspection.sources.decisions -ne 'project/choices.md') { throw 'Custom decision mapping was not preserved' }
+    foreach ($check in @(
+        @("$temp\custom\project\work-items.md", 'CUSTOM-TASK-CONTENT'),
+        @("$temp\custom\project\choices.md", 'CUSTOM-DECISION-CONTENT')
+    )) {
+        if (-not [IO.File]::ReadAllText($check[0]).Contains($check[1])) {
+            throw "Custom mapped content was not preserved in $($check[0]): $($check[1])"
+        }
+    }
+    $customFirst = Get-TreeFingerprint "$temp\custom"
+    & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\custom" -Language en | Out-Host
+    $customSecond = Get-TreeFingerprint "$temp\custom"
+    if ($customFirst -cne $customSecond) { throw 'Custom mapped adoption is not idempotent' }
+
+    & "$skill\scripts\update-project.ps1" -ProjectPath "$temp\invalid" -Language en | Out-Host
+    $pwsh = (Get-Process -Id $PID).Path
+    & $pwsh -NoLogo -NoProfile -File "$skill\scripts\validate-project.ps1" -ProjectPath "$temp\invalid" *> $null
+    if ($LASTEXITCODE -eq 0) { throw 'Validation accepted unresolved task and decision mappings' }
 
     & "$skill\scripts\update-project.ps1" -ProjectPath "$temp\v1" -Language en | Out-Host
     $first = Get-TreeFingerprint "$temp\v1"

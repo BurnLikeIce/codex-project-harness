@@ -1,4 +1,4 @@
-# Project Harness 2.0 Design Contract
+# Project Harness Design Contract
 
 ## Purpose
 
@@ -18,6 +18,8 @@ Project Harness does not prescribe how an implementation task must be reasoned a
 8. Preserve existing project facts and customized documentation during every update.
 9. Treat structural migration as optional. Existing Harness projects must remain usable without migration.
 10. Keep Git commits, remote writes, releases, deployments, destructive actions, and material scope expansion behind explicit project or user authorization.
+11. Separate Skill activation from persistence. Selecting or naming Project Harness loads its rules but does not by itself authorize project-file changes.
+12. Keep durable identifiers agent-maintained and concurrency-safe through one project coordinator.
 
 ## Ownership Boundary
 
@@ -45,17 +47,23 @@ Project Harness does not own:
 
 Recognize user meaning rather than exact phrases. The following phrases are canonical examples, not keyword requirements.
 
-### Start a new project
+### Activate Project Harness
 
-Examples: "Start this project with project-harness" or "Use project-harness and make this the control conversation."
+Examples: selecting the Skill while asking "What does this project need?" or saying "Use project-harness to review this setup."
 
-Inspect first, initialize only missing project-governance files, and never repeat `git init` when a repository already exists.
+Load the rules and route from the requested meaning. Selection or naming alone is not permission to write project files; exploratory and status-only requests remain read-only.
 
-### Adopt an existing project
+### Start or resume project work
 
-Examples: "Use project-harness in this existing project" or "Make this conversation the control conversation for the old project."
+Examples: "I want to build an app", "Continue this project", or "Go ahead with the agreed change."
 
-Inspect and map existing sources of truth. Do not rewrite or reorganize existing documentation merely to match a template.
+Inspect the actual project state, preserve existing sources, and establish only missing governance state when execution is clearly approved. Never repeat `git init` when a repository already exists.
+
+### Adopt a project
+
+Examples: "Use project-harness to manage this project" or "Apply Project Harness here."
+
+The request to manage the project authorizes the smallest persistent binding. Inspect and map existing sources category by category, create only missing task or decision ledgers, validate the binding, and do not reorganize existing documentation merely to match a template.
 
 ### Sync the current conversation
 
@@ -74,6 +82,12 @@ Apply an in-place, backward-compatible Harness protocol update. Preserve all exi
 Example: "Migrate this project to the latest Harness structure."
 
 Treat this as an optional structural operation. Inspect first, propose a plan, and require confirmation before moving, merging, archiving, or deleting existing files.
+
+### Hand off to another conversation
+
+Example: "Continue this work in another conversation."
+
+Refresh durable tasks, decisions, evidence, and the project map. Create a focused handoff file only when important unresolved context cannot fit those sources. Return `READY_TO_HANDOFF` and one directly usable restart instruction.
 
 ## Adaptive Routing
 
@@ -113,6 +127,8 @@ Create product, architecture, API, security, deployment, testing, release, or ha
 
 Generic workflow explanations belong in the skill's `references/` directory, not in every generated project.
 
+Task and decision records are agent-maintained. One active project coordinator allocates global identifiers, re-reads the ledger, and reserves the next unused identifier before parallel dispatch. Execution units use assigned references and return unnumbered proposals for newly discovered durable work.
+
 ## Backward-Compatible Project Update
 
 V1 project layouts remain valid storage layouts. V2 must understand their existing task, decision, product, architecture, API, acceptance, handoff, and workflow files without requiring renames.
@@ -148,6 +164,8 @@ When work is coordinated, record:
 - acceptance evidence required from each unit;
 - the final integration and acceptance owner.
 
+The active project coordinator is the only allocator for project-wide task and decision identifier sequences. If shared durable state cannot be updated before parallel work begins, use temporary execution references and allocate durable identifiers during integration.
+
 Do not require a specific runtime, subagent implementation, conversation type, branch strategy, or worktree strategy. Select those mechanisms according to project risk and available capabilities.
 
 ## Acceptance Contract
@@ -160,6 +178,10 @@ Every governed task ends in one of these states:
 - **Superseded:** link the replacing task or decision.
 
 Acceptance must always return a next action for the control context, including when the work is accepted.
+
+## Handoff Contract
+
+Conversation replacement must not require reconstructing old chat history. Update the existing durable project state first; use a temporary handoff file only for unresolved context that does not fit the task and decision ledgers. A successful handoff ends with `READY_TO_HANDOFF` and a restart instruction that tells the receiving conversation to read `AGENTS.md`, `HARNESS.md`, and the current task and decision state before resuming the recorded next action.
 
 ## Skill Structure
 
@@ -236,5 +258,9 @@ V2 is ready for installation and public release only when:
 10. the installed local skill matches the tested repository source;
 11. current files and Git history pass privacy and secret review;
 12. README files describe V2 behavior accurately.
+13. selecting the Skill during exploration causes no project-file changes;
+14. adoption preserves valid custom mappings, reuses partial existing sources, creates only missing ledgers, and rejects unmapped required sources;
+15. coordinator-owned identifiers cannot be allocated independently by parallel execution units;
+16. conversation handoff produces durable resumable state and a directly usable restart instruction.
 
 Changing repository visibility and publishing a release remain separate, explicitly authorized actions after these gates pass.

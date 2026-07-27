@@ -4,7 +4,7 @@
 
 Use the first matching layer:
 
-1. **Explicit fallback:** the user names or selects Project Harness.
+1. **Explicit activation:** the user selects or names Project Harness. Load the Skill, then route according to the user's semantic request; activation alone is not write authorization.
 2. **Project-level continuity:** `HARNESS.md` or a managed Project Harness entry is present and the request may affect durable project work.
 3. **Semantic activation:** ordinary language clearly indicates starting, resuming, discussing, implementing, debugging, accepting, summarizing, coordinating, or handing off project work.
 4. **No activation:** unrelated Q&A, translation, casual conversation, or an isolated mechanical edit with no durable project impact.
@@ -17,6 +17,8 @@ Infer intent from the user's meaning and current project state. Examples are ill
 
 | Intent | Typical meaning | Harness action |
 | --- | --- | --- |
+| Activate | The user selects or names Project Harness while asking a question | Load the rules and follow the request. Do not write project files unless the semantic request also authorizes adoption or execution. |
+| Adopt | "Use Project Harness to manage this project" | Inspect, persist the minimal safe binding, validate it, and report `ADOPTED`, `ALREADY_ADOPTED`, or `BLOCKED`. |
 | Start | "I want to build an app" | Inspect the workspace. When the intent is to begin execution, establish the minimal missing project map and proceed. |
 | Resume | "Continue this project" | Inspect and read current state, reuse existing sources, and continue without repeated initialization. |
 | Explore | "Can this be done?" | Discuss; do not start implementation unless durable output is requested. |
@@ -27,7 +29,7 @@ Infer intent from the user's meaning and current project state. Examples are ill
 | Sync | "Sync the latest project-harness" | Reload rules only; make no file or Git changes. |
 | Update | "Update this project's harness" | Apply the managed, in-place compatibility update. |
 | Migrate | "Move this project to the latest structure" | Propose a structural plan; wait for confirmation before changing structure. |
-| Handoff | "Move control to a new conversation" | Refresh durable state and produce a concise control handoff. |
+| Handoff | "Move control to a new conversation" | Refresh durable state, add a focused handoff file only if needed, and return `READY_TO_HANDOFF` with a directly usable restart instruction. |
 
 When wording is incomplete, infer from the surrounding conversation. Ask only when different interpretations would materially change scope, authority, data, architecture, release, or destructive actions.
 
@@ -37,8 +39,9 @@ Activation and persistence are separate decisions.
 
 | Project state and intent | Allowed behavior |
 | --- | --- |
-| No Harness marker; exploration only | Discuss and inspect read-only context as needed. Do not initialize governance files or implementation records. |
-| No Harness marker; clear start, resume, or approved execution | Inspect first, reuse equivalent sources, then create only the minimal missing governance files. |
+| Skill selected; exploration or status question only | Load and apply the rules in the conversation. Inspect read-only context when needed; do not create or update project files. |
+| No Harness marker; exploration only | Discuss and inspect read-only context as needed. Do not initialize governance files, implementation records, or claim adoption. |
+| No Harness marker; explicit adoption or approved execution | Inspect first, reuse equivalent sources, persist only the minimal missing governance files, and validate the result. |
 | Harness marker present; durable project work | Read `HARNESS.md`, apply current rules automatically, and update only records justified by durable impact. |
 | Explicit conversation sync | Reload installed rules and leave files and Git state unchanged. |
 | Unrelated or purely mechanical request | Continue normally without introducing Harness records or terminology. |

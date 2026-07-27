@@ -13,6 +13,16 @@ Apply one state-aware flow:
 
 Do not ask the user to classify the project before inspection. Do not install a template over equivalent project files merely because their names differ.
 
+## Persistently Adopt a Project
+
+Selecting or naming the Skill only activates its rules. An explicit request to use, adopt, set up, or apply Project Harness to manage the project is permission to write the minimal project binding.
+
+Inspect first, then run the state-aware initializer for adoption. It must preserve valid custom paths already mapped from `HARNESS.md`, reuse each equivalent task or decision source independently, create only the missing ledger for an unmapped category, refresh the managed project map, and run validation. A project with `TASKS.md` but no decision ledger, for example, keeps `TASKS.md` and receives only a missing decision ledger.
+
+The updater is a refresh-only operation. It maps sources that already exist and may leave an unresolved category visible, but validation must reject a persistent binding whose required task or decision source is unmapped or missing.
+
+Report `ADOPTED` when a binding was created or repaired, `ALREADY_ADOPTED` when a valid binding already existed and nothing changed, or `BLOCKED` with the exact required action when safe adoption or validation cannot complete.
+
 ## Sync Conversation Rules
 
 "Sync the latest Project Harness" is read-only. Reload the installed skill and continue using the project's existing facts. Do not run initialization or update scripts. Confirm that no project files or Git state changed.
