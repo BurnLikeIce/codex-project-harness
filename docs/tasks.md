@@ -6,7 +6,7 @@ Record work that must survive a conversation, ownership, acceptance, integration
 
 ### TASK-0001 — Make Project Harness agent-first for vibe coding
 
-- Status: ready_for_review
+- Status: accepted
 - Created: 2026-07-24
 - Outcome: Explicitly applying Project Harness persistently adopts the project, while agents autonomously maintain durable task and decision history for vibe coding users.
 - Scope: activation semantics, agent-maintained task and decision history, minimal templates, related references, public documentation, and small checks in the existing test entry points.
@@ -28,8 +28,8 @@ Record work that must survive a conversation, ownership, acceptance, integration
   - The original initialization, update, validation, and cross-platform script entry points remain available.
   - Existing tests cover the revised Skill, adoption, validation, handoff, and template contract.
 - Linked decisions: `DEC-0001`
-- Evidence: PowerShell and POSIX behavior suites pass for English and Chinese initialization, V1-compatible update, partial-source adoption, custom mapped sources, idempotence, and rejection of unresolved mappings. PowerShell and shell syntax checks pass, the Skill validator passes in UTF-8 mode, and `git diff --check` reports no whitespace errors.
-- Next action: the repository owner reviews the final Windows, Linux, and macOS CI result and decides whether to mark the pull request ready and merge it.
+- Evidence: PowerShell and POSIX behavior suites pass for English and Chinese initialization, V1-compatible update, partial-source adoption, custom mapped sources, idempotence, and rejection of unresolved mappings. PowerShell and shell syntax checks pass, the Skill validator passes in UTF-8 mode, `git diff --check` reports no whitespace errors, and the final Windows, Ubuntu, and macOS GitHub Actions jobs pass. The repository owner accepted the result for merge.
+- Next action: merge the accepted pull request. Keep release publication as a separate explicitly authorized action.
 
 ## Completed
 
