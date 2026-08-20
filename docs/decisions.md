@@ -4,6 +4,27 @@ Record product and technical choices whose rationale or consequences should guid
 
 ## Accepted
 
+### DEC-0002 — Use native Codex tasks through a lightweight continuity adapter
+
+- Status: accepted
+- Date: 2026-08-20
+- Context: Codex can create user-visible tasks from another task. Project Harness previously emphasized manual handoff packets and optional conversation separation, while newer runtime capabilities can perform task creation directly. Recreating task lifecycle management inside Harness would duplicate Codex and make the Skill heavier.
+- Decision:
+  - Let Codex own creation, display, switching, forking, and retention of user-visible tasks.
+  - Let Project Harness own durable project state and the context needed to continue safely across tasks.
+  - Create a user-visible task only when the user explicitly expresses creation, separation, fork, or transfer intent.
+  - Keep one current task as the default and do not create fixed product, frontend, or backend tasks.
+  - Create a clean, independent task by default and pass a compact self-contained project packet instead of full chat history.
+  - Keep the originating task visible after handoff; never archive it automatically.
+  - Treat a newly created task as independent by default; the originating task does not monitor it.
+  - Preserve a capability-aware fallback that returns `READY_TO_HANDOFF` and a directly usable restart instruction when native task creation or messaging is unavailable.
+- Consequences:
+  - Users can use ordinary Codex task commands without learning Harness-specific dispatch syntax.
+  - Harness remains runtime-aware but does not become dependent on one task-management tool name or implementation.
+  - Existing durable task, decision, and optional handoff files remain the recovery layer when task context is unavailable.
+  - Existing projects do not require structural migration, protocol changes, or additional default documents.
+- Linked task: `TASK-0002`
+
 ### DEC-0001 — Optimize the default experience for vibe coding
 
 - Status: accepted

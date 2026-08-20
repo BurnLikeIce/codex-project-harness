@@ -4,6 +4,32 @@ Record work that must survive a conversation, ownership, acceptance, integration
 
 ## Active
 
+### TASK-0002 — Adapt Project Harness to native Codex tasks
+
+- Status: ready_for_review
+- Created: 2026-08-20
+- Outcome: Project Harness uses native Codex task creation and handoff capabilities without becoming a task orchestrator or requiring fixed product, frontend, and backend conversations.
+- Scope: semantic routing for explicit task creation, clean-task context packets, full control handoff, capability fallback, execution-context boundaries, compatibility, and the v2.2 design contract.
+- Constraints:
+  - User-visible tasks may be created only from explicit semantic user intent.
+  - New tasks are clean and independent by default; they do not inherit the full chat history.
+  - The originating task does not monitor the new task and is not automatically archived.
+  - Codex owns native task lifecycle behavior; Harness owns durable project continuity.
+  - Existing projects remain usable without migration or new default files.
+- Acceptance criteria:
+  - The design separates current-task work, internal execution units, and user-visible Codex tasks.
+  - Fixed product, frontend, and backend task roles are not part of the default workflow.
+  - Create, fork, and full-handoff intents have distinct behavior.
+  - Full handoff refreshes durable project state before creating the receiving task.
+  - Missing native task capabilities degrade to a directly usable restart instruction.
+  - Git worktree creation remains independent from task creation.
+  - The implementation plan changes only Skill guidance, references, public documentation, and contract tests unless later evidence requires script changes.
+- Linked decisions: `DEC-0002`
+- Evidence: `docs/native-task-continuity-design.md`
+- Next action: repository owner reviews and approves the design before implementation planning begins.
+
+## Completed
+
 ### TASK-0001 — Make Project Harness agent-first for vibe coding
 
 - Status: accepted
@@ -29,8 +55,4 @@ Record work that must survive a conversation, ownership, acceptance, integration
   - Existing tests cover the revised Skill, adoption, validation, handoff, and template contract.
 - Linked decisions: `DEC-0001`
 - Evidence: PowerShell and POSIX behavior suites pass for English and Chinese initialization, V1-compatible update, partial-source adoption, custom mapped sources, idempotence, and rejection of unresolved mappings. PowerShell and shell syntax checks pass, the Skill validator passes in UTF-8 mode, `git diff --check` reports no whitespace errors, and the final Windows, Ubuntu, and macOS GitHub Actions jobs pass. The repository owner accepted the result for merge.
-- Next action: merge the accepted pull request. Keep release publication as a separate explicitly authorized action.
-
-## Completed
-
-No completed governed tasks.
+- Next action: completed by squash merge `5167839`; release publication remains a separate explicitly authorized action.
