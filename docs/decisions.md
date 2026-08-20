@@ -4,6 +4,24 @@ Record product and technical choices whose rationale or consequences should guid
 
 ## Accepted
 
+### DEC-0002 — Use native Codex tasks through a lightweight continuity adapter
+
+- Status: accepted
+- Date: 2026-08-20
+- Context: Codex can create user-visible tasks. Recreating that lifecycle inside Project Harness would duplicate native behavior and make the Skill heavier.
+- Decision:
+  - Let Codex own user-visible task lifecycle behavior and Project Harness own durable project continuity.
+  - Create a user-visible task only when the user explicitly expresses creation, separation, fork, or transfer intent.
+  - Keep one current task as the default and do not create fixed product, frontend, or backend tasks.
+  - Create a clean, independent task by default and pass a compact self-contained project packet instead of full chat history.
+  - Keep the originating task visible after handoff; never archive it automatically.
+  - Treat a newly created task as independent by default; the originating task does not monitor it.
+  - Fall back to `READY_TO_HANDOFF` and a directly usable restart instruction when native creation or messaging is unavailable.
+- Consequences:
+  - Users can speak naturally without learning Harness-specific dispatch syntax.
+  - Existing projects need no migration, protocol change, or additional default documents.
+- Linked task: `TASK-0002`
+
 ### DEC-0001 — Optimize the default experience for vibe coding
 
 - Status: accepted

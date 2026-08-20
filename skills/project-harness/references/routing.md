@@ -29,7 +29,9 @@ Infer intent from the user's meaning and current project state. Examples are ill
 | Sync | "Sync the latest project-harness" | Reload rules only; make no file or Git changes. |
 | Update | "Update this project's harness" | Apply the managed, in-place compatibility update. |
 | Migrate | "Move this project to the latest structure" | Propose a structural plan; wait for confirmation before changing structure. |
-| Handoff | "Move control to a new conversation" | Refresh durable state, add a focused handoff file only if needed, and return `READY_TO_HANDOFF` with a directly usable restart instruction. |
+| New task | "Create a new task for the login page" | When the request is explicit, use native task creation and send a compact project packet. Use a clean independent task by default. |
+| Fork | "Fork this task to try another approach" | Use native context inheritance because the user explicitly requested a fork or context-preserving alternative. |
+| Handoff | "Move control to a new task" | Refresh durable state first. Deliver the recovery packet through native task capabilities and return `HANDOFF_COMPLETE`, or use the `READY_TO_HANDOFF` fallback. |
 
 When wording is incomplete, infer from the surrounding conversation. Ask only when different interpretations would materially change scope, authority, data, architecture, release, or destructive actions.
 
@@ -44,9 +46,12 @@ Activation and persistence are separate decisions.
 | No Harness marker; explicit adoption or approved execution | Inspect first, reuse equivalent sources, persist only the minimal missing governance files, and validate the result. |
 | Harness marker present; durable project work | Read `HARNESS.md`, apply current rules automatically, and update only records justified by durable impact. |
 | Explicit conversation sync | Reload installed rules and leave files and Git state unchanged. |
+| Explicit native task request | Create or fork one user-visible task as requested. Do not treat task creation alone as project-file, Git, or release authorization. |
 | Unrelated or purely mechanical request | Continue normally without introducing Harness records or terminology. |
 
 Use the current conversation as the internal coordinator by default. Explain coordination roles only when multiple owners, execution units, or a handoff make that distinction useful.
+
+Do not infer authority to create a user-visible task from complexity alone. Phrases with equivalent meaning to create, separate, fork, or transfer are sufficient; exact commands are not required.
 
 ## Durable Record Test
 

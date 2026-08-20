@@ -13,7 +13,7 @@ Project Harness does not prescribe how an implementation task must be reasoned a
 3. Record work according to durable impact, not code size.
 4. Choose execution topology independently from documentation impact.
 5. Enforce hard, repeatable invariants mechanically when practical; do not replace verification with more prose.
-6. Prefer one long-lived control conversation for ordinary work. Add parallel execution only when it provides a concrete benefit.
+6. Keep ordinary work in the current task. Create a user-visible task only from explicit semantic user intent.
 7. Keep one active coordinator for each task, regardless of the runtime or delegation mechanism used.
 8. Preserve existing project facts and customized documentation during every update.
 9. Treat structural migration as optional. Existing Harness projects must remain usable without migration.
@@ -40,6 +40,7 @@ Project Harness does not own:
 - mandatory planning, TDD, debugging, or review rituals;
 - tool selection;
 - runtime-specific agent or subagent behavior;
+- native task creation, display, switching, forking, or retention;
 - a fixed number of conversations, branches, or worktrees;
 - detection of or dependency on auxiliary skills.
 
@@ -83,11 +84,17 @@ Example: "Migrate this project to the latest Harness structure."
 
 Treat this as an optional structural operation. Inspect first, propose a plan, and require confirmation before moving, merging, archiving, or deleting existing files.
 
-### Hand off to another conversation
+### Create or fork a Codex task
 
-Example: "Continue this work in another conversation."
+Examples: "Create a new task for the login page" or "Fork this task to try another approach."
 
-Refresh durable tasks, decisions, evidence, and the project map. Create a focused handoff file only when important unresolved context cannot fit those sources. Return `READY_TO_HANDOFF` and one directly usable restart instruction.
+Use native task capabilities only after explicit semantic intent. Create a clean independent task by default; inherit current context only for an explicit fork. Pass project-related tasks a compact self-contained packet, keep the originating task available, and do not monitor the new task by default.
+
+### Hand off to another task
+
+Example: "Hand this project to a new task."
+
+Refresh durable tasks, decisions, evidence, and the project map. Deliver the recovery packet through native task capabilities when available and return `HANDOFF_COMPLETE`. Otherwise return `READY_TO_HANDOFF` and one directly usable restart instruction. Never archive the originating task automatically.
 
 ## Adaptive Routing
 
@@ -181,7 +188,7 @@ Acceptance must always return a next action for the control context, including w
 
 ## Handoff Contract
 
-Conversation replacement must not require reconstructing old chat history. Update the existing durable project state first; use a temporary handoff file only for unresolved context that does not fit the task and decision ledgers. A successful handoff ends with `READY_TO_HANDOFF` and a restart instruction that tells the receiving conversation to read `AGENTS.md`, `HARNESS.md`, and the current task and decision state before resuming the recorded next action.
+Task replacement must not require reconstructing old chat history. Update durable project state first and use native clean-task creation and message delivery when available. A delivered handoff ends with `HANDOFF_COMPLETE`; otherwise return `READY_TO_HANDOFF` and a restart instruction that tells the receiving task to read `AGENTS.md`, `HARNESS.md`, and the current task and decision state before resuming the recorded next action.
 
 ## Skill Structure
 

@@ -103,13 +103,15 @@ Sync the latest project-harness.
 
 Syncing conversation rules does not edit project files.
 
-To continue the project in another conversation, say naturally:
+Ordinary work stays in the current Codex task. To create a separate task, say so naturally:
 
 ```text
-Hand this project to another conversation.
+Create a new task for the login page.
 ```
 
-The agent refreshes tasks, decisions, evidence, and the project map, creates a focused handoff file only when unresolved context needs one, and returns `READY_TO_HANDOFF` with a directly usable restart instruction.
+Project Harness uses Codex's native task capability only after an explicit request. New project tasks are clean and independent by default, receive a compact project packet, and do not automatically create a Git branch or worktree. Fixed product, frontend, and backend tasks are not required.
+
+For a full control transfer, say `Hand this project to a new task.` The agent refreshes durable state first and delivers the packet when native messaging is available. It keeps the old task available and does not monitor or archive it automatically. When native creation or delivery is unavailable, it returns `READY_TO_HANDOFF` with a directly usable restart instruction.
 
 ## Bundled Scripts
 

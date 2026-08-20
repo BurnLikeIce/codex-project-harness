@@ -7,6 +7,7 @@
 - Made validation reject missing or unresolved required source mappings.
 - Assigned global task and decision identifier allocation to one active project coordinator.
 - Restored an explicit, lightweight conversation-handoff contract with `READY_TO_HANDOFF`.
+- Added lightweight native Codex task creation, explicit-fork routing, and delivered handoff support without changing project templates or scripts.
 
 ## 2.0.2 - 2026-07-21
 
