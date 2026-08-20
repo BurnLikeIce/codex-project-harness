@@ -32,12 +32,16 @@ try {
     $skillInstructions = [IO.File]::ReadAllText((Join-Path $skill 'SKILL.md'))
     foreach ($expected in @(
         'starts or resumes a project',
-        'Do not require the user to name the skill',
+        'do not require the skill name or exact commands',
         'selection alone does not authorize project-file changes',
         'READY_TO_HANDOFF',
         'TASK-0001',
         'project coordinator owns allocation',
-        'inspect relevant task and decision history'
+        'inspect relevant task and decision history',
+        'user-visible Codex task only when',
+        'clean, independent task',
+        'HANDOFF_COMPLETE',
+        'Do not create fixed product, frontend, or backend task roles.'
     )) {
         if (-not $skillInstructions.Contains($expected)) {
             throw "Missing activation contract in SKILL.md: $expected"

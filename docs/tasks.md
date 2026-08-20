@@ -9,7 +9,7 @@ Record work that must survive a conversation, ownership, acceptance, integration
 - Status: ready_for_review
 - Created: 2026-08-20
 - Outcome: Project Harness uses native Codex task creation and handoff capabilities without becoming a task orchestrator or requiring fixed product, frontend, and backend conversations.
-- Scope: semantic routing for explicit task creation, clean-task context packets, full control handoff, capability fallback, execution-context boundaries, compatibility, and the v2.2 design contract.
+- Scope: Skill guidance, routing and coordination references, public documentation, and focused contract checks.
 - Constraints:
   - User-visible tasks may be created only from explicit semantic user intent.
   - New tasks are clean and independent by default; they do not inherit the full chat history.
@@ -17,16 +17,14 @@ Record work that must survive a conversation, ownership, acceptance, integration
   - Codex owns native task lifecycle behavior; Harness owns durable project continuity.
   - Existing projects remain usable without migration or new default files.
 - Acceptance criteria:
-  - The design separates current-task work, internal execution units, and user-visible Codex tasks.
-  - Fixed product, frontend, and backend task roles are not part of the default workflow.
-  - Create, fork, and full-handoff intents have distinct behavior.
-  - Full handoff refreshes durable project state before creating the receiving task.
-  - Missing native task capabilities degrade to a directly usable restart instruction.
-  - Git worktree creation remains independent from task creation.
-  - The implementation plan changes only Skill guidance, references, public documentation, and contract tests unless later evidence requires script changes.
+  - Ordinary work remains in the current task.
+  - Explicit create, fork, and full-handoff intents have distinct behavior.
+  - New tasks are clean and independent by default and receive a compact project packet.
+  - Fixed specialist roles, automatic monitoring, archiving, branches, and worktrees are not introduced.
+  - Native capability failure degrades to a directly usable restart instruction.
 - Linked decisions: `DEC-0002`
-- Evidence: `docs/native-task-continuity-design.md`
-- Next action: repository owner reviews and approves the design before implementation planning begins.
+- Evidence: `docs/native-task-continuity-design.md`; Skill validator, `git diff --check`, PowerShell behavior suite, and POSIX shell behavior suite all pass.
+- Next action: repository owner reviews the implementation and decides whether to publish it.
 
 ## Completed
 

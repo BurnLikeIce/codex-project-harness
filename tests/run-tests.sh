@@ -20,12 +20,16 @@ cleanup
 mkdir -p "$temp/new-en" "$temp/new-zh" "$temp/v1/docs" "$temp/v1/prompts" "$temp/partial/docs" "$temp/custom/project" "$temp/invalid"
 
 grep -F 'starts or resumes a project' "$skill/SKILL.md" >/dev/null
-grep -F 'Do not require the user to name the skill' "$skill/SKILL.md" >/dev/null
+grep -F 'do not require the skill name or exact commands' "$skill/SKILL.md" >/dev/null
 grep -F 'selection alone does not authorize project-file changes' "$skill/SKILL.md" >/dev/null
 grep -F 'READY_TO_HANDOFF' "$skill/SKILL.md" >/dev/null
 grep -F 'TASK-0001' "$skill/SKILL.md" >/dev/null
 grep -F 'project coordinator owns allocation' "$skill/SKILL.md" >/dev/null
 grep -F 'inspect relevant task and decision history' "$skill/SKILL.md" >/dev/null
+grep -F 'user-visible Codex task only when' "$skill/SKILL.md" >/dev/null
+grep -F 'clean, independent task' "$skill/SKILL.md" >/dev/null
+grep -F 'HANDOFF_COMPLETE' "$skill/SKILL.md" >/dev/null
+grep -F 'Do not create fixed product, frontend, or backend task roles.' "$skill/SKILL.md" >/dev/null
 
 printf '# Existing Harness\n\nCustom project fact: KEEP-ME\n' > "$temp/v1/HARNESS.md"
 printf '# Existing Instructions\n\nCustom rule: KEEP-AGENT\n' > "$temp/v1/AGENTS.md"

@@ -40,9 +40,17 @@ Use isolation when concurrent or risky writes justify it. Record branch or workt
 
 Before integration, verify the expected base, changed scope, tests, unresolved risks, and integration order. Remove worktrees and branches only after their work is integrated or explicitly abandoned and cleanup is authorized.
 
+## User-Visible Codex Tasks
+
+Keep ordinary work in the current task. Create a user-visible task only when the user explicitly asks to create, separate, fork, or hand off work; task complexity alone is not authority.
+
+Use a clean independent task by default. Send a compact contract with the objective, project path, sources, settled constraints, acceptance criteria, prohibited operations, and next action. Use a native fork only when the user explicitly wants context inheritance. Do not create permanent product, frontend, backend, or bug-fix roles.
+
+The new task runs independently. Keep the originating task available, but do not monitor the new task or archive the originating task by default. Native task creation and Git worktrees are separate decisions.
+
 ## Handoff
 
-Before moving control to another conversation, update durable tasks, decisions, evidence, and the project map. In most projects, those repository sources are the handoff packet.
+Before moving control to another task, update durable tasks, decisions, evidence, and the project map. In most projects, those repository sources are the handoff packet.
 
 Create or update a focused handoff file such as `docs/handovers/current-control-state.md` only when important unresolved context cannot fit the existing ledgers. Map that file from `HARNESS.md`, and remove or supersede it after the receiving context absorbs the state.
 
@@ -54,8 +62,8 @@ The handoff state must cover:
 - verification and release state;
 - unresolved questions and exact next action.
 
-Return `READY_TO_HANDOFF` and one directly usable restart instruction, localized to the user when practical. A valid generic instruction is:
+When native task creation and message delivery are available, create a clean receiving task, send the packet, and return `HANDOFF_COMPLETE`. Otherwise return `READY_TO_HANDOFF` and one directly usable restart instruction, localized to the user when practical. A valid generic instruction is:
 
 > Continue this project. Read `AGENTS.md`, `HARNESS.md`, and the current task and decision state first, then resume the recorded next action.
 
-The receiving context should be able to resume from repository files and this concise packet without reconstructing old chat history.
+The receiving task should be able to resume from repository files and this concise packet without reconstructing old chat history. Control transfers only after the receiving task has the packet.

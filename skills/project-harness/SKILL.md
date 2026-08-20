@@ -1,6 +1,6 @@
 ---
 name: project-harness
-description: Use for ongoing software-project work when a user starts or resumes a project, asks whether a feature can be built, agrees to implement, reports a project problem, asks to review or accept results, requests project status, coordinates parallel work, or hands work to another conversation. Also use when HARNESS.md or a Project Harness entry is present and work may affect requirements, tasks, decisions, defects, acceptance, coordination, handoff, or release boundaries. Recognize ordinary English or Chinese such as "I want to build an app", "continue this project", "can this feature be done?", "go ahead with this", "this page is wrong", "review the result", "我想做一个项目", "接着做", "按这个开始", "这里不对", or "验收一下". Do not require the user to name the skill or know control-context terminology. Do not use for unrelated Q&A, translation, or isolated mechanical edits with no durable project impact.
+description: Use for ongoing software-project work when a user starts or resumes a project, explores or approves a feature, reports a project problem, asks for review, acceptance, or status, coordinates parallel work, asks to create or fork a Codex task for project work, or hands the project to another task. Also use when HARNESS.md or a Project Harness entry is present and work may affect durable project state or release boundaries. Match ordinary English or Chinese intent such as "continue this project", "go ahead", "create a new task for this", "接着做", "按这样开始", "新建一个任务做这个", "这里不对", or "验收一下"; do not require the skill name or exact commands. Do not use for unrelated Q&A, translation, or isolated mechanical edits with no durable project impact.
 ---
 
 # Project Harness
@@ -21,7 +21,7 @@ Reply and create project-facing content in the user's language unless the projec
 4. Reuse existing project documents as sources of truth; do not create duplicate canonical files.
 5. Record work according to durable impact, not code size.
 6. Keep one active coordinator for each governed task. Treat coordinator and control-context terminology as internal unless coordination or handoff requires explanation.
-7. Use one conversation for ordinary work; add parallel execution only when it provides a concrete benefit.
+7. Keep ordinary work in the current task. Create a user-visible Codex task only when the user explicitly asks to create, separate, fork, or hand off work.
 8. Prefer mechanical verification for repeatable invariants and keep prose focused on intent and boundaries.
 9. Do not repeat `git init`, overwrite existing documentation, or perform structural migration without explicit intent.
 10. Do not commit, push, publish, deploy, release, delete, or materially expand scope without authorization from the user or established project policy.
@@ -41,7 +41,17 @@ Interpret meaning rather than matching exact commands.
 - **Proceed with the agreed change:** convert the settled outcome into the smallest sufficient task and decision records, then execute or coordinate it.
 - **Report a problem:** triage directly. Fix it as a bounded task when safe; create or update durable records when impact, uncertainty, coordination, or acceptance requires them.
 - **Accept or review results:** evaluate recorded criteria and evidence, then always return the control context's next action.
-- **Hand work to another conversation:** refresh durable tasks, decisions, evidence, and the project map first. Create a focused handoff document only when important unresolved context cannot fit those existing sources. Return `READY_TO_HANDOFF` plus one directly usable restart instruction.
+- **Create a new task:** only explicit semantic intent authorizes a user-visible task. Use the runtime's native task capability when available. For project work, create a clean, independent task by default and give it a compact, self-contained project packet. Keep the originating task available; do not monitor the new task by default.
+- **Fork the current task:** use native context inheritance only when the user explicitly asks to fork, branch the discussion, or try an alternative with the current context.
+- **Hand off the whole project:** refresh durable tasks, decisions, evidence, and the project map first. Use native task creation and message delivery when available. After successful delivery return `HANDOFF_COMPLETE`; otherwise return `READY_TO_HANDOFF` plus one directly usable restart instruction. Do not archive the originating task automatically.
+
+## Use Native Tasks Lightly
+
+Distinguish user-visible Codex tasks from internal execution units. Internal workers may be chosen by the active agent; user-visible tasks belong to the user's workspace and require explicit user intent.
+
+For project-related task creation, send only the objective, project path, sources to read first, settled constraints, acceptance criteria, prohibited operations, and recorded next action. Do not copy the full chat history. Do not create fixed product, frontend, or backend task roles.
+
+Creating a Codex task does not by itself authorize a Git branch, worktree, commit, push, merge, release, or deployment. If native task creation or cross-task messaging is unavailable, preserve the repository-first handoff fallback instead of simulating another task manager.
 
 ## Maintain Agent-First Project History
 
