@@ -1,30 +1,21 @@
 # Codex Project Harness
 
-Project Harness is a bilingual, adaptive project-governance skill for Codex. It keeps project facts, decisions, constraints, task state, acceptance evidence, and coordination boundaries usable across long-running software work.
+Project Harness helps Codex keep project facts, decisions, progress, and verification evidence accurate across long-running work and task changes. It works in English and Chinese.
 
-It gives Codex a small project map and stable sources of truth without prescribing how every implementation task must be planned or executed.
+The agent maintains the records and chooses how to implement the work. Users can discuss requirements, report problems, and continue a project in ordinary language.
 
 [中文说明](README.zh-CN.md)
 
-## What It Manages
+## What It Keeps
 
-- Project knowledge maps and sources of truth
-- Durable task and decision records
-- Product, architecture, contract, authority, and release boundaries
-- Acceptance evidence and required next actions
-- Control handoff between long-running conversations
-- Coordination boundaries for parallel tasks, branches, or worktrees
+- A small project map linking to existing requirements and technical documents.
+- Important decisions, unfinished work, blockers, and the next action.
+- Evidence separating implementation, verification, acceptance, merge, and release.
+- Enough context to continue in another task.
 
-Project Harness does not require a fixed development methodology, number of conversations, branch strategy, worktree strategy, or auxiliary skill.
+Small changes with lasting product or technical impact are recorded. Existing tasks and documents are updated first; the same facts are not copied into several ledgers. On resumption and completion, the agent reconciles recorded progress with observed results.
 
-## How It Adapts
-
-Project Harness makes two independent decisions:
-
-1. **Durable impact:** whether work must be recorded because it changes product behavior, contains a meaningful decision, affects a shared contract, or must survive acceptance, ownership, or conversation changes.
-2. **Execution topology:** whether work is best handled directly, as structured multi-stage work, or as coordinated parallel units.
-
-A tiny product or technical decision can require a durable record. A large mechanical edit may need structured execution without creating a permanent decision.
+Execution methods, plans, tests, and internal workers are chosen as needed. No fixed execution tiers, specialist roles, or auxiliary skills are required.
 
 ## Project Footprint
 
@@ -63,55 +54,28 @@ On Windows, the usual destination is `%USERPROFILE%\.codex\skills\project-harnes
 
 Clone the repository, then copy or link `skills/project-harness` into `~/.codex/skills/project-harness`. Restart Codex after installation or replacement.
 
-## Start Naturally
+## Everyday Use
 
-Project Harness has no required activation phrase. After installation, ordinary project language can activate it, for example:
-
-```text
-I want to build a personal finance app.
-```
-
-```text
-Continue this project and check the current progress first.
-```
-
-```text
-Can this feature be built?
-```
-
-```text
-This page is wrong. Please investigate it.
-```
-
-Project Harness infers whether the user is exploring, starting, resuming, implementing, reporting a problem, accepting results, or handing off work. Exploratory discussion remains read-only. Once execution is clearly requested, it inspects the project, preserves existing files, and creates only missing governance files. Projects with a Harness entry continue using the installed rules automatically.
-
-Users do not need to understand control-context or specialist-conversation terminology. Selecting or naming Project Harness activates its rules, but does not by itself authorize project-file changes. To explicitly adopt and persist Project Harness, ask it to manage the project:
+To explicitly adopt Harness, ask:
 
 ```text
 Use project-harness to manage this project.
 ```
 
-Explicit adoption allows the agent to inspect the project and write the minimal binding instead of enabling the Skill only for the current conversation. The agent preserves existing `AGENTS.md` content and project documents, reuses task and decision sources independently, creates only missing ledgers, validates the result, and reports `ADOPTED`, `ALREADY_ADOPTED`, or `BLOCKED`.
+The agent reuses existing documents and creates only missing records and a project entry. It maintains task and decision identifiers, progress, and history for you.
 
-After adoption, task and decision records primarily serve future agents. The active project coordinator assigns and reserves stable `TASK-0001` and `DEC-0001` identifiers, retains history, updates status, and checks related work for continuation, reuse, or conflicts before creating a new task. Parallel execution units use assigned references instead of allocating competing identifiers. Users do not maintain these records manually.
+There is no required phrase. Ordinary project requests can activate the Skill, and a project entry helps subsequent tasks discover it. Discussion and review-only requests stay within that scope; once execution is requested, the agent carries out authorized work and updates the relevant records.
 
-To reload updated rules in a long-running conversation, say:
+| Request | Expected behavior |
+| --- | --- |
+| "Can this feature be built?" | Discuss the options before implementation is requested. |
+| "Go ahead with this." | Implement the agreed change and record meaningful outcomes. |
+| "This page is wrong. Fix it." | Investigate and repair within scope; retain any important decision. |
+| "Review the result." | Explain findings, evidence, and next steps; respect review-only scope. |
+| "Sync the latest project-harness." | Reread locally installed rules without editing files or downloading an update. |
+| "Continue this project in a new task." | Refresh state and pass concise context through native capabilities, or provide a restart instruction. |
 
-```text
-Sync the latest project-harness.
-```
-
-Syncing conversation rules does not edit project files.
-
-Ordinary work stays in the current Codex task. To create a separate task, say so naturally:
-
-```text
-Create a new task for the login page.
-```
-
-Project Harness uses Codex's native task capability only after an explicit request. New project tasks are clean and independent by default, receive a compact project packet, and do not automatically create a Git branch or worktree. Fixed product, frontend, and backend tasks are not required.
-
-For a full control transfer, say `Hand this project to a new task.` The agent refreshes durable state first and delivers the packet when native messaging is available. It keeps the old task available and does not monitor or archive it automatically. When native creation or delivery is unavailable, it returns `READY_TO_HANDOFF` with a directly usable restart instruction.
+New tasks are independent by default; forks inherit context when requested. The old task remains available, with no automatic archiving or ongoing monitoring. Workspace selection follows the user's request and native tool rules; Harness does not create a worktree for every role.
 
 ## Bundled Scripts
 
@@ -131,7 +95,7 @@ skills/project-harness/scripts/init-project.sh --project-path <path> --language 
 skills/project-harness/scripts/validate-project.sh <path>
 ```
 
-Use `zh-CN` for Chinese project templates and managed sections.
+Use `zh-CN` for Chinese project templates and managed sections. The agent uses these scripts for setup or binding maintenance, not on every task.
 
 ## Development and Validation
 
@@ -143,7 +107,7 @@ tests/run-tests.ps1
 sh tests/run-tests.sh
 ```
 
-The test suite covers English and Chinese initialization, preservation of project content, source mapping, idempotent managed updates, and structure validation.
+These are maintainer tests for the file-changing scripts: English and Chinese initialization, content preservation, source mapping, idempotent updates, and structure validation. Normal Skill use does not run this suite. Instruction changes need a consistency review and a small practical check where useful, not exact-phrase assertions.
 
 ## Project Status
 

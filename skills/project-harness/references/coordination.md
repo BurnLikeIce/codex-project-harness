@@ -1,69 +1,40 @@
-# Coordination
+# Coordination and Handoff
 
-## Default
+## Shared Work
 
-Keep ordinary work in one control context. Coordination exists to reduce risk, preserve ownership, or gain meaningful parallelism, not to mirror an organization chart.
+The agent chooses execution methods and internal workers. Harness records only the boundaries needed for safe continuation: the outcome, relevant sources, responsibility, allowed write scope, dependencies, and required evidence.
 
-## One Coordinator
+Assign one owner for each shared record or overlapping change. Before integration, reconcile results and resolve shared-contract questions. Do not impose permanent specialist roles.
 
-Each governed task has one active coordinator responsible for:
+When allocating project-wide identifiers concurrently, one coordinator re-reads the shared ledger and reserves the next unused identifier before dispatch. Workers use assigned references and return unnumbered proposals for new work. If reservation is unavailable, use temporary references and allocate durable IDs during integration.
 
-- the task contract and current state;
-- decomposition and ownership;
-- resolving scope or contract questions;
-- integration order;
-- final evidence and acceptance routing.
+## Native Tasks and Workspaces
 
-Execution units may implement and report results, but they do not independently expand product scope or change shared contracts without returning the decision to the coordinator.
+Create a user-visible task or fork only when the user explicitly requests it. Prefer an independent task with concise context; use native context inheritance when requested.
 
-## Identifier Ownership
+Follow native tool requirements for creation, setup, and delivery, including any bounded completion check. Do not establish ongoing monitoring or automatically archive the originating task. The user follows the new task directly unless they request continued coordination.
 
-The active project coordinator owns allocation of project-wide task and decision identifiers. It must reserve durable records before parallel dispatch whenever possible. Execution units use the assigned task reference and return unnumbered proposals for newly discovered durable work; they do not race to allocate the next global identifier.
+A fresh conversation and a fresh Git checkout are different choices. Follow the requested workspace and native environment rules; account for concurrent writes and record the actual branch or worktree when it affects integration. Do not add branches or worktrees just to match task roles.
 
-## Execution Unit Contract
+## Handoff Contents
 
-Provide each independent unit with:
+Update relevant durable state before handing work over. Send a self-contained packet with only what matters:
 
-- task or parent-task reference;
-- exact outcome and boundaries;
-- relevant sources of truth;
-- allowed and prohibited scope when overlap is risky;
-- dependencies and assumptions;
-- required verification evidence;
-- completion return format.
+- project and working location, including the branch or checkout when relevant;
+- objective, scope, and acceptance criteria;
+- sources to read first, settled decisions, and protected constraints;
+- observed progress, verification evidence, blockers, and exact next action.
 
-The contract must stand alone. Do not require the user to copy a long conversation transcript.
+If the receiving task will use a different checkout, ensure required files and uncommitted state are available there, or identify what is missing before execution. Never assume a new worktree includes local uncommitted changes.
 
-## Branches and Worktrees
+Use existing records for the packet. Create a focused handoff file only for unresolved context that does not fit them. It is not a required project file.
 
-Use isolation when concurrent or risky writes justify it. Record branch or worktree ownership only while it affects integration. Avoid creating a worktree for every conversation or every small task.
+## Delivery and Continuation
 
-Before integration, verify the expected base, changed scope, tests, unresolved risks, and integration order. Remove worktrees and branches only after their work is integrated or explicitly abandoned and cleanup is authorized.
+For a whole-project handoff, make the transfer of responsibility explicit. An independent task for one outcome does not replace responsibility for the whole project.
 
-## User-Visible Codex Tasks
+Report the actual creation and delivery state and link the receiving task when available. Pending setup is not a completed handoff. If a task exists but delivery fails, reuse it rather than blindly creating another.
 
-Keep ordinary work in the current task. Create a user-visible task only when the user explicitly asks to create, separate, fork, or hand off work; task complexity alone is not authority.
+If delivery is unavailable, provide the packet or one directly usable restart instruction. Keep the originating task responsible until the receiving task has the necessary context. Existing `READY_TO_HANDOFF` and `HANDOFF_COMPLETE` labels remain usable, but plain-language results are sufficient.
 
-Use a clean independent task by default. Send a compact contract with the objective, project path, sources, settled constraints, acceptance criteria, prohibited operations, and next action. Use a native fork only when the user explicitly wants context inheritance. Do not create permanent product, frontend, backend, or bug-fix roles.
-
-The new task runs independently. Keep the originating task available, but do not monitor the new task or archive the originating task by default. Native task creation and Git worktrees are separate decisions.
-
-## Handoff
-
-Before moving control to another task, update durable tasks, decisions, evidence, and the project map. In most projects, those repository sources are the handoff packet.
-
-Create or update a focused handoff file such as `docs/handovers/current-control-state.md` only when important unresolved context cannot fit the existing ledgers. Map that file from `HARNESS.md`, and remove or supersede it after the receiving context absorbs the state.
-
-The handoff state must cover:
-
-- current objective and accepted baseline;
-- active tasks, owners, branches, and worktrees;
-- settled decisions and protected constraints;
-- verification and release state;
-- unresolved questions and exact next action.
-
-When native task creation and message delivery are available, create a clean receiving task, send the packet, and return `HANDOFF_COMPLETE`. Otherwise return `READY_TO_HANDOFF` and one directly usable restart instruction, localized to the user when practical. A valid generic instruction is:
-
-> Continue this project. Read `AGENTS.md`, `HARNESS.md`, and the current task and decision state first, then resume the recorded next action.
-
-The receiving task should be able to resume from repository files and this concise packet without reconstructing old chat history. Control transfers only after the receiving task has the packet.
+A receiving task reads the mapped sources and reconciles the recorded state before resuming; it should not need to reconstruct the entire chat history.

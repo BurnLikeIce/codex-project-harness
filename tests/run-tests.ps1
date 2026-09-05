@@ -29,25 +29,6 @@ try {
     Remove-SafeTemp
     New-Item -ItemType Directory -Path "$temp\new-en", "$temp\new-zh", "$temp\v1\docs", "$temp\v1\prompts", "$temp\partial\docs", "$temp\custom\project", "$temp\invalid" -Force | Out-Null
 
-    $skillInstructions = [IO.File]::ReadAllText((Join-Path $skill 'SKILL.md'))
-    foreach ($expected in @(
-        'starts or resumes a project',
-        'do not require the skill name or exact commands',
-        'selection alone does not authorize project-file changes',
-        'READY_TO_HANDOFF',
-        'TASK-0001',
-        'project coordinator owns allocation',
-        'inspect relevant task and decision history',
-        'user-visible Codex task only when',
-        'clean, independent task',
-        'HANDOFF_COMPLETE',
-        'Do not create fixed product, frontend, or backend task roles.'
-    )) {
-        if (-not $skillInstructions.Contains($expected)) {
-            throw "Missing activation contract in SKILL.md: $expected"
-        }
-    }
-
     Write-Utf8 "$temp\v1\HARNESS.md" "# Existing Harness`n`nCustom project fact: KEEP-ME"
     Write-Utf8 "$temp\v1\AGENTS.md" "# Existing Instructions`n`nCustom rule: KEEP-AGENT"
     Write-Utf8 "$temp\v1\docs\tasks.md" "# Old tasks`n`nTASK-CONTENT"
@@ -78,15 +59,12 @@ try {
         $files = @(Get-ChildItem -Recurse -File "$temp\$name")
         if ($files.Count -ne 4) { throw "$name should contain exactly four initialized files, found $($files.Count)" }
         & "$skill\scripts\validate-project.ps1" -ProjectPath "$temp\$name" | Out-Host
-        if (-not (Select-String -LiteralPath "$temp\$name\docs\tasks.md" -Pattern 'TASK-0001' -Quiet)) { throw "$name task template has no stable ID guidance" }
-        if (-not (Select-String -LiteralPath "$temp\$name\docs\decisions.md" -Pattern 'DEC-0001' -Quiet)) { throw "$name decision template has no stable ID guidance" }
-    }
-
-    if (-not (Select-String -LiteralPath "$temp\new-en\AGENTS.md" -Pattern 'Infer project intent from ordinary language' -Quiet)) {
-        throw 'English project entry does not enable semantic activation'
-    }
-    if (-not (Select-String -LiteralPath "$temp\new-zh\AGENTS.md" -Pattern '根据日常表达判断项目意图' -Quiet)) {
-        throw 'Chinese project entry does not enable semantic activation'
+        $language = if ($name -eq 'new-zh') { 'zh-CN' } else { 'en' }
+        foreach ($ledger in @('tasks', 'decisions')) {
+            $actual = (Get-FileHash -LiteralPath "$temp\$name\docs\$ledger.md").Hash
+            $expected = (Get-FileHash -LiteralPath "$skill\assets\minimal-project\$language\docs\$ledger.md").Hash
+            if ($actual -ne $expected) { throw "$name did not copy the $ledger template for $language" }
+        }
     }
 
     & "$skill\scripts\init-project.ps1" -ProjectPath "$temp\partial" -Language en | Out-Host
@@ -145,9 +123,6 @@ try {
     $inspection = & "$skill\scripts\inspect-project.ps1" -ProjectPath "$temp\v1" | ConvertFrom-Json
     if ($inspection.protocol -ne '2') { throw "Unexpected protocol: $($inspection.protocol)" }
     if ($inspection.sources.tasks -ne 'docs/tasks.md') { throw 'Task source map failed' }
-    if (-not (Select-String -LiteralPath "$temp\v1\AGENTS.md" -Pattern 'Infer project intent from ordinary language' -Quiet)) {
-        throw 'Updated project entry does not enable semantic activation'
-    }
 
     foreach ($check in @(
         @("$temp\v1\HARNESS.md", 'KEEP-ME'),

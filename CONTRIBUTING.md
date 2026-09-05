@@ -13,7 +13,7 @@ Applying governance must preserve project files and custom content by default. S
 1. Keep `SKILL.md` concise and move conditional detail into focused references.
 2. Do not copy generic workflow documentation into generated projects.
 3. Preserve user and project content outside clearly marked managed blocks.
-4. Add or update tests for behavior changes.
+4. Add or update meaningful tests when changing file-writing script behavior. For instruction edits, review consistency and use a small practical scenario when useful; do not add exact-phrase assertions.
 5. Run both available test suites when your environment supports them:
 
 ```powershell

@@ -1,58 +1,39 @@
-# Durable Project State
+# Project State
 
-## Source-of-Truth Rules
+## Sources and Scope
 
-Prefer an existing project-specific document over a generated template. When multiple files overlap, identify one canonical source and link to it from `HARNESS.md`; do not silently merge or rewrite competing documents.
+Use `HARNESS.md` as an index to canonical project documents. Read only the sources relevant to the current work; search related history before creating a duplicate task or reopening a settled decision.
 
-Use `HARNESS.md` as a map, not an encyclopedia. Keep deep product, architecture, contract, security, deployment, or operational knowledge in focused files that already fit the project.
+Keep requirements and observations distinct. A failing implementation does not invalidate a requirement, and an old progress note does not override newer verification or merge evidence. Correct stale status from evidence; surface substantive requirement conflicts for resolution.
 
-## Task Record
+## Tasks
 
-A durable task should contain only the state needed to resume and govern the work:
+Use the project's existing record format. A small task may need only its identifier, outcome, status, and next action; add constraints, acceptance criteria, dependencies, and evidence when they matter for continuation.
 
-- stable identifier using the project's scheme, or `TASK-0001` when no scheme exists;
-- outcome and scope;
-- status and owner or control context;
-- durable constraints and linked decisions;
-- acceptance criteria;
-- dependencies or coordination boundaries;
-- evidence and next action.
+Update a matching task first. Link regressions or extensions to earlier work. Record small product or technical changes when they affect future behavior; do not create a separate record for every edit.
 
-Do not require IDs for trivial isolated work. Do not encode implementation narration in the task ledger when Git, a plan, or test output already holds it.
+Use stable `TASK-0001` identifiers if no scheme exists. Keep completed, cancelled, and superseded history. For concurrent allocation, read [coordination.md](coordination.md).
 
-## Decision Record
+## Decisions
 
-Record:
+Record choices whose rationale should guide later work: what was decided, why, affected requirements or contracts, and status. Link supporting sources and related tasks. Use the project's scheme, or `DEC-0001`.
 
-- the decision;
-- context and reason;
-- alternatives only when they matter later;
-- consequences and affected contracts;
-- status and linked task.
+Routine implementation choices do not need permanent decision records. A meaningful choice within a small task does. If the canonical specification already records the choice and rationale, link to it rather than copying the same text into several documents.
 
-Do not turn routine implementation choices into permanent decisions.
-
-## Stable Identity and History
-
-Use `TASK-0001` and `DEC-0001` identifiers when the project has no established identifier system. The active project coordinator is the only allocator for these global sequences. It re-reads the ledger, chooses the next unused identifier, and reserves the record in shared durable state before dispatching parallel execution.
-
-Execution units must not independently allocate durable global identifiers. They return an unnumbered task or decision proposal to the coordinator when new durable work is discovered. If shared state cannot be updated before parallel work begins, use a temporary execution reference and allocate the durable identifier during integration.
-
-The coordinator never reuses identifiers and keeps completed, cancelled, and superseded records available.
-
-Before creating a durable task, inspect relevant active and historical tasks plus linked decisions. Continue matching active work, reuse an accepted result that already satisfies the request, create linked work for a regression or extension, and surface a material conflict before changing an accepted decision.
-
-Users do not need to assign identifiers or move records between states. Agents maintain queued, active, blocked, completed, cancelled, and superseded state as part of normal project work.
+Retain replaced decisions with a link to the replacement.
 
 ## Update Timing
 
-- After discussion commits a meaningful change, update the task and decision state before independent execution begins.
-- During execution, update durable state only when scope, ownership, dependencies, decisions, or next actions change.
-- Before acceptance or handoff, refresh criteria, evidence, unresolved risks, and next action.
-- After acceptance, integration, release, supersession, or rollback, close the loop in the durable record.
+Update relevant records when requirements settle, scope or decisions change, a blocker appears, or work closes. Before independent execution, record the agreements needed by the recipient.
 
-## Conditional Documents
+On resumption, reconcile status with available evidence. On completion, update the task after the actual result, including acceptance, integration, or release when those occurred. Avoid leaving a completed action as the next step.
 
-Create a focused document when the information is durable, shared, and too substantial for the task or decision ledger. Common examples are product specifications, architecture maps, API contracts, data schemas, security boundaries, deployment procedures, test strategies, release plans, and control handoffs.
+Implemented, verified, accepted, merged, and released describe different events. Reference the relevant checks, commit, PR, or deployment when useful, and name any unverified state. An old test result does not establish that later changes pass.
 
-Do not create empty placeholders for documents the project does not need.
+A read-only request may reveal stale records; report the discrepancy without editing them until maintenance or execution is authorized.
+
+## Additional Documents
+
+Reuse PRDs, API contracts, architecture notes, and other established sources. Create a focused document only when durable information is too substantial for the current record. Link it from the project map where useful.
+
+Do not add empty placeholders or copy generic SOP text into projects. Keep unfinished work easy to find without loading the entire completed history.

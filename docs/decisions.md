@@ -4,6 +4,15 @@ Record product and technical choices whose rationale or consequences should guid
 
 ## Accepted
 
+### DEC-0003 - Focus instructions on accurate project continuity
+
+- Status: accepted
+- Date: 2026-09-05
+- Context: Execution classifications, repeated intent rules, and fixed replies overlap with agent behavior while stale project records can still mislead later work.
+- Decision: Use the user-approved concise Skill draft; leave execution methods to the agent, preserve important decisions regardless of edit size, reconcile records with evidence, and continue work within existing authorization. Keep review-only requests read-only and supply handoff instructions when another task must act.
+- Consequences: Update references and bilingual documentation consistently; preserve Protocol 2, layouts, identifiers, scripts, and optional legacy result labels. Keep script behavior tests and remove exact-phrase assertions. No model-specific mode or auxiliary-skill dependency.
+- Linked task: `TASK-0003`
+
 ### DEC-0002 — Use native Codex tasks through a lightweight continuity adapter
 
 - Status: accepted

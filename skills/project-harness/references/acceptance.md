@@ -1,44 +1,23 @@
 # Completion and Acceptance
 
-## Implementation Return
+## Evidence
 
-Use a proportional return containing:
+Compare results against the agreed criteria. State what was checked and observed, and distinguish verified results from assumptions. Use evidence suited to the task; screenshots, logs, links, and tests are options, not universal requirements.
 
-- task reference or concise outcome;
-- completed scope;
-- files or contracts changed when relevant;
-- verification performed and observed result;
-- remaining risks, assumptions, or omissions;
-- readiness for acceptance.
+Keep the reply proportional. Simple work can finish in a few sentences; there is no mandatory status block or field checklist.
 
-Visual evidence, screenshots, logs, links, commits, or test output are optional evidence types, not universal requirements. Request only evidence that can verify the recorded criteria.
+## Outcome and Follow-Through
 
-## Acceptance Result
+When criteria are satisfied, state the result and any material remaining uncertainty. Complete follow-through already authorized by the user, then update the related record.
 
-Return exactly one status and always include the next control action.
+When criteria fail, identify the criterion, observed behavior, expected behavior, and required correction. Repair and recheck in the current task when repair is within the authorized scope. A request limited to review or assessment calls for findings and recommendations, not automatic edits.
 
-### Accepted
+If another task or the user must act, provide a directly usable instruction containing the outcome, scope, relevant sources, constraints, and verification needed. Do not generate copy-and-paste instructions for work the current task can already perform.
 
-State which criteria and evidence passed, identify residual risk, and say whether the next action is integration, broader verification, release preparation, another task, or closure.
+When blocked, identify the missing input or dependency, who can resolve it, and useful work that can continue. When superseded, link the replacing work and retain the history.
 
-### Rework required
+## Record the Actual State
 
-For each failure, state:
+Distinguish implementation completion, verification, user acceptance, merge, and release. Passing tests does not establish user acceptance or authorize publication.
 
-- the criterion that failed;
-- observed evidence;
-- expected behavior;
-- responsible execution context;
-- a directly usable rework instruction containing scope, constraints, and verification.
-
-### Blocked
-
-State the missing dependency or decision, its owner, what can continue safely, and the exact unblocking action.
-
-### Superseded
-
-State the replacing task or decision and what should happen to existing work.
-
-## Control Instruction
-
-Acceptance is not complete when it only says pass or fail. It must tell the control context what to do next and which durable records need to change.
+After an authorized action completes, record its evidence and the remaining next step, or close the task when no work remains. Do not leave a completed merge or review as an outstanding action.

@@ -35,10 +35,10 @@ Include only what the receiving task needs: project path, objective, sources to 
 
 ## Boundaries
 
-- Creating a task does not automatically create a branch or worktree.
+- Task creation follows native workspace requirements; Harness does not create branches or worktrees to match roles.
 - Do not archive the originating task automatically.
 - Do not monitor the new task by default.
 - Do not change project templates, scripts, or Harness Protocol 2 for this adaptation.
 - When native creation or message delivery is unavailable, return `READY_TO_HANDOFF` with one directly usable restart instruction.
 
-Existing Harness projects need no migration; updating the installed Skill is sufficient.
+Existing Harness projects need no migration; updating the installed Skill is sufficient. The current [design contract](harness-v2-design.md) allows plain-language delivery results; the status labels above remain available for compatibility.
