@@ -1,137 +1,68 @@
 ---
 name: project-harness
-description: Use for ongoing software-project work when a user starts or resumes a project, explores or approves a feature, reports a project problem, asks for review, acceptance, or status, coordinates parallel work, asks to create or fork a Codex task for project work, or hands the project to another task. Also use when HARNESS.md or a Project Harness entry is present and work may affect durable project state or release boundaries. Match ordinary English or Chinese intent such as "continue this project", "go ahead", "create a new task for this", "接着做", "按这样开始", "新建一个任务做这个", "这里不对", or "验收一下"; do not require the skill name or exact commands. Do not use for unrelated Q&A, translation, or isolated mechanical edits with no durable project impact.
+description: Maintain project facts, decisions, progress, and handoffs during ongoing software work. Use when starting or resuming a project, discussing or implementing changes, investigating problems, reviewing results, or moving work to another task; also when HARNESS.md or a Project Harness entry applies. Recognize ordinary English or Chinese intent without exact commands. Exclude unrelated questions and isolated mechanical edits with no durable project impact.
 ---
 
 # Project Harness
 
-## Mission
+Keep project facts, important decisions, task progress, and verification evidence accurate so later work can continue reliably. Let the active agent choose its execution methods for the task and runtime.
 
-Keep project-specific facts, decisions, constraints, task state, acceptance evidence, and coordination boundaries usable across long-running agent work.
+Communicate in the user's language; follow the project's established language for documents.
 
-Manage the project-level contract. Do not prescribe the agent's internal planning, implementation, debugging, testing, review, tool, or delegation method.
+## Understand the Request
 
-Reply and create project-facing content in the user's language unless the project already establishes another language.
+Infer intent from context without requiring fixed commands or role names. Keep discussion and read-only review within their requested scope. Once execution is requested, carry the authorized work through to completion. Existing authorization continues within its original scope; do not ask again for routine follow-through.
 
-## Core Rules
+"Sync the latest project-harness" means reread the locally installed rules. It does not edit project files or Git state, download a release, or replace the installation. Updating project bindings or reorganizing documents follows the user's actual request.
 
-1. Infer project intent from ordinary language; do not require exact phrases or internal Harness vocabulary.
-2. Inspect before applying governance, refreshing managed sections, or changing project structure.
-3. Treat broad activation as permission to route and inspect, not automatic permission to write files. Keep exploration read-only until the user clearly starts, resumes, or approves execution.
-4. Reuse existing project documents as sources of truth; do not create duplicate canonical files.
-5. Record work according to durable impact, not code size.
-6. Keep one active coordinator for each governed task. Treat coordinator and control-context terminology as internal unless coordination or handoff requires explanation.
-7. Keep ordinary work in the current task. Create a user-visible Codex task only when the user explicitly asks to create, separate, fork, or hand off work.
-8. Prefer mechanical verification for repeatable invariants and keep prose focused on intent and boundaries.
-9. Do not repeat `git init`, overwrite existing documentation, or perform structural migration without explicit intent.
-10. Do not commit, push, publish, deploy, release, delete, or materially expand scope without authorization from the user or established project policy.
+## Read and Adopt
 
-## Route Semantic Intent
+Read relevant project guidance and sources. Use `HARNESS.md`, when present, to locate the documents needed for this task rather than loading all history.
 
-Interpret meaning rather than matching exact commands.
+When the user asks to adopt Harness or clearly starts project execution under it, inspect the current structure and reuse equivalent sources. Where missing, use `HARNESS.md` for the project map, `docs/tasks.md` for tasks, `docs/decisions.md` for decisions, and a short entry in `AGENTS.md`.
 
-- **Start or resume project work:** activate from ordinary project language. If the user is only exploring, discuss without creating governance files or implementation records. When the user clearly starts, resumes, or approves execution, inspect the current state, map reusable sources of truth, create only missing governance files, and use the current conversation as the internal coordinator unless another owner is already established.
-- **Continue a governed project:** when `HARNESS.md` or a Project Harness entry in `AGENTS.md` is present, read the project map before durable changes and apply the currently installed rules automatically. Do not ask the user to invoke the skill again.
-- **Explicitly activate Project Harness:** Selecting or naming the Skill loads its rules, but selection alone does not authorize project-file changes. Infer the requested action from the user's semantic intent and keep exploration read-only.
-- **Explicitly adopt Project Harness:** When the user asks to use, adopt, set up, or apply Project Harness to manage the current project, treat that management request as permission to write the smallest safe project binding. Inspect first, reuse equivalent sources, create only missing ledgers, validate the result, and report `ADOPTED`, `ALREADY_ADOPTED`, or `BLOCKED`.
-- **Sync the latest Project Harness:** reload the latest skill rules for this conversation only. Do not edit files or change Git state.
-- **Refresh project bindings:** when the user asks to apply the installed rules to project files, preserve files and custom content and update only managed Harness entry sections.
-- **Migrate project structure:** inspect and propose a migration plan first. Require confirmation before moving, merging, archiving, or deleting files.
-- **Discuss a possible change:** explore without creating an implementation task until the user commits to the change or durable discussion output must be recorded.
-- **Proceed with the agreed change:** convert the settled outcome into the smallest sufficient task and decision records, then execute or coordinate it.
-- **Report a problem:** triage directly. Fix it as a bounded task when safe; create or update durable records when impact, uncertainty, coordination, or acceptance requires them.
-- **Accept or review results:** evaluate recorded criteria and evidence, then always return the control context's next action.
-- **Create a new task:** only explicit semantic intent authorizes a user-visible task. Use the runtime's native task capability when available. For project work, create a clean, independent task by default and give it a compact, self-contained project packet. Keep the originating task available; do not monitor the new task by default.
-- **Fork the current task:** use native context inheritance only when the user explicitly asks to fork, branch the discussion, or try an alternative with the current context.
-- **Hand off the whole project:** refresh durable tasks, decisions, evidence, and the project map first. Use native task creation and message delivery when available. After successful delivery return `HANDOFF_COMPLETE`; otherwise return `READY_TO_HANDOFF` plus one directly usable restart instruction. Do not archive the originating task automatically.
+Preserve existing content and layout. Do not repeat Git initialization or reorganize a project merely to fit a template. Naming the Skill alone does not authorize persistent setup.
 
-## Use Native Tasks Lightly
+## Record Important Changes
 
-Distinguish user-visible Codex tasks from internal execution units. Internal workers may be chosen by the active agent; user-visible tasks belong to the user's workspace and require explicit user intent.
+Record what future work needs to know: product behavior, meaningful technical choices, shared contracts, unfinished work, blockers, and acceptance outcomes. Impact determines the need to record, not the size of the edit.
 
-For project-related task creation, send only the objective, project path, sources to read first, settled constraints, acceptance criteria, prohibited operations, and recorded next action. Do not copy the full chat history. Do not create fixed product, frontend, or backend task roles.
+Update existing tasks and relevant documents first. Link to specifications, contracts, and evidence instead of duplicating them. Purely mechanical changes may remain traceable through Git.
 
-Creating a Codex task does not by itself authorize a Git branch, worktree, commit, push, merge, release, or deployment. If native task creation or cross-task messaging is unavailable, preserve the repository-first handoff fallback instead of simulating another task manager.
+Use existing identifiers, or `TASK-0001` and `DEC-0001` when no scheme exists. Agents maintain identifiers and state; retain completed, cancelled, and superseded history.
 
-## Maintain Agent-First Project History
+Update relevant records when requirements settle, scope or decisions change, work blocks, and work closes. Record necessary agreements before independent execution or handoff. Do not keep a tool-by-tool diary.
 
-Users may inspect task and decision records, but the active coordinator maintains identifiers, status, evidence, and history automatically.
+## Keep State Accurate
 
-Before creating a durable task, inspect relevant task and decision history. Continue active work when it matches, reuse an accepted result when it already satisfies the request, link regressions and extensions to their earlier work, and surface conflicts before replacing an accepted decision.
+On resumption and completion, reconcile relevant records with observed results. Correct stale progress and next actions so completed work is not repeated.
 
-When the project has no established identifier system, use stable `TASK-0001` and `DEC-0001` identifiers. The active project coordinator owns allocation and reserves identifiers in durable state before parallel dispatch; execution units do not independently allocate global identifiers. Never reuse an identifier or delete completed, cancelled, or superseded history.
+Distinguish agreed requirements from implemented behavior. Surface conflicts; code alone is not authority to rewrite a requirement.
 
-Read [routing.md](references/routing.md) for the activation order, persistence boundary, and semantic routing matrix.
+Record what was verified, the observed result, and what remains unknown. Implementation, verification, user acceptance, merge, and release are separate facts; report each only when supported.
 
-## Classify Work on Two Axes
+## Complete and Review
 
-### Durable Impact
+Describe the result, necessary evidence, unresolved issues, and next action in proportion to the task. No fixed response form is required.
 
-Create or update a durable task when work changes product behavior, records a meaningful decision, changes a contract or release boundary, affects downstream work, needs acceptance or rollback, or must survive a conversation or ownership change.
+When acceptance fails, identify the failed criterion, actual behavior, and expected result. If repair is already authorized and belongs to the current task, fix and verify it. When another task or the user must act, provide a directly usable instruction.
 
-Record a decision when a product or technical choice and its rationale should constrain future work. A tiny change can require both a task and a decision. Purely mechanical work may remain traceable through Git alone.
+A review-only request calls for findings and recommendations. After acceptance, complete authorized follow-through and update the record; ask only for decisions that are still needed.
 
-### Execution Topology
+## Coordinate and Hand Off
 
-- **Direct:** one bounded owner can complete and verify the work.
-- **Structured:** risk, ambiguity, cross-module impact, or verification stages require an explicit execution record.
-- **Coordinated:** independent units benefit from parallel ownership.
+Keep ordinary work in the current task. Planning, testing, and internal subagents are chosen as needed; no execution tiers or fixed product, frontend, and backend roles are required.
 
-The active agent chooses how to execute. Harness records only the project contract, ownership, constraints, evidence, and integration state.
+Use native capabilities when the user explicitly requests a new task or fork. New tasks are independent without full chat history by default; inherit context when requested. Do not automatically archive the old task or establish ongoing monitoring.
 
-Read [project-state.md](references/project-state.md) for record rules and [coordination.md](references/coordination.md) for coordinated work.
+Before handoff, update relevant state and supply the objective, project location, required sources, key constraints, unfinished work, and next action. Report actual creation and delivery results. If the capability is unavailable, provide a directly usable restart instruction.
 
-## Use the Minimal Project Map
+## Read References as Needed
 
-When the project has no equivalent governance sources, default to:
+- [project-state.md](references/project-state.md): task, decision, and document maintenance.
+- [acceptance.md](references/acceptance.md): acceptance and rework.
+- [coordination.md](references/coordination.md): handoffs, concurrent writes, and identifier allocation.
+- [git-release.md](references/git-release.md): Git, integration, and project release boundaries.
+- [update-existing-project.md](references/update-existing-project.md): adoption, binding updates, and structural changes.
 
-- `HARNESS.md`: project map, protocol metadata, authority boundaries, and links;
-- `docs/tasks.md`: durable task state;
-- `docs/decisions.md`: durable product and technical decisions;
-- a short managed pointer in `AGENTS.md` when safe.
-
-Create product, architecture, API, security, deployment, testing, release, or handoff documents only when needed. Reuse equivalent existing files.
-
-Before creating any file, map equivalent project sources and preserve the current layout. Structural reorganization is a separate, explicit operation.
-
-## Govern Completion and Acceptance
-
-An implementation result must state the task, outcome, changed scope, verification evidence, unresolved risks, and whether it is ready for acceptance. Keep the format proportional to the task.
-
-Acceptance ends in exactly one state:
-
-- **Accepted:** criteria are satisfied; state the next control action.
-- **Rework required:** identify failed criteria and provide a directly usable instruction for the responsible execution context.
-- **Blocked:** identify the dependency, owner, and required next action.
-- **Superseded:** identify the replacing task or decision.
-
-Read [acceptance.md](references/acceptance.md) when reviewing or handing off results.
-
-## Respect Git and Release Boundaries
-
-Use branches or worktrees only when isolation, review, or parallelism justifies them. Record ownership and integration order when concurrent writes could conflict. Keep remote writes, merges, releases, deployments, and cleanup explicitly authorized.
-
-Read [git-release.md](references/git-release.md) for Git, GitHub, worktree, integration, and release guidance.
-
-## Use Bundled Scripts for Deterministic Operations
-
-- Inspect: `scripts/inspect-project.ps1` or `scripts/inspect-project.sh`
-- Initialize: `scripts/init-project.ps1` or `scripts/init-project.sh`
-- Update in place: `scripts/update-project.ps1` or `scripts/update-project.sh`
-- Validate: `scripts/validate-project.ps1` or `scripts/validate-project.sh`
-
-Use `-Language zh-CN` or `--language zh-CN` for Chinese templates. Follow the project's established language when refreshing managed sections.
-
-Read [update-existing-project.md](references/update-existing-project.md) before refreshing managed sections or changing project structure.
-
-## Report Project-Governance Actions
-
-After initialization, adoption, update, migration, acceptance, integration, or handoff, report only what matters:
-
-- detected project state and sources of truth;
-- files changed or intentionally left unchanged;
-- Git and authorization state;
-- task, decision, acceptance, or coordination state;
-- the exact next action for the control context.
-
-Do not manufacture specialist roles, task IDs, branches, worktrees, or documents before the project needs them.
+Use the bundled inspection, initialization, update, and validation scripts when adoption or binding maintenance needs them. Ordinary project work does not require the full Harness check suite.

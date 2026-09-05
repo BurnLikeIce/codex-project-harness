@@ -4,9 +4,23 @@ Record work that must survive a conversation, ownership, acceptance, integration
 
 ## Active
 
-### TASK-0002 — Adapt Project Harness to native Codex tasks
+### TASK-0003 - Simplify project continuity guidance
 
 - Status: ready_for_review
+- Created: 2026-09-05
+- Outcome: Apply the approved concise Skill instructions across references and public documentation while keeping project records accurate.
+- Scope: Skill instructions, supporting references, documentation, and removal of exact-phrase test assertions.
+- Acceptance criteria: no mandatory execution tiers or repeated approvals within existing scope; retain important small-change decisions, read-only sync, proportional acceptance, and usable handoffs; preserve Protocol 2 and script behavior.
+- Linked decisions: `DEC-0003`
+- Evidence: approved instruction draft implemented; instruction consistency reviewed for read-only sync, small consequential changes, review-only requests, authorized repair, and workspace-aware handoffs. Skill validation, PowerShell tests, and POSIX tests under WSL pass. Local installation synchronized. No live task-creation or model-behavior evaluation was run.
+- Publication: the user authorized committing and publishing `refactor/project-continuity` as a PR.
+- Next action: review the branch's PR and CI results before deciding on merge. Merge and release remain pending.
+
+## Completed
+
+### TASK-0002 — Adapt Project Harness to native Codex tasks
+
+- Status: accepted
 - Created: 2026-08-20
 - Outcome: Project Harness uses native Codex task creation and handoff capabilities without becoming a task orchestrator or requiring fixed product, frontend, and backend conversations.
 - Scope: Skill guidance, routing and coordination references, public documentation, and focused contract checks.
@@ -24,9 +38,7 @@ Record work that must survive a conversation, ownership, acceptance, integration
   - Native capability failure degrades to a directly usable restart instruction.
 - Linked decisions: `DEC-0002`
 - Evidence: `docs/native-task-continuity-design.md`; Skill validator, `git diff --check`, PowerShell behavior suite, and POSIX shell behavior suite all pass.
-- Next action: repository owner reviews the implementation and decides whether to publish it.
-
-## Completed
+- Next action: completed through PR #2, squash merge `86b123e` on 2026-08-20. Release publication was not part of that merge.
 
 ### TASK-0001 — Make Project Harness agent-first for vibe coding
 

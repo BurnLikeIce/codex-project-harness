@@ -1,32 +1,19 @@
 # Git, Integration, and Release
 
-## Inspect First
+Read the relevant project constraints and actual Git state before repository operations. Preserve user changes and use isolation when the work or native environment requires it.
 
-Before changing repository state, inspect the current branch, working tree, remotes, existing worktrees, and protected project or release rules. Never repeat `git init` when `.git` already exists.
+## Authorization
 
-## Local Work
+Interpret the user's request and prior authorization together. Carry out necessary steps within the authorized outcome without asking for each routine substep. Respect any explicit limitation, such as local-only work or a protected release.
 
-Local inspection, in-scope edits, and non-destructive verification may proceed when the user requested implementation. A branch or worktree is optional and should have a concrete isolation or review benefit.
-
-Do not discard unrelated or user-authored changes. Keep commits focused when commits are authorized.
+Adoption, a successful test, or acceptance alone does not authorize publishing or deploying. Unrelated releases, destructive cleanup, and material scope expansion require their own authority.
 
 ## Integration
 
-Before merge or equivalent integration, verify:
+Before integration, verify the intended base, changed scope, relevant evidence, and any conflicts. For concurrent work, establish write ownership and integration order. Choose checks proportional to the change and project requirements.
 
-- correct base and task ownership;
-- accepted scope and evidence;
-- shared contracts and generated artifacts;
-- required tests and checks;
-- known conflicts and integration order;
-- rollback or recovery expectations when risk warrants them.
-
-## Remote and Release Boundaries
-
-Treat push, pull-request creation, merge, tag publication, package publication, deployment, release, and remote deletion as external actions. Perform them only when explicitly requested or clearly authorized by established project policy.
-
-Acceptance does not automatically authorize release. A successful local result may still require integration, product acceptance, environment verification, or release approval.
+After merge, record the confirmed result and remaining work. Keep local validation, acceptance, integration, and deployment status distinct.
 
 ## Cleanup
 
-List merged, abandoned, or stale branches and worktrees before cleanup. Delete only items whose ownership and integration state are known and whose cleanup is authorized.
+Remove branches and worktrees only when cleanup is authorized and their changes are integrated or explicitly abandoned. Check ownership and uncommitted work first. A task finishing does not by itself authorize deleting its workspace.

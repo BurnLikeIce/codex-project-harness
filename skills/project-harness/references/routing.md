@@ -1,74 +1,9 @@
-# Intent and Work Routing
+# Request Scope
 
-## Activation Order
+Project intent is interpreted from context. The shared guidance lives in [SKILL.md](../SKILL.md); no command matrix or execution-tier classification is required.
 
-Use the first matching layer:
+Discussion and read-only review remain within their scope. Approved execution can proceed with relevant record maintenance. Existing authorization continues within that scope.
 
-1. **Explicit activation:** the user selects or names Project Harness. Load the Skill, then route according to the user's semantic request; activation alone is not write authorization.
-2. **Project-level continuity:** `HARNESS.md` or a managed Project Harness entry is present and the request may affect durable project work.
-3. **Semantic activation:** ordinary language clearly indicates starting, resuming, discussing, implementing, debugging, accepting, summarizing, coordinating, or handing off project work.
-4. **No activation:** unrelated Q&A, translation, casual conversation, or an isolated mechanical edit with no durable project impact.
+Reloading installed rules is read-only. Adopting Harness, updating project bindings, and reorganizing documents are distinct requests; see [update-existing-project.md](update-existing-project.md).
 
-Do not ask the user whether a project is new, existing, governed, or controlled. Inspect and infer those states internally. Do not require words such as Harness, control, coordinator, task ID, product conversation, frontend conversation, or backend conversation.
-
-## Semantic Routing
-
-Infer intent from the user's meaning and current project state. Examples are illustrative, not required phrases.
-
-| Intent | Typical meaning | Harness action |
-| --- | --- | --- |
-| Activate | The user selects or names Project Harness while asking a question | Load the rules and follow the request. Do not write project files unless the semantic request also authorizes adoption or execution. |
-| Adopt | "Use Project Harness to manage this project" | Inspect, persist the minimal safe binding, validate it, and report `ADOPTED`, `ALREADY_ADOPTED`, or `BLOCKED`. |
-| Start | "I want to build an app" | Inspect the workspace. When the intent is to begin execution, establish the minimal missing project map and proceed. |
-| Resume | "Continue this project" | Inspect and read current state, reuse existing sources, and continue without repeated initialization. |
-| Explore | "Can this be done?" | Discuss; do not start implementation unless durable output is requested. |
-| Commit | "Do it this way" | Record the smallest sufficient task and any durable decision, then execute or coordinate. |
-| Problem | "This display is wrong" | Triage directly; escalate record and coordination only when impact requires it. |
-| Accept | "Review these results" | Compare criteria and evidence; return status and next control action. |
-| Status | "Where are we now?" | Read durable state and summarize current progress, risks, and next action. |
-| Sync | "Sync the latest project-harness" | Reload rules only; make no file or Git changes. |
-| Update | "Update this project's harness" | Apply the managed, in-place compatibility update. |
-| Migrate | "Move this project to the latest structure" | Propose a structural plan; wait for confirmation before changing structure. |
-| New task | "Create a new task for the login page" | When the request is explicit, use native task creation and send a compact project packet. Use a clean independent task by default. |
-| Fork | "Fork this task to try another approach" | Use native context inheritance because the user explicitly requested a fork or context-preserving alternative. |
-| Handoff | "Move control to a new task" | Refresh durable state first. Deliver the recovery packet through native task capabilities and return `HANDOFF_COMPLETE`, or use the `READY_TO_HANDOFF` fallback. |
-
-When wording is incomplete, infer from the surrounding conversation. Ask only when different interpretations would materially change scope, authority, data, architecture, release, or destructive actions.
-
-## Persistence Boundary
-
-Activation and persistence are separate decisions.
-
-| Project state and intent | Allowed behavior |
-| --- | --- |
-| Skill selected; exploration or status question only | Load and apply the rules in the conversation. Inspect read-only context when needed; do not create or update project files. |
-| No Harness marker; exploration only | Discuss and inspect read-only context as needed. Do not initialize governance files, implementation records, or claim adoption. |
-| No Harness marker; explicit adoption or approved execution | Inspect first, reuse equivalent sources, persist only the minimal missing governance files, and validate the result. |
-| Harness marker present; durable project work | Read `HARNESS.md`, apply current rules automatically, and update only records justified by durable impact. |
-| Explicit conversation sync | Reload installed rules and leave files and Git state unchanged. |
-| Explicit native task request | Create or fork one user-visible task as requested. Do not treat task creation alone as project-file, Git, or release authorization. |
-| Unrelated or purely mechanical request | Continue normally without introducing Harness records or terminology. |
-
-Use the current conversation as the internal coordinator by default. Explain coordination roles only when multiple owners, execution units, or a handoff make that distinction useful.
-
-Do not infer authority to create a user-visible task from complexity alone. Phrases with equivalent meaning to create, separate, fork, or transfer are sufficient; exact commands are not required.
-
-## Durable Record Test
-
-Record a task when any answer is yes:
-
-1. Will future work need to know this happened?
-2. Does it change user behavior, product rules, architecture, API, data, auth, security, deployment, or release behavior?
-3. Does it contain a meaningful product or technical choice?
-4. Does another module, owner, conversation, branch, or worktree depend on it?
-5. Does it require acceptance, rollback, recovery, or a later next action?
-
-Record a decision only when a choice and rationale should guide future work. Link the decision from the task instead of duplicating the rationale.
-
-## Execution Topology Test
-
-Use Direct unless evidence supports escalation.
-
-Use Structured when the task is ambiguous, risky, cross-module, hard to verify, or likely to outlive the current execution context.
-
-Use Coordinated when at least two units are independent enough to proceed in parallel and their ownership or integration boundary can be stated clearly. Do not parallelize tightly coupled edits merely to create more workers.
+For decisions about what to record, read [project-state.md](project-state.md). For explicit user-visible task creation and handoffs, read [coordination.md](coordination.md).

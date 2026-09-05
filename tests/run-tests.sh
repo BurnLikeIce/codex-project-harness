@@ -19,18 +19,6 @@ fingerprint() {
 cleanup
 mkdir -p "$temp/new-en" "$temp/new-zh" "$temp/v1/docs" "$temp/v1/prompts" "$temp/partial/docs" "$temp/custom/project" "$temp/invalid"
 
-grep -F 'starts or resumes a project' "$skill/SKILL.md" >/dev/null
-grep -F 'do not require the skill name or exact commands' "$skill/SKILL.md" >/dev/null
-grep -F 'selection alone does not authorize project-file changes' "$skill/SKILL.md" >/dev/null
-grep -F 'READY_TO_HANDOFF' "$skill/SKILL.md" >/dev/null
-grep -F 'TASK-0001' "$skill/SKILL.md" >/dev/null
-grep -F 'project coordinator owns allocation' "$skill/SKILL.md" >/dev/null
-grep -F 'inspect relevant task and decision history' "$skill/SKILL.md" >/dev/null
-grep -F 'user-visible Codex task only when' "$skill/SKILL.md" >/dev/null
-grep -F 'clean, independent task' "$skill/SKILL.md" >/dev/null
-grep -F 'HANDOFF_COMPLETE' "$skill/SKILL.md" >/dev/null
-grep -F 'Do not create fixed product, frontend, or backend task roles.' "$skill/SKILL.md" >/dev/null
-
 printf '# Existing Harness\n\nCustom project fact: KEEP-ME\n' > "$temp/v1/HARNESS.md"
 printf '# Existing Instructions\n\nCustom rule: KEEP-AGENT\n' > "$temp/v1/AGENTS.md"
 printf '# Old tasks\n\nTASK-CONTENT\n' > "$temp/v1/docs/tasks.md"
@@ -61,12 +49,12 @@ for name in new-en new-zh; do
   count=$(find "$temp/$name" -type f | wc -l | tr -d ' ')
   [ "$count" -eq 4 ] || { printf '%s should contain four files, found %s\n' "$name" "$count" >&2; exit 1; }
   sh "$skill/scripts/validate-project.sh" "$temp/$name"
-  grep -F 'TASK-0001' "$temp/$name/docs/tasks.md" >/dev/null
-  grep -F 'DEC-0001' "$temp/$name/docs/decisions.md" >/dev/null
+  case "$name" in new-zh) language=zh-CN ;; *) language=en ;; esac
+  for ledger in tasks decisions; do
+    cmp -s "$temp/$name/docs/$ledger.md" "$skill/assets/minimal-project/$language/docs/$ledger.md" ||
+      { printf '%s did not copy the %s template for %s\n' "$name" "$ledger" "$language" >&2; exit 1; }
+  done
 done
-
-grep -F 'Infer project intent from ordinary language' "$temp/new-en/AGENTS.md" >/dev/null
-grep -F '根据日常表达判断项目意图' "$temp/new-zh/AGENTS.md" >/dev/null
 
 sh "$skill/scripts/init-project.sh" --project-path "$temp/partial" --language en
 [ ! -f "$temp/partial/docs/tasks.md" ] || { printf 'Partial adoption duplicated TASKS.md\n' >&2; exit 1; }
@@ -105,7 +93,6 @@ cmp -s "$temp/first.cksum" "$temp/second.cksum" || { printf 'V1 update is not id
 
 sh "$skill/scripts/validate-project.sh" "$temp/v1"
 sh "$skill/scripts/inspect-project.sh" "$temp/v1" | grep -F 'protocol=2' >/dev/null
-grep -F 'Infer project intent from ordinary language' "$temp/v1/AGENTS.md" >/dev/null
 
 grep -F 'KEEP-ME' "$temp/v1/HARNESS.md" >/dev/null
 grep -F 'KEEP-AGENT' "$temp/v1/AGENTS.md" >/dev/null

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Focused Skill instructions on project facts, meaningful decisions, progress, and verification evidence.
+- Removed mandatory execution tiers and fixed replies; preserved read-only review and sync while allowing authorized follow-through.
+- Clarified state reconciliation and workspace-aware handoffs, with existing project layouts and Protocol 2 unchanged.
+- Replaced exact instruction wording checks with script-focused validation and localized template-copy checks.
 - Separated Skill activation from authorization to persist project files.
 - Made adoption preserve valid custom mappings, reuse partial existing task and decision sources, and create only missing ledgers.
 - Made validation reject missing or unresolved required source mappings.
